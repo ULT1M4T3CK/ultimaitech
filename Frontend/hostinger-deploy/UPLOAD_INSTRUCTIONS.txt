@@ -1,0 +1,35 @@
+🌐 HOSTINGER UPLOAD INSTRUCTIONS for www.ultimaitech.com
+
+1. LOGIN TO HOSTINGER:
+   - Go to hostinger.com
+   - Login to your account
+   - Access cPanel
+
+2. UPLOAD FILES:
+   - Open File Manager in cPanel
+   - Navigate to public_html folder
+   - Upload ALL files from this folder
+   - Make sure .htaccess file is uploaded
+
+3. CONFIGURE DOMAIN:
+   - In Hostinger panel, go to Domains
+   - Point www.ultimaitech.com to your hosting account
+   - Update DNS if needed
+
+4. ENABLE SSL:
+   - Go to SSL section in Hostinger panel
+   - Enable Free SSL certificate
+   - Force HTTPS redirect
+
+5. TEST WEBSITE:
+   - Visit http://www.ultimaitech.com
+   - Test all pages: Home, Services, Portfolio, Contact
+   - Verify contact form works
+
+Files to upload:
+- index.html (main page)
+- assets/ folder (CSS, JS, images)
+- .htaccess (routing and optimization)
+- All other files in this folder
+
+Your website will be live at: https://www.ultimaitech.com
