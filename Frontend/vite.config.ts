@@ -32,5 +32,8 @@ export default defineConfig({
   },
   preview: {
     port: 4173
+  },
+  css: {
+    postcss: './postcss.config.js'
   }
 })
