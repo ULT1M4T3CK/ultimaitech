@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx vite build",
+    "build": "./node_modules/.bin/vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "build:prod": "npx vite build --mode production",
+    "build:prod": "./node_modules/.bin/vite build --mode production",
     "deploy:vercel": "vercel --prod",
     "deploy:netlify": "netlify deploy --prod"
   },
