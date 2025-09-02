@@ -1,0 +1,24 @@
+{
+  "name": "ultimaitech-portfolio",
+  "version": "1.0.0",
+  "description": "UltimAItech Portfolio Website with Admin Panel",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd Frontend && npm run dev",
+    "build": "cd Frontend && npm run build",
+    "start": "cd backend && npm start",
+    "install:all": "npm install && cd backend && npm install && cd ../Frontend && npm install",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "keywords": ["portfolio", "ultimaitech", "admin", "react", "nodejs"],
+  "author": "UltimAItech",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

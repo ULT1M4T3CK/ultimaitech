@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: ultimaitech_postgres
+    environment:
+      POSTGRES_DB: ultimaitech_portfolio
+      POSTGRES_USER: ultimaitech_user
+      POSTGRES_PASSWORD: ultimaitech_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ultimaitech_network
+
+  backend:
+    build: ./backend
+    container_name: ultimaitech_backend
+    ports:
+      - "5001:5001"
+    environment:
+      NODE_ENV: development
+      PORT: 5001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ultimaitech_portfolio
+      DB_USER: ultimaitech_user
+      DB_PASSWORD: ultimaitech_password
+      JWT_SECRET: your_jwt_secret_here
+      UPLOAD_PATH: /app/uploads
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - ultimaitech_network
+
+  frontend:
+    build: ./Frontend
+    container_name: ultimaitech_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      REACT_APP_API_URL: http://localhost:5001
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - ultimaitech_network
+
+volumes:
+  postgres_data:
+
+networks:
+  ultimaitech_network:
+    driver: bridge
