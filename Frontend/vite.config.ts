@@ -20,19 +20,27 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    minify: 'esbuild',
+    target: 'es2015',
+    cssCodeSplit: true,
     rollupOptions: {
-      input: {
-        main: './index.html',
-        404: './public/404.html'
-      },
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-          ui: ['framer-motion', 'lucide-react']
-        }
+          ui: ['framer-motion', 'lucide-react'],
+          utils: ['axios']
+        },
+        // Optimize chunk file names for caching
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
-    }
+    },
+    // Compress assets
+    assetsInlineLimit: 4096,
+    // Optimize CSS
+    cssMinify: true
   },
   preview: {
     port: 4173

@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Important pages
+Allow: /portfolio
+Allow: /services
+Allow: /contact
+
+# Block admin area from search engines
+Disallow: /admin
+
+# Sitemap location
+Sitemap: https://ultimaitech.com/sitemap.xml
+
+# Crawl delay (be respectful)
+Crawl-delay: 1

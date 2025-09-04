@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { useAnalytics } from '../contexts/AnalyticsContext'
 import axios from 'axios'
 import { staticProjects } from '../data/staticProjects'
+import SEOHead from '../components/SEOHead'
+import { portfolioSchema, breadcrumbSchema } from '../utils/structuredData'
 
 interface Project {
   id: string
@@ -49,6 +51,16 @@ const Portfolio = () => {
     ? projects.filter(p => p.featured)
     : projects
 
+  const breadcrumbs = [
+    { name: 'Home', url: 'https://ultimaitech.com' },
+    { name: 'Portfolio', url: 'https://ultimaitech.com/portfolio' }
+  ]
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [portfolioSchema(projects), breadcrumbSchema(breadcrumbs)]
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-dark flex items-center justify-center">
@@ -84,6 +96,16 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Portfolio - UltimAItech | Web Development Projects & AI Solutions"
+        description="Explore UltimAItech's portfolio of innovative web development projects, AI integrations, and digital solutions. See our React, Node.js, and full-stack development work."
+        keywords="portfolio, web development projects, React projects, Node.js applications, AI solutions, full-stack development, UltimAItech projects"
+        canonical="https://ultimaitech.com/portfolio"
+        ogTitle="UltimAItech Portfolio - Innovative Web Development Projects"
+        ogDescription="Discover our latest projects and creative solutions showcasing expertise in web development, AI integration, and modern digital solutions."
+        ogImage="https://ultimaitech.com/images/portfolio-og-image.png"
+        structuredData={combinedSchema}
+      />
       {/* Hero Section */}
       <section className="relative py-12 bg-gradient-to-b from-primary/10 to-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

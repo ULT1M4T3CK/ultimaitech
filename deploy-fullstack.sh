@@ -19,15 +19,15 @@ npm run build
 cd ..
 
 echo "🐳 Starting full-stack deployment with Docker..."
-docker-compose -f docker-compose.fullstack.yml down
-docker-compose -f docker-compose.fullstack.yml build --no-cache
-docker-compose -f docker-compose.fullstack.yml up -d
+docker compose -f docker-compose.fullstack.yml down
+docker compose -f docker-compose.fullstack.yml build --no-cache
+docker compose -f docker-compose.fullstack.yml up -d
 
 echo "⏳ Waiting for services to start..."
 sleep 10
 
 # Check if services are running
-if docker-compose -f docker-compose.fullstack.yml ps | grep -q "Up"; then
+if docker compose -f docker-compose.fullstack.yml ps | grep -q "Up"; then
     echo "✅ Deployment successful!"
     echo ""
     echo "🌐 Your website is now running at:"
@@ -35,11 +35,11 @@ if docker-compose -f docker-compose.fullstack.yml ps | grep -q "Up"; then
     echo "   - Backend API: http://localhost/api"
     echo ""
     echo "🔧 To view logs:"
-    echo "   docker-compose -f docker-compose.fullstack.yml logs -f"
+    echo "   docker compose -f docker-compose.fullstack.yml logs -f"
     echo ""
     echo "🛑 To stop:"
-    echo "   docker-compose -f docker-compose.fullstack.yml down"
+    echo "   docker compose -f docker-compose.fullstack.yml down"
 else
     echo "❌ Deployment failed. Check logs:"
-    docker-compose -f docker-compose.fullstack.yml logs
+    docker compose -f docker-compose.fullstack.yml logs
 fi

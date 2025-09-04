@@ -15,6 +15,8 @@ import {
   Users
 } from 'lucide-react'
 import { useAnalytics } from '../contexts/AnalyticsContext'
+import SEOHead from '../components/SEOHead'
+import { serviceSchema, breadcrumbSchema } from '../utils/structuredData'
 
 const Services = () => {
   const { recordVisit } = useAnalytics()
@@ -117,8 +119,28 @@ const Services = () => {
     }
   ]
 
+  const breadcrumbs = [
+    { name: 'Home', url: 'https://ultimaitech.com' },
+    { name: 'Services', url: 'https://ultimaitech.com/services' }
+  ]
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [serviceSchema, breadcrumbSchema(breadcrumbs)]
+  }
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Web Development Services - UltimAItech | React, Node.js, AI Solutions"
+        description="Professional web development services including React, Node.js, AI integration, and full-stack solutions. Transform your business with modern web applications and digital solutions."
+        keywords="web development services, React development, Node.js services, AI integration, full-stack development, custom web applications, digital solutions, UltimAItech services"
+        canonical="https://ultimaitech.com/services"
+        ogTitle="Professional Web Development Services - UltimAItech"
+        ogDescription="Expert web development services including React, Node.js, AI integration, and full-stack solutions for modern businesses."
+        ogImage="https://ultimaitech.com/images/services-og-image.png"
+        structuredData={combinedSchema}
+      />
       {/* Hero Section */}
       <section className="relative py-12 bg-gradient-to-b from-primary/10 to-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

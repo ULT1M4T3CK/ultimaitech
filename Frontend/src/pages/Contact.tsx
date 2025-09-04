@@ -3,6 +3,8 @@ import { Mail, Phone, MapPin, Send, ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAnalytics } from '../contexts/AnalyticsContext'
 import { useEffect } from 'react'
+import SEOHead from '../components/SEOHead'
+import { contactSchema, breadcrumbSchema } from '../utils/structuredData'
 
 const Contact = () => {
   const { recordVisit } = useAnalytics()
@@ -50,8 +52,28 @@ const Contact = () => {
     }
   }
 
+  const breadcrumbs = [
+    { name: 'Home', url: 'https://ultimaitech.com' },
+    { name: 'Contact', url: 'https://ultimaitech.com/contact' }
+  ]
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [contactSchema, breadcrumbSchema(breadcrumbs)]
+  }
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Contact UltimAItech - Get Your Web Development Quote Today"
+        description="Ready to start your next project? Contact UltimAItech for professional web development, AI integration, and digital solutions. Get a free consultation and quote today."
+        keywords="contact UltimAItech, web development quote, hire web developer, AI solutions consultation, React developer contact, Node.js development services"
+        canonical="https://ultimaitech.com/contact"
+        ogTitle="Contact UltimAItech - Professional Web Development Services"
+        ogDescription="Get in touch for expert web development, AI integration, and digital solutions. Free consultation available."
+        ogImage="https://ultimaitech.com/images/contact-og-image.png"
+        structuredData={combinedSchema}
+      />
       {/* Hero Section */}
       <section className="relative py-12 bg-gradient-to-b from-primary/10 to-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

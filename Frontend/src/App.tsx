@@ -9,11 +9,15 @@ import Contact from './pages/Contact'
 import Services from './pages/Services'
 import { AuthProvider } from './contexts/AuthContext'
 import { AnalyticsProvider } from './contexts/AnalyticsContext'
+import { optimizeLoading } from './utils/webVitals'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Initialize performance monitoring and optimizations
+    optimizeLoading()
+    
     // Simulate initial loading
     const timer = setTimeout(() => setIsLoading(false), 1000)
     return () => clearTimeout(timer)

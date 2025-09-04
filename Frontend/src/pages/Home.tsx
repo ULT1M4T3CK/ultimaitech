@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Code, Palette, Zap } from 'lucide-react'
 import { useAnalytics } from '../contexts/AnalyticsContext'
+import SEOHead from '../components/SEOHead'
+import { organizationSchema, websiteSchema, serviceSchema } from '../utils/structuredData'
 
 const Home = () => {
   const { recordVisit } = useAnalytics()
@@ -10,8 +12,23 @@ const Home = () => {
     recordVisit('Home')
   }, [recordVisit])
 
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [organizationSchema, websiteSchema, serviceSchema]
+  }
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="UltimAItech - AI-Powered Web Development & Digital Solutions"
+        description="Transform your digital presence with UltimAItech. Expert web development, AI integration, and innovative digital solutions for modern businesses. Get cutting-edge websites and applications."
+        keywords="web development, AI development, digital solutions, React development, Node.js, full-stack development, artificial intelligence, web applications, mobile apps, UltimAItech"
+        canonical="https://ultimaitech.com"
+        ogTitle="UltimAItech - AI-Powered Web Development & Digital Solutions"
+        ogDescription="Transform your digital presence with expert web development, AI integration, and innovative digital solutions. Professional React, Node.js, and full-stack development services."
+        ogImage="https://ultimaitech.com/images/ultimaitech-og-image.png"
+        structuredData={combinedSchema}
+      />
       {/* Hero Section */}
       <section 
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
