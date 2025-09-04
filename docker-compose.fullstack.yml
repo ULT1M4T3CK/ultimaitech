@@ -17,6 +17,8 @@ services:
   backend:
     build: ./backend
     container_name: ultimaitech_backend_prod
+    ports:
+      - "5001:5001"
     environment:
       NODE_ENV: production
       PORT: 5001
@@ -46,6 +48,7 @@ services:
       - ./Frontend/dist:/usr/share/nginx/html
       - ./nginx.fullstack.conf:/etc/nginx/nginx.conf
       - ./logs/nginx:/var/log/nginx
+      - ./uploads:/usr/share/nginx/uploads
     depends_on:
       - backend
     networks:

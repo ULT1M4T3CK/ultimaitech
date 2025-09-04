@@ -6,6 +6,7 @@ import axios from 'axios'
 import { staticProjects } from '../data/staticProjects'
 import SEOHead from '../components/SEOHead'
 import { portfolioSchema, breadcrumbSchema } from '../utils/structuredData'
+import { getImageUrl } from '../utils/imageUtils'
 
 interface Project {
   id: string
@@ -178,9 +179,14 @@ const Portfolio = () => {
                   <div className="relative mb-6 overflow-hidden rounded-lg">
                     {project.image_path ? (
                       <img
-                        src={project.image_path}
+                        src={getImageUrl(project.image_path)}
                         alt={project.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          console.error('Image failed to load:', getImageUrl(project.image_path))
+                          // Hide the image on error
+                          e.currentTarget.style.display = 'none'
+                        }}
                       />
                     ) : (
                       <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
