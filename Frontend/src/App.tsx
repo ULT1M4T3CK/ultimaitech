@@ -31,7 +31,8 @@ function App() {
           <img
             src="/images/ultimaitech-logo.png"
             alt="UltimAItech Logo"
-            className="w-20 h-20 mx-auto mb-4"
+            className="w-25 h-25 mx-auto mb-4"
+            style={{ width: '100px', height: '100px' }}
           />
           <h2 className="text-2xl font-bold text-primary mb-2">UltimAItech</h2>
           <p className="text-light/70">Loading...</p>
