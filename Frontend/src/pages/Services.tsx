@@ -120,7 +120,7 @@ const Services = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-b from-primary/10 to-transparent">
+      <section className="relative py-12 bg-gradient-to-b from-primary/10 to-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back Button */}
           <div className="mb-8">
@@ -134,7 +134,7 @@ const Services = () => {
           </div>
 
           {/* Page Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Our <span className="gradient-text">Services</span>
             </h1>

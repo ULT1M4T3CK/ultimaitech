@@ -35,7 +35,7 @@ const Contact = () => {
     try {
       // For now, we'll use a mailto link to open the user's email client
       // In a production environment, you'd want to integrate with a service like EmailJS, SendGrid, or your own backend
-      const mailtoLink = `mailto:hasslerandre01@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+      const mailtoLink = `mailto:andre@ultimaitech.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
       )}`
       
@@ -53,7 +53,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-b from-primary/10 to-transparent">
+      <section className="relative py-12 bg-gradient-to-b from-primary/10 to-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back Button */}
           <div className="mb-8">
@@ -67,7 +67,7 @@ const Contact = () => {
           </div>
 
           {/* Page Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Get in <span className="gradient-text">Touch</span>
             </h1>
@@ -102,7 +102,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-light font-medium">Email</p>
-                    <p className="text-primary text-lg">hasslerandre01@gmail.com</p>
+                    <p className="text-primary text-lg">andre@ultimaitech.com</p>
                   </div>
                 </div>
 
