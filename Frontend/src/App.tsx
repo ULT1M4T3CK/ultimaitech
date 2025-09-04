@@ -27,15 +27,13 @@ function App() {
     return (
       <div className="min-h-screen bg-dark flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <div className="flex items-center space-x-2">
-            <img
-              src="/images/ultimaitech-logo.png"
-              alt="UltimAItech Logo"
-              className="w-8 h-8"
-            />
-            <h2 className="text-2xl font-bold text-primary">UltimAItech</h2>
-          </div>
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+          <img
+            src="/images/ultimaitech-logo.png"
+            alt="UltimAItech Logo"
+            className="w-20 h-20 mx-auto mb-4"
+          />
+          <h2 className="text-2xl font-bold text-primary mb-2">UltimAItech</h2>
           <p className="text-light/70">Loading...</p>
         </div>
       </div>
