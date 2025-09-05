@@ -183,7 +183,7 @@ const Home = () => {
               View AI Projects
             </Link>
             <Link to="/contact" className="btn-outline text-lg px-8 py-4">
-              Get AI Consultation
+              Contact Us
             </Link>
           </div>
         </div>

@@ -163,7 +163,7 @@ const Contact = () => {
                   Let's Connect
                 </h3>
                 <p className="text-light/70 mb-8 text-lg">
-                  I'm always excited to hear about new projects and opportunities. 
+                  We're always excited to hear about new projects and opportunities. 
                   Whether you have a specific idea in mind or just want to explore possibilities, 
                   let's start a conversation.
                 </p>
@@ -229,7 +229,7 @@ const Contact = () => {
             <div className="card">
               <div className="mb-6">
                 <h3 className="text-2xl font-semibold text-light mb-2">Send a Message</h3>
-                <p className="text-light/70">Fill out the form below and I'll get back to you soon.</p>
+                <p className="text-light/70">Fill out the form below and we'll get back to you soon.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -312,7 +312,7 @@ const Contact = () => {
                     className={`w-full px-4 py-3 bg-dark border rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none ${
                       formErrors.message ? 'border-red-500 focus:ring-red-500' : 'border-secondary/20 focus:ring-primary'
                     }`}
-                    placeholder="Tell me about your project, ideas, or questions..."
+                    placeholder="Tell us about your project, ideas, or questions..."
                   />
                   {formErrors.message && (
                     <p className="mt-1 text-sm text-red-400">{formErrors.message}</p>
