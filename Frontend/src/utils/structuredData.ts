@@ -4,7 +4,7 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "UltimAItech",
-  "description": "AI-Powered Web Development & Digital Solutions",
+  "description": "Custom AI Model Training & Machine Learning Solutions",
   "url": "https://ultimaitech.com",
   "logo": "https://ultimaitech.com/images/ultimaitech-logo.png",
   "contactPoint": {
@@ -31,7 +31,7 @@ export const organizationSchema = {
   },
   "foundingDate": "2024",
   "numberOfEmployees": "1-10",
-  "industry": "Web Development, AI Solutions"
+  "industry": "Artificial Intelligence, Machine Learning, AI Model Training"
 }
 
 export const websiteSchema = {
@@ -61,49 +61,49 @@ export const websiteSchema = {
 export const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Web Development Services",
-  "description": "Professional web development services including React, Node.js, AI integration, and full-stack solutions",
+  "name": "AI Model Training & Machine Learning Services",
+  "description": "Custom AI model training, machine learning solutions, and intelligent automation services for businesses",
   "provider": {
     "@type": "Organization",
     "name": "UltimAItech",
     "url": "https://ultimaitech.com"
   },
-  "serviceType": "Web Development",
+  "serviceType": "Artificial Intelligence & Machine Learning",
   "areaServed": "Worldwide",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Web Development Services",
+    "name": "AI & Machine Learning Services",
     "itemListElement": [
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Frontend Development",
-          "description": "React, Vue.js, and modern frontend frameworks"
+          "name": "Custom AI Model Training",
+          "description": "Specialized AI models trained on your unique data for maximum accuracy and business impact"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Backend Development",
-          "description": "Node.js, Express, API development"
+          "name": "AI Integration & Automation",
+          "description": "Seamless integration of AI capabilities into existing systems and workflows"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "AI Integration",
-          "description": "Artificial Intelligence and machine learning solutions"
+          "name": "Intelligent Chatbots",
+          "description": "Advanced conversational AI systems with context understanding and human-like interactions"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Full-Stack Development",
-          "description": "Complete web application development"
+          "name": "AI Strategy & Consulting",
+          "description": "Expert guidance on AI adoption, strategy development, and implementation roadmaps"
         }
       }
     ]

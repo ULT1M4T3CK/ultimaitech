@@ -20,7 +20,26 @@ const PORT = process.env.PORT || 5001;
 app.set('trust proxy', 1);
 
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      fontSrc: ["'self'", "fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'"],
+      mediaSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      childSrc: ["'self'"],
+      workerSrc: ["'self'"],
+      frameSrc: ["'none'"],
+      formAction: ["'self'"],
+      upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null,
+    },
+  },
+  crossOriginEmbedderPolicy: false,
+}));
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? process.env.FRONTEND_URL || ['https://ultimaitech.com', 'https://www.ultimaitech.com', 'http://localhost', 'http://127.0.0.1']

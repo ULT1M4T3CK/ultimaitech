@@ -19,18 +19,70 @@ const Contact = () => {
     subject: '',
     message: ''
   })
+  const [formErrors, setFormErrors] = useState<{[key: string]: string}>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
+  const validateForm = () => {
+    const errors: {[key: string]: string} = {}
+    
+    // Name validation
+    if (!formData.name.trim()) {
+      errors.name = 'Name is required'
+    } else if (formData.name.trim().length < 2) {
+      errors.name = 'Name must be at least 2 characters'
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required'
+    } else if (!emailRegex.test(formData.email)) {
+      errors.email = 'Please enter a valid email address'
+    }
+    
+    // Subject validation
+    if (!formData.subject.trim()) {
+      errors.subject = 'Subject is required'
+    } else if (formData.subject.trim().length < 3) {
+      errors.subject = 'Subject must be at least 3 characters'
+    }
+    
+    // Message validation
+    if (!formData.message.trim()) {
+      errors.message = 'Message is required'
+    } else if (formData.message.trim().length < 10) {
+      errors.message = 'Message must be at least 10 characters'
+    }
+    
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     })
+    
+    // Clear error for this field when user starts typing
+    if (formErrors[name]) {
+      setFormErrors({
+        ...formErrors,
+        [name]: ''
+      })
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validate form before submitting
+    if (!validateForm()) {
+      return
+    }
+    
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
@@ -193,9 +245,14 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-dark border border-secondary/20 rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                      className={`w-full px-4 py-3 bg-dark border rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 ${
+                        formErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-secondary/20 focus:ring-primary'
+                      }`}
                       placeholder="Your name"
                     />
+                    {formErrors.name && (
+                      <p className="mt-1 text-sm text-red-400">{formErrors.name}</p>
+                    )}
                   </div>
 
                   <div>
@@ -209,9 +266,14 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-dark border border-secondary/20 rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                      className={`w-full px-4 py-3 bg-dark border rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 ${
+                        formErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-secondary/20 focus:ring-primary'
+                      }`}
                       placeholder="your.email@example.com"
                     />
+                    {formErrors.email && (
+                      <p className="mt-1 text-sm text-red-400">{formErrors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -226,9 +288,14 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-dark border border-secondary/20 rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                    className={`w-full px-4 py-3 bg-dark border rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 ${
+                      formErrors.subject ? 'border-red-500 focus:ring-red-500' : 'border-secondary/20 focus:ring-primary'
+                    }`}
                     placeholder="What's this about?"
                   />
+                  {formErrors.subject && (
+                    <p className="mt-1 text-sm text-red-400">{formErrors.subject}</p>
+                  )}
                 </div>
 
                 <div>
@@ -242,9 +309,14 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-dark border border-secondary/20 rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 resize-none"
+                    className={`w-full px-4 py-3 bg-dark border rounded-lg text-light placeholder-light/40 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none ${
+                      formErrors.message ? 'border-red-500 focus:ring-red-500' : 'border-secondary/20 focus:ring-primary'
+                    }`}
                     placeholder="Tell me about your project, ideas, or questions..."
                   />
+                  {formErrors.message && (
+                    <p className="mt-1 text-sm text-red-400">{formErrors.message}</p>
+                  )}
                 </div>
 
                 {submitStatus === 'success' && (

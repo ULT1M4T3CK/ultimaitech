@@ -1,190 +1,195 @@
-// Web Vitals monitoring for Core Web Vitals optimization
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals'
+
+type MetricName = 'CLS' | 'FID' | 'FCP' | 'LCP' | 'TTFB'
 
 interface WebVitalMetric {
-  name: string
+  name: MetricName
   value: number
   rating: 'good' | 'needs-improvement' | 'poor'
   delta: number
   id: string
 }
 
-// Thresholds based on Google's Core Web Vitals recommendations
-const THRESHOLDS = {
-  CLS: { good: 0.1, poor: 0.25 },
-  FID: { good: 100, poor: 300 },
-  FCP: { good: 1800, poor: 3000 },
-  LCP: { good: 2500, poor: 4000 },
-  TTFB: { good: 800, poor: 1800 }
-}
-
-function getRating(name: string, value: number): 'good' | 'needs-improvement' | 'poor' {
-  const threshold = THRESHOLDS[name as keyof typeof THRESHOLDS]
-  if (!threshold) return 'good'
+// Function to send metrics to analytics service
+const sendToAnalytics = (metric: WebVitalMetric) => {
+  // In production, you would send this to your analytics service
+  // For now, we'll just log it
+  console.log('Web Vital:', metric)
   
-  if (value <= threshold.good) return 'good'
-  if (value <= threshold.poor) return 'needs-improvement'
-  return 'poor'
+  // Example: Send to Google Analytics
+  // gtag('event', metric.name, {
+  //   event_category: 'Web Vitals',
+  //   value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+  //   event_label: metric.id,
+  //   non_interaction: true,
+  // })
 }
 
-function sendToAnalytics(metric: WebVitalMetric) {
-  // In production, send to your analytics service
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Web Vital:', metric)
+// Initialize Web Vitals monitoring
+export const initWebVitals = () => {
+  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    getCLS(sendToAnalytics)
+    getFID(sendToAnalytics)
+    getFCP(sendToAnalytics)
+    getLCP(sendToAnalytics)
+    getTTFB(sendToAnalytics)
   }
-  
-  // Example: Send to Google Analytics 4
-  if (typeof gtag !== 'undefined') {
-    gtag('event', metric.name, {
-      custom_parameter_1: metric.value,
-      custom_parameter_2: metric.rating,
-      custom_parameter_3: metric.id
+}
+
+// Performance optimization functions
+export const optimizeLoading = () => {
+  // Preload critical resources
+  const preloadCriticalResources = () => {
+    const criticalResources = [
+      '/images/ultimaitech-logo.png',
+      '/images/hero-background.png'
+    ]
+    
+    criticalResources.forEach(resource => {
+      const link = document.createElement('link')
+      link.rel = 'preload'
+      link.as = 'image'
+      link.href = resource
+      document.head.appendChild(link)
     })
   }
-}
-
-export function measureWebVitals() {
-  // Only run in browser environment
-  if (typeof window === 'undefined') return
-
-  // Measure Cumulative Layout Shift (CLS)
-  if ('PerformanceObserver' in window) {
+  
+  // Optimize font loading
+  const optimizeFontLoading = () => {
+    const fontLinks = document.querySelectorAll('link[href*="fonts.googleapis.com"]')
+    fontLinks.forEach(link => {
+      ;(link as HTMLLinkElement).rel = 'preload'
+      ;(link as HTMLLinkElement).as = 'style'
+      ;(link as HTMLLinkElement).onload = function() {
+        ;(this as HTMLLinkElement).rel = 'stylesheet'
+      }
+    })
+  }
+  
+  // Enable passive event listeners for better scrolling performance
+  const enablePassiveListeners = () => {
+    let supportsPassive = false
     try {
-      const clsObserver = new PerformanceObserver((list) => {
-        let clsValue = 0
-        for (const entry of list.getEntries()) {
-          if (!(entry as any).hadRecentInput) {
-            clsValue += (entry as any).value
-          }
-        }
-        
-        if (clsValue > 0) {
-          const metric: WebVitalMetric = {
-            name: 'CLS',
-            value: clsValue,
-            rating: getRating('CLS', clsValue),
-            delta: clsValue,
-            id: 'cls-' + Date.now()
-          }
-          sendToAnalytics(metric)
+      const opts = Object.defineProperty({}, 'passive', {
+        get: function() {
+          supportsPassive = true
+          return true
         }
       })
-      
-      clsObserver.observe({ type: 'layout-shift', buffered: true })
+      window.addEventListener('testPassive', () => {}, opts as EventListenerOptions)
+      window.removeEventListener('testPassive', () => {}, opts as EventListenerOptions)
     } catch (e) {
-      console.warn('CLS measurement failed:', e)
+      // Passive not supported
     }
-
-    // Measure First Input Delay (FID)
-    try {
-      const fidObserver = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          const fidValue = entry.processingStart - entry.startTime
-          const metric: WebVitalMetric = {
-            name: 'FID',
-            value: fidValue,
-            rating: getRating('FID', fidValue),
-            delta: fidValue,
-            id: 'fid-' + Date.now()
-          }
-          sendToAnalytics(metric)
-        }
-      })
-      
-      fidObserver.observe({ type: 'first-input', buffered: true })
-    } catch (e) {
-      console.warn('FID measurement failed:', e)
-    }
-
-    // Measure Largest Contentful Paint (LCP)
-    try {
-      const lcpObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries()
-        const lastEntry = entries[entries.length - 1]
-        const lcpValue = lastEntry.startTime
-        
-        const metric: WebVitalMetric = {
-          name: 'LCP',
-          value: lcpValue,
-          rating: getRating('LCP', lcpValue),
-          delta: lcpValue,
-          id: 'lcp-' + Date.now()
-        }
-        sendToAnalytics(metric)
-      })
-      
-      lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true })
-    } catch (e) {
-      console.warn('LCP measurement failed:', e)
+    
+    if (supportsPassive) {
+      // Add passive listeners for touch events
+      document.addEventListener('touchstart', () => {}, { passive: true })
+      document.addEventListener('touchmove', () => {}, { passive: true })
     }
   }
+  
+  // Defer non-critical JavaScript
+  const deferNonCriticalJS = () => {
+    const scripts = document.querySelectorAll('script[data-defer]')
+    scripts.forEach(script => {
+      if (script.hasAttribute('data-defer')) {
+        const newScript = document.createElement('script')
+        newScript.src = script.getAttribute('src') || ''
+        newScript.defer = true
+        document.head.appendChild(newScript)
+        script.remove()
+      }
+    })
+  }
+  
+  // Run optimizations
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      preloadCriticalResources()
+      optimizeFontLoading()
+      enablePassiveListeners()
+      deferNonCriticalJS()
+    })
+  } else {
+    preloadCriticalResources()
+    optimizeFontLoading()
+    enablePassiveListeners()
+    deferNonCriticalJS()
+  }
+}
 
-  // Measure First Contentful Paint (FCP) and Time to First Byte (TTFB)
-  window.addEventListener('load', () => {
-    if ('performance' in window && 'getEntriesByType' in performance) {
-      const navigationEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
-      const paintEntries = performance.getEntriesByType('paint')
-      
-      if (navigationEntries.length > 0) {
-        const nav = navigationEntries[0]
-        
-        // TTFB
-        const ttfbValue = nav.responseStart - nav.fetchStart
-        const ttfbMetric: WebVitalMetric = {
-          name: 'TTFB',
-          value: ttfbValue,
-          rating: getRating('TTFB', ttfbValue),
-          delta: ttfbValue,
-          id: 'ttfb-' + Date.now()
-        }
-        sendToAnalytics(ttfbMetric)
-      }
-      
-      // FCP
-      const fcpEntry = paintEntries.find(entry => entry.name === 'first-contentful-paint')
-      if (fcpEntry) {
-        const fcpValue = fcpEntry.startTime
-        const fcpMetric: WebVitalMetric = {
-          name: 'FCP',
-          value: fcpValue,
-          rating: getRating('FCP', fcpValue),
-          delta: fcpValue,
-          id: 'fcp-' + Date.now()
-        }
-        sendToAnalytics(fcpMetric)
-      }
+// Image optimization utility
+export const createOptimizedImageUrl = (src: string, width?: number, height?: number): string => {
+  // In a real implementation, you might use a service like Cloudinary or ImageKit
+  // For now, we'll just return the original URL
+  // Example with query parameters for future CDN integration:
+  const url = new URL(src, window.location.origin)
+  if (width) url.searchParams.set('w', width.toString())
+  if (height) url.searchParams.set('h', height.toString())
+  url.searchParams.set('f', 'webp') // Request WebP format if supported
+  url.searchParams.set('q', '85') // Set quality to 85%
+  
+  return url.toString()
+}
+
+// Check if WebP is supported
+export const supportsWebP = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const webP = new Image()
+    webP.onload = webP.onerror = () => {
+      resolve(webP.height === 2)
     }
+    webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA'
   })
 }
 
-// Preload critical resources
-export function preloadCriticalResources() {
-  // Preload hero image
-  const heroImage = new Image()
-  heroImage.src = '/images/hero-background.png'
-  
-  // Preload logo
-  const logo = new Image()
-  logo.src = '/images/ultimaitech-logo.png'
-}
-
-// Optimize loading performance
-export function optimizeLoading() {
-  // Preload critical resources
-  preloadCriticalResources()
-  
-  // Start measuring web vitals
-  measureWebVitals()
-  
-  // Prefetch likely next pages
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-      const routes = ['/portfolio', '/services', '/contact']
-      routes.forEach(route => {
-        const link = document.createElement('link')
-        link.rel = 'prefetch'
-        link.href = route
-        document.head.appendChild(link)
-      })
+// Lazy loading intersection observer
+export const createLazyLoadObserver = (callback: (entries: IntersectionObserverEntry[]) => void) => {
+  if ('IntersectionObserver' in window) {
+    return new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: '50px',
+      threshold: 0.1
     })
   }
+  return null
+}
+
+// Performance monitoring
+export const measurePerformance = (name: string, fn: () => void) => {
+  const start = performance.now()
+  fn()
+  const end = performance.now()
+  console.log(`${name} took ${end - start} milliseconds`)
+}
+
+// Resource hints
+export const addResourceHints = () => {
+  const hints = [
+    { rel: 'dns-prefetch', href: '//fonts.googleapis.com' },
+    { rel: 'dns-prefetch', href: '//fonts.gstatic.com' },
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' }
+  ]
+  
+  hints.forEach(hint => {
+    const link = document.createElement('link')
+    link.rel = hint.rel
+    link.href = hint.href
+    if ('crossorigin' in hint) {
+      link.crossOrigin = hint.crossorigin
+    }
+    document.head.appendChild(link)
+  })
+}
+
+export default {
+  initWebVitals,
+  optimizeLoading,
+  createOptimizedImageUrl,
+  supportsWebP,
+  createLazyLoadObserver,
+  measurePerformance,
+  addResourceHints
 }

@@ -27,94 +27,101 @@ const Services = () => {
 
   const services = [
     {
-      id: 'website-development',
-      title: 'Website Development',
-      description: 'Modern, responsive websites and web applications built with cutting-edge technologies.',
-      icon: Globe,
+      id: 'ai-training',
+      title: 'Custom AI Model Training',
+      description: 'Transform your business with specialized AI models trained on your unique data. From computer vision to natural language processing, we create AI solutions that understand your specific domain.',
+      icon: Brain,
       features: [
-        'Responsive Design',
-        'SEO Optimization',
-        'Performance Optimization',
-        'Content Management Systems',
-        'E-commerce Solutions',
-        'Custom Web Applications'
+        'Custom Neural Network Architecture',
+        'Large Language Model Fine-tuning',
+        'Computer Vision Model Training',
+        'Domain-specific Data Processing',
+        'Model Optimization & Deployment',
+        'Continuous Learning Systems',
+        'Performance Analytics & Monitoring',
+        'A/B Testing for AI Models'
       ],
-      technologies: ['React', 'Next.js', 'Node.js', 'TypeScript', 'Tailwind CSS', 'MongoDB'],
-      color: 'from-blue-500 to-cyan-500'
+      technologies: ['TensorFlow', 'PyTorch', 'Transformers', 'Hugging Face', 'CUDA', 'Docker', 'Kubernetes', 'MLOps'],
+      color: 'from-purple-600 to-blue-600',
+      featured: true
     },
     {
-      id: 'app-development',
-      title: 'App Development',
-      description: 'Native and cross-platform mobile applications that deliver exceptional user experiences.',
-      icon: Smartphone,
+      id: 'ai-integration',
+      title: 'AI Integration & Automation',
+      description: 'Seamlessly integrate cutting-edge AI capabilities into your existing systems and workflows to automate complex tasks and enhance decision-making.',
+      icon: Zap,
       features: [
-        'iOS & Android Development',
-        'Cross-platform Solutions',
-        'Native Performance',
-        'Offline Functionality',
-        'Push Notifications',
-        'App Store Optimization'
+        'OpenAI API Integration',
+        'Custom AI Workflow Automation',
+        'Intelligent Document Processing',
+        'Predictive Analytics Implementation',
+        'AI-powered Recommendation Systems',
+        'Automated Content Generation',
+        'Smart Data Analysis Tools'
       ],
-      technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase', 'Redux'],
-      color: 'from-purple-500 to-pink-500'
+      technologies: ['OpenAI GPT-4', 'LangChain', 'Python', 'FastAPI', 'Azure AI', 'AWS SageMaker', 'Google AI'],
+      color: 'from-emerald-500 to-teal-600'
     },
     {
       id: 'chatbot-development',
-      title: 'Chat Bot Development',
-      description: 'Intelligent conversational AI that enhances customer engagement and automates support.',
+      title: 'Intelligent AI Chatbots',
+      description: 'Advanced conversational AI systems that understand context, maintain memory, and provide human-like interactions for superior customer engagement.',
       icon: MessageCircle,
       features: [
-        'Natural Language Processing',
-        'Multi-platform Integration',
-        'Automated Response System',
-        'Custom Training Data',
-        'Analytics & Insights',
-        'Seamless Handoff to Humans'
+        'GPT-powered Conversational AI',
+        'Multi-language Support',
+        'Context-aware Responses',
+        'Integration with Business Systems',
+        'Voice & Text Capabilities',
+        'Advanced NLP Processing',
+        'Custom Knowledge Base Training',
+        'Analytics & Conversation Insights'
       ],
-      technologies: ['OpenAI GPT', 'Dialogflow', 'Rasa', 'Python', 'Node.js', 'Webhooks'],
+      technologies: ['OpenAI GPT', 'LangChain', 'Rasa', 'Dialogflow', 'Python', 'Node.js', 'WebSockets', 'Vector Databases'],
       color: 'from-green-500 to-emerald-500'
     },
     {
-      id: 'ai-training',
-      title: 'Custom Training of AI',
-      description: 'Specialized AI models trained on your data for unique business applications.',
-      icon: Brain,
+      id: 'ai-consulting',
+      title: 'AI Strategy & Consulting',
+      description: 'Expert guidance on AI adoption, strategy development, and implementation roadmaps to maximize your AI investment and competitive advantage.',
+      icon: Users,
       features: [
-        'Custom Model Training',
-        'Data Preprocessing',
-        'Fine-tuning Existing Models',
-        'Domain-specific Solutions',
-        'Continuous Learning',
-        'Performance Monitoring'
+        'AI Readiness Assessment',
+        'Custom AI Strategy Development',
+        'Technology Stack Recommendations',
+        'ROI Analysis & Planning',
+        'Team Training & Workshops',
+        'AI Ethics & Governance',
+        'Implementation Roadmapping'
       ],
-      technologies: ['TensorFlow', 'PyTorch', 'Hugging Face', 'Python', 'GPU Computing', 'MLOps'],
-      color: 'from-orange-500 to-red-500'
+      technologies: ['Strategic Planning', 'Data Analysis', 'ML Frameworks', 'Cloud Platforms', 'Business Intelligence'],
+      color: 'from-indigo-500 to-purple-600'
     }
   ]
 
   const processSteps = [
     {
       step: '01',
-      title: 'Discovery & Planning',
-      description: 'We start by understanding your business needs, goals, and requirements.',
+      title: 'AI Assessment & Strategy',
+      description: 'We analyze your data, identify AI opportunities, and develop a comprehensive AI implementation strategy.',
       icon: Users
     },
     {
       step: '02',
-      title: 'Design & Architecture',
-      description: 'Creating detailed designs and technical architecture for your solution.',
+      title: 'Data Preparation & Model Design',
+      description: 'Preparing your data for training and designing the optimal AI model architecture for your specific use case.',
       icon: Palette
     },
     {
       step: '03',
-      title: 'Development & Testing',
-      description: 'Building your solution with rigorous testing and quality assurance.',
-      icon: Code
+      title: 'Training & Optimization',
+      description: 'Training custom AI models on your data with continuous optimization for maximum performance and accuracy.',
+      icon: Brain
     },
     {
       step: '04',
-      title: 'Deployment & Launch',
-      description: 'Smooth deployment and launch with ongoing support and maintenance.',
+      title: 'Deployment & Monitoring',
+      description: 'Seamless deployment to production with real-time monitoring, performance tracking, and continuous improvement.',
       icon: Zap
     }
   ]
@@ -158,10 +165,10 @@ const Services = () => {
           {/* Page Header */}
           <div className="text-center mb-8">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Our <span className="gradient-text">Services</span>
+              AI-Powered <span className="gradient-text">Solutions</span>
             </h1>
             <p className="text-xl md:text-2xl text-light/70 max-w-3xl mx-auto">
-              Comprehensive digital solutions tailored to your business needs. From websites to AI, we've got you covered.
+              Transform your business with cutting-edge AI technology. From custom model training to intelligent automation, we specialize in making AI work for you.
             </p>
           </div>
         </div>
@@ -172,7 +179,14 @@ const Services = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8">
             {services.map((service) => (
-              <div key={service.id} className="card group hover:scale-105 transition-all duration-300">
+              <div key={service.id} className={`card group hover:scale-105 transition-all duration-300 ${
+                service.featured ? 'ring-2 ring-primary/50 relative overflow-hidden' : ''
+              }`}>
+                {service.featured && (
+                  <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Featured
+                  </div>
+                )}
                 <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                   <service.icon className="h-8 w-8 text-white" />
                 </div>
@@ -253,41 +267,41 @@ const Services = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">
-              Why Choose <span className="gradient-text">UltimAItech</span>
+              Why Choose <span className="gradient-text">UltimAItech</span> for AI
             </h2>
             <p className="text-xl text-light/70 max-w-2xl mx-auto">
-              We combine technical expertise with creative innovation to deliver exceptional results
+              Deep AI expertise combined with practical business understanding to deliver transformative AI solutions
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Brain className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-4 text-light">AI Expertise</h3>
+              <p className="text-light/70">
+                Deep knowledge in machine learning, neural networks, and cutting-edge AI technologies including GPT, computer vision, and custom model training
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Zap className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-4 text-light">Proven Results</h3>
+              <p className="text-light/70">
+                Track record of successful AI implementations that deliver measurable business value and ROI for our clients
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Shield className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-light">Quality Assurance</h3>
+              <h3 className="text-xl font-semibold mb-4 text-light">End-to-End Support</h3>
               <p className="text-light/70">
-                Rigorous testing and quality control ensure your solution meets the highest standards
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Clock className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-light">Timely Delivery</h3>
-              <p className="text-light/70">
-                We value your time and deliver projects on schedule with transparent communication
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Users className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-light">Ongoing Support</h3>
-              <p className="text-light/70">
-                Continuous support and maintenance to ensure your solution evolves with your business
+                From initial AI strategy to deployment and ongoing optimization, we provide comprehensive support throughout your AI journey
               </p>
             </div>
           </div>

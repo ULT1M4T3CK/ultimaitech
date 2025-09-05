@@ -8,8 +8,15 @@ import { body, validationResult } from 'express-validator';
 const router = Router();
 
 router.post('/login', authLimiter, [
-  body('username').trim().isLength({ min: 3 }).escape(),
-  body('password').isLength({ min: 8 })
+  body('username')
+    .trim()
+    .isLength({ min: 3, max: 50 })
+    .matches(/^[a-zA-Z0-9_]+$/)
+    .withMessage('Username must be 3-50 characters and contain only letters, numbers, and underscores')
+    .escape(),
+  body('password')
+    .isLength({ min: 8, max: 128 })
+    .withMessage('Password must be between 8 and 128 characters')
 ], async (req: Request, res: Response) => {
   try {
     const errors = validationResult(req);

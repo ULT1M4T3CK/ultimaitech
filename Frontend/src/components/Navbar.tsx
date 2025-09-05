@@ -11,8 +11,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'AI Services', path: '/services' },
+    { name: 'AI Projects', path: '/portfolio' },
     { name: 'Contact', path: '/contact' }
   ]
 
@@ -27,7 +27,7 @@ const Navbar = () => {
             <img 
               src="/images/ultimaitech-logo.png" 
               alt="UltimAItech Logo" 
-              className="h-32 w-32 group-hover:scale-105 transition-transform duration-200"
+              className="h-12 w-12 group-hover:scale-105 transition-transform duration-200"
             />
           </Link>
 
