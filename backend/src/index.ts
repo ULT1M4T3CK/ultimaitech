@@ -44,7 +44,10 @@ app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? process.env.FRONTEND_URL || ['https://ultimaitech.com', 'https://www.ultimaitech.com', 'http://localhost', 'http://127.0.0.1']
     : ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost', 'http://127.0.0.1'],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  optionsSuccessStatus: 200
 }));
 
 // Body parsing middleware
@@ -56,10 +59,7 @@ const uploadsPath = path.join(process.cwd(), 'uploads');
 console.log('Serving uploads from:', uploadsPath);
 app.use('/uploads', express.static(uploadsPath));
 
-// Rate limiting
-app.use('/api/', apiLimiter);
-
-// Handle preflight OPTIONS requests globally
+// Handle preflight OPTIONS requests globally BEFORE rate limiting
 app.options('*', (req, res) => {
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -67,6 +67,9 @@ app.options('*', (req, res) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   res.status(200).end();
 });
+
+// Rate limiting (after OPTIONS handling)
+app.use('/api/', apiLimiter);
 
 // Routes
 app.use('/api/auth', authRoutes);
