@@ -46,7 +46,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = async (username: string, password: string): Promise<boolean> => {
     try {
+      console.log('🔐 Attempting login with username:', username)
+      console.log('🌐 Making POST request to:', '/api/auth/login')
+      console.log('📤 Request payload:', { username, password: '***' })
+      
       const response = await axios.post('/api/auth/login', { username, password })
+      console.log('✅ Login response received:', response.status, response.data)
+      
       const { token, user } = response.data
       
       localStorage.setItem('authToken', token)
@@ -61,7 +67,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(user)
       return true
     } catch (error) {
-      console.error('Login failed:', error)
+      console.error('❌ Login failed:', error)
+      console.error('📊 Error details:', {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        url: error.config?.url,
+        method: error.config?.method
+      })
       return false
     }
   }
