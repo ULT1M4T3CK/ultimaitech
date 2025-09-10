@@ -75,4 +75,13 @@ router.post('/login', authLimiter, [
   }
 });
 
+// Handle preflight OPTIONS requests for CORS
+router.options('/login', (req: Request, res: Response) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.header('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.status(200).end();
+});
+
 export default router;
