@@ -10,11 +10,12 @@ import authRoutes from './routes/auth';
 import projectsRoutes from './routes/projects';
 import analyticsRoutes from './routes/analytics';
 import uploadRoutes from './routes/upload';
+import healthRoutes from './routes/health';
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5002;
 
 // Trust proxy for rate limiting (needed when behind nginx)
 app.set('trust proxy', 1);
@@ -72,6 +73,7 @@ app.options('*', (req, res) => {
 app.use('/api/', apiLimiter);
 
 // Routes
+app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectsRoutes);
 app.use('/api/analytics', analyticsRoutes);
