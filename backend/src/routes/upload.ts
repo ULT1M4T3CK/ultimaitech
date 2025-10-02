@@ -8,12 +8,16 @@ const router = Router();
 
 // Ensure uploads directory exists
 const uploadsDir = path.join(process.cwd(), 'uploads');
-console.log('Uploads directory path:', uploadsDir);
-console.log('Uploads directory exists:', fs.existsSync(uploadsDir));
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Uploads directory path:', uploadsDir);
+  console.log('Uploads directory exists:', fs.existsSync(uploadsDir));
+}
 
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
-  console.log('Created uploads directory');
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('Created uploads directory');
+  }
 }
 
 // Configure multer for file uploads
@@ -50,8 +54,10 @@ const upload = multer({
 // Upload image endpoint (admin only)
 router.post('/', authenticateToken, isAdmin, upload.single('image'), async (req: Request, res: Response) => {
   try {
-    console.log('Upload request received:', req.body);
-    console.log('File:', req.file);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Upload request received:', req.body);
+      console.log('File:', req.file);
+    }
     
     if (!req.file) {
       return res.status(400).json({ message: 'No image file provided' });
@@ -60,7 +66,9 @@ router.post('/', authenticateToken, isAdmin, upload.single('image'), async (req:
     // Return the file path relative to the uploads directory
     const imagePath = `/uploads/${req.file.filename}`;
     
-    console.log('Generated image path:', imagePath);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Generated image path:', imagePath);
+    }
     
     res.json({
       message: 'Image uploaded successfully',
@@ -77,7 +85,26 @@ router.post('/', authenticateToken, isAdmin, upload.single('image'), async (req:
 router.delete('/:filename', authenticateToken, isAdmin, async (req: Request, res: Response) => {
   try {
     const { filename } = req.params;
-    const filePath = path.join(uploadsDir, filename);
+    
+    // Security: Prevent path traversal attacks
+    const sanitizedFilename = path.basename(filename);
+    if (sanitizedFilename !== filename || filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
+      return res.status(400).json({ message: 'Invalid filename' });
+    }
+    
+    // Additional validation: only allow expected file extensions
+    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+    const fileExtension = path.extname(sanitizedFilename).toLowerCase();
+    if (!allowedExtensions.includes(fileExtension)) {
+      return res.status(400).json({ message: 'Invalid file type' });
+    }
+    
+    const filePath = path.join(uploadsDir, sanitizedFilename);
+    
+    // Security: Ensure the resolved path is still within uploads directory
+    if (!filePath.startsWith(uploadsDir)) {
+      return res.status(400).json({ message: 'Invalid file path' });
+    }
     
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);

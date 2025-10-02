@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import path from 'path';
 import { apiLimiter } from './middleware/rateLimit';
+import { csrfProtection, csrfTokenEndpoint } from './middleware/csrf';
 
 // Import routes
 import authRoutes from './routes/auth';
@@ -72,6 +73,12 @@ app.options('*', (req, res) => {
 // Rate limiting (after OPTIONS handling)
 app.use('/api/', apiLimiter);
 
+// CSRF protection (after rate limiting)
+app.use(csrfProtection);
+
+// CSRF token endpoint
+app.get('/api/csrf-token', csrfTokenEndpoint);
+
 // Routes
 app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
@@ -91,7 +98,16 @@ app.get('/api/health', (req, res) => {
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong!' });
+  
+  // Don't expose error details in production
+  const isDevelopment = process.env.NODE_ENV !== 'production';
+  const message = isDevelopment ? err.message : 'Internal server error';
+  const stack = isDevelopment ? err.stack : undefined;
+  
+  res.status(err.status || 500).json({ 
+    message,
+    ...(stack && { stack })
+  });
 });
 
 // 404 handler

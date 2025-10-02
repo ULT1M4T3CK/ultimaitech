@@ -82,7 +82,9 @@ router.post('/', authenticateToken, isAdmin, [
 
     const { title, description, image_path, technologies, project_url, github_url, featured } = req.body;
     
-    console.log('Creating project with data:', { title, description, image_path, technologies, project_url, github_url, featured });
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Creating project with data:', { title, description, image_path, technologies, project_url, github_url, featured });
+    }
     
     const result = await pool.query(
       `INSERT INTO projects (title, description, image_path, technologies, project_url, github_url, featured)
@@ -132,7 +134,9 @@ router.put('/:id', authenticateToken, isAdmin, [
     const { id } = req.params;
     const { title, description, image_path, technologies, project_url, github_url, featured } = req.body;
     
-    console.log('Updating project with data:', { id, title, description, image_path, technologies, project_url, github_url, featured });
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Updating project with data:', { id, title, description, image_path, technologies, project_url, github_url, featured });
+    }
     
     const result = await pool.query(
       `UPDATE projects 

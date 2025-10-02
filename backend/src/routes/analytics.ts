@@ -1,15 +1,28 @@
 import { Router, Request, Response } from 'express';
 import pool from '../database/config';
 import { authenticateToken, isAdmin } from '../middleware/auth';
+import { body, validationResult } from 'express-validator';
 
 const router = Router();
 
 // Record visitor (public)
-router.post('/visit', async (req: Request, res: Response) => {
+router.post('/visit', [
+  body('page_visited')
+    .trim()
+    .isLength({ min: 1, max: 255 })
+    .matches(/^[a-zA-Z0-9\-_\/\?&=.]+$/)
+    .withMessage('Invalid page path format')
+    .escape()
+], async (req: Request, res: Response) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { page_visited } = req.body;
     const ip_address = req.ip || req.connection.remoteAddress || 'unknown';
-    const user_agent = req.get('User-Agent') || 'unknown';
+    const user_agent = (req.get('User-Agent') || 'unknown').substring(0, 500); // Limit length
 
     await pool.query(
       'INSERT INTO visitor_stats (ip_address, user_agent, page_visited) VALUES ($1, $2, $3)',
