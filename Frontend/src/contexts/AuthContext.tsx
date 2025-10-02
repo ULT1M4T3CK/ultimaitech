@@ -47,10 +47,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async (username: string, password: string): Promise<boolean> => {
     try {
       console.log('🔐 Attempting login with username:', username)
-      console.log('🌐 Making POST request to:', '/api/auth/login')
+      
+      // Use production API URL when deployed
+      const apiUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? '' : 'https://your-railway-backend.railway.app');
+      const loginEndpoint = `${apiUrl}/api/auth/login`;
+      
+      console.log('🌐 Making POST request to:', loginEndpoint)
       console.log('📤 Request payload:', { username, password: '***' })
       
-      const response = await axios.post('/api/auth/login', { username, password })
+      const response = await axios.post(loginEndpoint, { username, password })
       console.log('✅ Login response received:', response.status, response.data)
       
       const { token, user } = response.data
