@@ -4,7 +4,7 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "UltimAItech",
-  "description": "Custom AI Model Training & Machine Learning Solutions",
+  "description": "Custom AI Training & Chatbot Development Specialists",
   "url": "https://ultimaitech.com",
   "logo": "https://ultimaitech.com/images/ultimaitech-logo.png",
   "contactPoint": {
@@ -31,14 +31,14 @@ export const organizationSchema = {
   },
   "foundingDate": "2024",
   "numberOfEmployees": "1-10",
-  "industry": "Artificial Intelligence, Machine Learning, AI Model Training"
+  "industry": "AI Model Training, Chatbot Development, Conversational AI, Machine Learning"
 }
 
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "UltimAItech",
-  "description": "AI-Powered Web Development & Digital Solutions",
+  "description": "Custom AI Training & Chatbot Development Specialists",
   "url": "https://ultimaitech.com",
   "potentialAction": {
     "@type": "SearchAction",
@@ -61,18 +61,18 @@ export const websiteSchema = {
 export const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "AI Model Training & Machine Learning Services",
-  "description": "Custom AI model training, machine learning solutions, and intelligent automation services for businesses",
+  "name": "AI Training & Chatbot Development Services",
+  "description": "Specialized custom AI model training and intelligent chatbot development services for businesses",
   "provider": {
     "@type": "Organization",
     "name": "UltimAItech",
     "url": "https://ultimaitech.com"
   },
-  "serviceType": "Artificial Intelligence & Machine Learning",
+  "serviceType": "AI Training & Chatbot Development",
   "areaServed": "Worldwide",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "AI & Machine Learning Services",
+    "name": "AI Training & Chatbot Services",
     "itemListElement": [
       {
         "@type": "Offer",
@@ -80,6 +80,14 @@ export const serviceSchema = {
           "@type": "Service",
           "name": "Custom AI Model Training",
           "description": "Specialized AI models trained on your unique data for maximum accuracy and business impact"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Intelligent Chatbot Development",
+          "description": "Advanced conversational AI systems with context understanding and human-like interactions"
         }
       },
       {
@@ -94,16 +102,8 @@ export const serviceSchema = {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Intelligent Chatbots",
-          "description": "Advanced conversational AI systems with context understanding and human-like interactions"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "AI Strategy & Consulting",
-          "description": "Expert guidance on AI adoption, strategy development, and implementation roadmaps"
+          "name": "Web & App Development",
+          "description": "Modern web applications and mobile solutions to complement AI implementations"
         }
       }
     ]
@@ -113,8 +113,8 @@ export const serviceSchema = {
 export const portfolioSchema = (projects: any[]) => ({
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "UltimAItech Portfolio",
-  "description": "Showcase of web development projects and creative solutions",
+  "name": "UltimAItech AI Projects Portfolio",
+  "description": "Showcase of AI training projects, chatbot development, and intelligent solutions",
   "url": "https://ultimaitech.com/portfolio",
   "mainEntity": {
     "@type": "ItemList",
@@ -147,7 +147,7 @@ export const contactSchema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   "name": "Contact UltimAItech",
-  "description": "Get in touch with UltimAItech for your web development and AI solution needs",
+  "description": "Get in touch with UltimAItech for your custom AI training and chatbot development needs",
   "url": "https://ultimaitech.com/contact",
   "mainEntity": {
     "@type": "ContactPoint",

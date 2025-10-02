@@ -29,7 +29,7 @@ const Services = () => {
     {
       id: 'ai-training',
       title: 'Custom AI Model Training',
-      description: 'Transform your business with specialized AI models trained on your unique data. From computer vision to natural language processing, we create AI solutions that understand your specific domain.',
+      description: 'Our core specialty: Transform your business with specialized AI models trained on your unique data. From computer vision to natural language processing, we create AI solutions that understand your specific domain.',
       icon: Brain,
       features: [
         'Custom Neural Network Architecture',
@@ -43,7 +43,28 @@ const Services = () => {
       ],
       technologies: ['TensorFlow', 'PyTorch', 'Transformers', 'Hugging Face', 'CUDA', 'Docker', 'Kubernetes', 'MLOps'],
       color: 'from-purple-600 to-blue-600',
-      featured: true
+      featured: true,
+      priority: 1
+    },
+    {
+      id: 'chatbot-development',
+      title: 'Intelligent AI Chatbots',
+      description: 'Our primary focus: Advanced conversational AI systems that understand context, maintain memory, and provide human-like interactions for superior customer engagement.',
+      icon: MessageCircle,
+      features: [
+        'GPT-powered Conversational AI',
+        'Multi-language Support',
+        'Context-aware Responses',
+        'Integration with Business Systems',
+        'Voice & Text Capabilities',
+        'Advanced NLP Processing',
+        'Custom Knowledge Base Training',
+        'Analytics & Conversation Insights'
+      ],
+      technologies: ['OpenAI GPT', 'LangChain', 'Rasa', 'Dialogflow', 'Python', 'Node.js', 'WebSockets', 'Vector Databases'],
+      color: 'from-green-500 to-emerald-500',
+      featured: true,
+      priority: 1
     },
     {
       id: 'ai-integration',
@@ -60,25 +81,27 @@ const Services = () => {
         'Smart Data Analysis Tools'
       ],
       technologies: ['OpenAI GPT-4', 'LangChain', 'Python', 'FastAPI', 'Azure AI', 'AWS SageMaker', 'Google AI'],
-      color: 'from-emerald-500 to-teal-600'
+      color: 'from-emerald-500 to-teal-600',
+      priority: 2
     },
     {
-      id: 'chatbot-development',
-      title: 'Intelligent AI Chatbots',
-      description: 'Advanced conversational AI systems that understand context, maintain memory, and provide human-like interactions for superior customer engagement.',
-      icon: MessageCircle,
+      id: 'web-app-development',
+      title: 'Web & App Development',
+      description: 'Modern web applications and mobile solutions to complement your AI implementations. Supporting service to enhance your overall digital presence.',
+      icon: Code,
       features: [
-        'GPT-powered Conversational AI',
-        'Multi-language Support',
-        'Context-aware Responses',
-        'Integration with Business Systems',
-        'Voice & Text Capabilities',
-        'Advanced NLP Processing',
-        'Custom Knowledge Base Training',
-        'Analytics & Conversation Insights'
+        'React & Next.js Applications',
+        'Mobile App Development',
+        'Full-Stack Web Solutions',
+        'API Development & Integration',
+        'Database Design & Management',
+        'UI/UX Design',
+        'Performance Optimization',
+        'Deployment & Maintenance'
       ],
-      technologies: ['OpenAI GPT', 'LangChain', 'Rasa', 'Dialogflow', 'Python', 'Node.js', 'WebSockets', 'Vector Databases'],
-      color: 'from-green-500 to-emerald-500'
+      technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'AWS'],
+      color: 'from-slate-500 to-gray-600',
+      priority: 3
     },
     {
       id: 'ai-consulting',
@@ -95,9 +118,13 @@ const Services = () => {
         'Implementation Roadmapping'
       ],
       technologies: ['Strategic Planning', 'Data Analysis', 'ML Frameworks', 'Cloud Platforms', 'Business Intelligence'],
-      color: 'from-indigo-500 to-purple-600'
+      color: 'from-indigo-500 to-purple-600',
+      priority: 2
     }
   ]
+
+  // Sort services by priority
+  const sortedServices = services.sort((a, b) => a.priority - b.priority)
 
   const processSteps = [
     {
@@ -139,12 +166,12 @@ const Services = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="Web Development Services - UltimAItech | React, Node.js, AI Solutions"
-        description="Professional web development services including React, Node.js, AI integration, and full-stack solutions. Transform your business with modern web applications and digital solutions."
-        keywords="web development services, React development, Node.js services, AI integration, full-stack development, custom web applications, digital solutions, UltimAItech services"
+        title="AI Training & Chatbot Development Services - UltimAItech | Custom AI Solutions"
+        description="Specialized AI training and chatbot development services. Custom AI model training, intelligent conversational AI, and machine learning solutions for modern businesses."
+        keywords="AI training services, chatbot development, custom AI models, conversational AI, AI chatbots, machine learning training, neural networks, LLM fine-tuning, UltimAItech AI services"
         canonical="https://ultimaitech.com/services"
-        ogTitle="Professional Web Development Services - UltimAItech"
-        ogDescription="Expert web development services including React, Node.js, AI integration, and full-stack solutions for modern businesses."
+        ogTitle="AI Training & Chatbot Development Services - UltimAItech"
+        ogDescription="Expert AI training and chatbot development services. Custom AI solutions, conversational AI, and machine learning for businesses."
         ogImage="https://ultimaitech.com/images/services-og-image.png"
         structuredData={combinedSchema}
       />
@@ -165,10 +192,10 @@ const Services = () => {
           {/* Page Header */}
           <div className="text-center mb-8">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              AI-Powered <span className="gradient-text">Solutions</span>
+              AI Training & <span className="gradient-text">Chatbot Development</span>
             </h1>
             <p className="text-xl md:text-2xl text-light/70 max-w-3xl mx-auto">
-              Transform your business with cutting-edge AI technology. From custom model training to intelligent automation, we specialize in making AI work for you.
+              Specialized in custom AI model training and intelligent chatbot development. Transform your business with tailored AI solutions that understand your unique needs and data.
             </p>
           </div>
         </div>
@@ -178,7 +205,7 @@ const Services = () => {
       <section className="py-20 bg-dark-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8">
-            {services.map((service) => (
+            {sortedServices.map((service) => (
               <div key={service.id} className={`card group hover:scale-105 transition-all duration-300 ${
                 service.featured ? 'ring-2 ring-primary/50 relative overflow-hidden' : ''
               }`}>

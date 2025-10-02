@@ -20,12 +20,12 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="UltimAItech - Custom AI Model Training & Machine Learning Solutions"
-        description="Transform your business with custom AI model training, intelligent automation, and cutting-edge machine learning solutions. Expert AI development services for modern enterprises."
-        keywords="AI model training, custom AI development, machine learning solutions, AI automation, neural networks, deep learning, AI consulting, artificial intelligence services, UltimAItech"
+        title="UltimAItech - Custom AI Training & Chatbot Development Specialists"
+        description="Expert custom AI model training and intelligent chatbot development services. Transform your business with specialized AI solutions tailored to your unique needs and data."
+        keywords="custom AI training, AI model training, chatbot development, conversational AI, machine learning specialists, AI chatbots, custom AI solutions, neural networks, LLM training, UltimAItech"
         canonical="https://ultimaitech.com"
-        ogTitle="UltimAItech - Custom AI Model Training & Machine Learning Solutions"
-        ogDescription="Expert AI development services specializing in custom model training, intelligent automation, and transformative machine learning solutions for businesses."
+        ogTitle="UltimAItech - Custom AI Training & Chatbot Development Specialists"
+        ogDescription="Leading specialists in custom AI model training and intelligent chatbot development. Expert AI solutions for modern businesses."
         ogImage="https://ultimaitech.com/images/ultimaitech-og-image.png"
         structuredData={combinedSchema}
       />
@@ -49,15 +49,15 @@ const Home = () => {
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <div className="mb-8">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-up">
-              AI-Powered Solutions by{' '}
+              Custom AI Training & Chatbot Development by{' '}
               <span className="gradient-text">UltimAItech</span>
             </h1>
             <p className="text-xl md:text-2xl text-light/80 mb-8 max-w-2xl mx-auto animate-slide-up">
-              Transform your business with custom AI model training, intelligent automation, and cutting-edge machine learning solutions.
+              Specialized in custom AI model training and intelligent chatbot development. Transform your business with tailored AI solutions that understand your unique needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
               <Link to="/services" className="btn-primary">
-                Explore AI Services
+                AI Training & Chatbots
               </Link>
               <Link to="/portfolio" className="btn-outline">
                 View AI Projects
@@ -79,41 +79,50 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">
-              AI <span className="gradient-text">Expertise</span>
+              Core AI <span className="gradient-text">Specializations</span>
             </h2>
-            <p className="text-xl text-light/70 max-w-2xl mx-auto">
-              We specialize in transforming businesses through intelligent AI solutions and custom machine learning models
+            <p className="text-xl text-light/70 max-w-3xl mx-auto">
+              Our primary expertise lies in custom AI model training and intelligent chatbot development, with additional support for web and mobile solutions
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="card text-center group">
+            <div className="card text-center group ring-2 ring-primary/50 relative">
+              <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-medium">
+                PRIMARY
+              </div>
               <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Code className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-4">Custom AI Model Training</h3>
               <p className="text-light/70">
-                Specialized AI models trained on your unique data for maximum accuracy and business impact
+                Specialized AI models trained on your unique data for maximum accuracy and business impact. From neural networks to large language models.
               </p>
             </div>
 
-            <div className="card text-center group">
-              <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Zap className="h-8 w-8 text-white" />
+            <div className="card text-center group ring-2 ring-primary/50 relative">
+              <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-medium">
+                PRIMARY
               </div>
-              <h3 className="text-xl font-semibold mb-4">AI Integration & Automation</h3>
-              <p className="text-light/70">
-                Seamless integration of AI capabilities into your existing workflows and systems
-              </p>
-            </div>
-
-            <div className="card text-center group">
               <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Palette className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Intelligent Chatbots</h3>
+              <h3 className="text-xl font-semibold mb-4">Intelligent Chatbot Development</h3>
               <p className="text-light/70">
-                Advanced conversational AI that understands context and provides human-like interactions
+                Advanced conversational AI systems with context awareness, memory, and human-like interactions for superior customer engagement.
+              </p>
+            </div>
+
+            <div className="card text-center group opacity-80">
+              <div className="absolute top-4 right-4 bg-gray-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                ADDITIONAL
+              </div>
+              <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Zap className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-4">Web & App Development</h3>
+              <p className="text-light/70">
+                Modern web applications and mobile solutions to complement your AI implementations and business needs.
               </p>
             </div>
           </div>
@@ -177,13 +186,13 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/services" className="btn-primary text-lg px-8 py-4">
-              Explore AI Services
+              AI Training & Chatbots
             </Link>
             <Link to="/portfolio" className="btn-outline text-lg px-8 py-4">
               View AI Projects
             </Link>
             <Link to="/contact" className="btn-outline text-lg px-8 py-4">
-              Contact Us
+              Get Started
             </Link>
           </div>
         </div>
