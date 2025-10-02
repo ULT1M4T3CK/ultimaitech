@@ -1,6 +1,6 @@
-import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals'
+import { onCLS, onINP, onFCP, onLCP, onTTFB } from 'web-vitals'
 
-type MetricName = 'CLS' | 'FID' | 'FCP' | 'LCP' | 'TTFB'
+type MetricName = 'CLS' | 'INP' | 'FCP' | 'LCP' | 'TTFB'
 
 interface WebVitalMetric {
   name: MetricName
@@ -28,11 +28,11 @@ const sendToAnalytics = (metric: WebVitalMetric) => {
 // Initialize Web Vitals monitoring
 export const initWebVitals = () => {
   if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-    getCLS(sendToAnalytics)
-    getFID(sendToAnalytics)
-    getFCP(sendToAnalytics)
-    getLCP(sendToAnalytics)
-    getTTFB(sendToAnalytics)
+    onCLS(sendToAnalytics)
+    onINP(sendToAnalytics)
+    onFCP(sendToAnalytics)
+    onLCP(sendToAnalytics)
+    onTTFB(sendToAnalytics)
   }
 }
 

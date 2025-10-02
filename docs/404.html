@@ -2,35 +2,84 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/images/ultimaitech-logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UltimAItech - Portfolio</title>
-    <meta name="description" content="UltimAItech Portfolio - Showcasing innovative projects and creative solutions" />
+    
+    <!-- Primary Meta Tags -->
+    <title>UltimAItech - Custom AI Model Training & Machine Learning Solutions</title>
+    <meta name="title" content="UltimAItech - Custom AI Model Training & Machine Learning Solutions" />
+    <meta name="description" content="Transform your business with custom AI model training, intelligent automation, and cutting-edge machine learning solutions. Expert AI development services for modern enterprises." />
+    <meta name="keywords" content="AI model training, custom AI development, machine learning solutions, AI automation, neural networks, deep learning, AI consulting, artificial intelligence services" />
+    <meta name="author" content="UltimAItech" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Viewport and Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="UltimAItech" />
+    <meta name="application-name" content="UltimAItech" />
+    
+    <!-- Icons and Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/ultimaitech-logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/ultimaitech-logo.png" />
+    <link rel="apple-touch-icon" href="/images/ultimaitech-logo.png" />
+    <link rel="shortcut icon" href="/images/ultimaitech-logo.png" />
+    
+    <!-- Theme and Colors -->
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="msapplication-TileColor" content="#3b82f6" />
+    <meta name="msapplication-navbutton-color" content="#3b82f6" />
+    
+    <!-- Fonts (Preload for performance) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- GitHub Pages SPA workaround -->
+    <!-- DNS Prefetch for performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ultimaitech.com/" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- GitHub Pages SPA redirect handling -->
     <script>
       // Single Page Apps for GitHub Pages
       // https://github.com/rafgraph/spa-github-pages
-      // This script checks to see if a redirect is present in the query string,
-      // converts it back into the correct url and adds it to the
-      // browser's history using window.history.replaceState(...)
+      // This script takes the current url and converts the path and query
+      // string into just a query string, and then redirects the browser
+      // to the new url with only a query string and hash fragment
       (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
-          );
+        if (l.search) {
+          var q = {};
+          l.search.slice(1).split('&').forEach(function(v) {
+            var a = v.split('=');
+            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+          });
+          if (q.p !== undefined) {
+            window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + (q.p || '') +
+              (q.q ? ('?' + q.q) : '') +
+              l.hash
+            );
+          }
         }
       }(window.location))
     </script>
+    <script type="module" crossorigin src="/assets/index-eo_mvBuO.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-DBiAVD-u.js">
+    <link rel="modulepreload" crossorigin href="/assets/router-BYAPR5id.js">
+    <link rel="modulepreload" crossorigin href="/assets/utils-DX0WRoKZ.js">
+    <link rel="modulepreload" crossorigin href="/assets/ui-DQDjyDL6.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BKCll6Yc.css">
   </head>
   <body class="bg-dark text-light">
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

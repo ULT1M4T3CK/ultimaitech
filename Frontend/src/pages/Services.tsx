@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { 
-  Globe, 
-  Smartphone, 
   MessageCircle, 
   Brain, 
   ArrowRight, 
@@ -11,7 +9,6 @@ import {
   Palette,
   Zap,
   Shield,
-  Clock,
   Users
 } from 'lucide-react'
 import { useAnalytics } from '../contexts/AnalyticsContext'
