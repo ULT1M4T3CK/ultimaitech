@@ -53,7 +53,7 @@ const Home = () => {
               <span className="gradient-text">UltimAItech</span>
             </h1>
             <p className="text-xl md:text-2xl text-light/80 mb-8 max-w-2xl mx-auto animate-slide-up">
-              Specialized in custom AI model training and intelligent chatbot development. Transform your business with tailored AI solutions that understand your unique needs.
+              We train AI models on your data and build chatbots that actually work. No generic solutions - just AI that understands your business and helps your customers.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
               <Link to="/services" className="btn-primary">
@@ -79,10 +79,10 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">
-              Core AI <span className="gradient-text">Specializations</span>
+              What We <span className="gradient-text">Do Best</span>
             </h2>
             <p className="text-xl text-light/70 max-w-3xl mx-auto">
-              Our primary expertise lies in custom AI model training and intelligent chatbot development, with additional support for web and mobile solutions
+              We specialize in two core areas: training custom AI models on your data and building intelligent chatbots that actually understand your business. We also create web applications when you need them.
             </p>
           </div>
 
@@ -96,7 +96,7 @@ const Home = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4">Custom AI Model Training</h3>
               <p className="text-light/70">
-                Specialized AI models trained on your unique data for maximum accuracy and business impact. From neural networks to large language models.
+                We train AI models specifically on your data so they understand your business better than generic solutions. Whether you need image recognition, text analysis, or predictive models - we make AI work for you.
               </p>
             </div>
 
@@ -109,7 +109,7 @@ const Home = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4">Intelligent Chatbot Development</h3>
               <p className="text-light/70">
-                Advanced conversational AI systems with context awareness, memory, and human-like interactions for superior customer engagement.
+                We build chatbots that actually understand your customers and remember conversations. No more frustrating bot interactions - we create AI assistants that feel natural and helpful.
               </p>
             </div>
 
@@ -122,7 +122,7 @@ const Home = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4">Web & App Development</h3>
               <p className="text-light/70">
-                Modern web applications and mobile solutions to complement your AI implementations and business needs.
+                Sometimes you need a website or app to showcase your AI work. We build modern, responsive applications that integrate seamlessly with your AI solutions.
               </p>
             </div>
           </div>
@@ -134,29 +134,29 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">
-              Advanced <span className="gradient-text">AI Technologies</span>
+              The <span className="gradient-text">Technology</span> We Use
             </h2>
             <p className="text-xl text-light/70 max-w-3xl mx-auto">
-              We leverage cutting-edge AI frameworks and technologies to build intelligent solutions that drive real business value
+              We work with the latest AI tools and frameworks to build solutions that actually work in the real world, not just in demos.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-dark-secondary/50 rounded-xl p-6 border border-primary/20 hover:border-primary/50 transition-colors duration-300">
               <h3 className="text-lg font-semibold text-primary mb-2">Neural Networks</h3>
-              <p className="text-light/70 text-sm">Custom architectures for complex pattern recognition and prediction tasks</p>
+              <p className="text-light/70 text-sm">Custom AI models that learn patterns from your specific data</p>
             </div>
             <div className="bg-dark-secondary/50 rounded-xl p-6 border border-primary/20 hover:border-primary/50 transition-colors duration-300">
               <h3 className="text-lg font-semibold text-primary mb-2">Large Language Models</h3>
-              <p className="text-light/70 text-sm">Fine-tuned LLMs for domain-specific text generation and understanding</p>
+              <p className="text-light/70 text-sm">AI that understands and generates text in your industry's language</p>
             </div>
             <div className="bg-dark-secondary/50 rounded-xl p-6 border border-primary/20 hover:border-primary/50 transition-colors duration-300">
               <h3 className="text-lg font-semibold text-primary mb-2">Computer Vision</h3>
-              <p className="text-light/70 text-sm">Image recognition, object detection, and visual analysis systems</p>
+              <p className="text-light/70 text-sm">AI that can see and understand images, videos, and visual data</p>
             </div>
             <div className="bg-dark-secondary/50 rounded-xl p-6 border border-primary/20 hover:border-primary/50 transition-colors duration-300">
               <h3 className="text-lg font-semibold text-primary mb-2">Predictive Analytics</h3>
-              <p className="text-light/70 text-sm">Data-driven insights and forecasting models for strategic decision making</p>
+              <p className="text-light/70 text-sm">AI that helps you make better decisions by predicting future trends</p>
             </div>
           </div>
 
@@ -179,10 +179,10 @@ const Home = () => {
       <section className="py-20 bg-gradient-to-r from-primary/10 to-secondary/10">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-4xl font-bold mb-6">
-            Ready to Transform Your Business with <span className="gradient-text">AI</span>?
+            Ready to See What <span className="gradient-text">AI</span> Can Do for You?
           </h2>
           <p className="text-xl text-light/70 mb-8">
-            Let's discuss how custom AI solutions can revolutionize your operations, automate complex tasks, and unlock new opportunities
+            Let's talk about your business challenges and see how custom AI training or intelligent chatbots can help solve them. No pressure, just a friendly conversation about what's possible.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/services" className="btn-primary text-lg px-8 py-4">
@@ -192,7 +192,7 @@ const Home = () => {
               View AI Projects
             </Link>
             <Link to="/contact" className="btn-outline text-lg px-8 py-4">
-              Get Started
+              Contact Us
             </Link>
           </div>
         </div>
