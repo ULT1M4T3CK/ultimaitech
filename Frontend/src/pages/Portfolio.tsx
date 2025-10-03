@@ -243,7 +243,7 @@ const Portfolio = () => {
                         src={getImageUrl(project.image_path)}
                         alt={project.title}
                         className={`w-full h-48 group-hover:scale-105 transition-transform duration-300 ${
-                          ['1', '2', '3'].includes(project.id || '') ? 'object-contain bg-white/10' : 'object-cover'
+                          ['1', '2', '3', '4'].includes(project.id || '') ? 'object-contain bg-white/10' : 'object-cover'
                         }`}
                         onError={(e) => {
                           console.error('Image failed to load:', getImageUrl(project.image_path))

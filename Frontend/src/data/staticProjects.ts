@@ -35,5 +35,17 @@ export const staticProjects = [
     featured: true,
     category: 'Websites',
     created_at: '2024-01-15T00:00:00Z'
+  },
+  {
+    id: '4',
+    title: 'AdPulse - Digital Marketing & Analytics',
+    description: 'Professional digital marketing agency website specializing in strategic advertising, tag management, and analytics optimization. Features comprehensive service offerings, client testimonials, and performance metrics showcasing 150% average ROI increase.',
+    image_path: '/images/Projects/adpulse-logo.png',
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'Digital Marketing', 'Analytics', 'Google Ads', 'Facebook Ads'],
+    project_url: 'https://ult1m4t3ck.github.io/adpulse/',
+    github_url: 'https://github.com/ULT1M4T3CK/adpulse',
+    featured: true,
+    category: 'Websites',
+    created_at: '2024-01-25T00:00:00Z'
   }
 ]

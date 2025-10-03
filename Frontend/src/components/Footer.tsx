@@ -17,7 +17,7 @@ const Footer = () => {
           {/* Centered copyright text */}
           <div className="mb-2">
             <p className="text-light/70 text-sm">
-              © 2024 UltimAItech. All rights reserved.
+              © 2025 UltimAItech. All rights reserved.
             </p>
           </div>
 
