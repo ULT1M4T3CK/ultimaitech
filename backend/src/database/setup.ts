@@ -65,29 +65,38 @@ const setupDatabase = async () => {
       console.log('Admin user already exists');
     }
 
-    // Insert sample projects
-    const sampleProjects = [
+    // Insert real projects
+    const realProjects = [
       {
-        title: 'E-Commerce Platform',
-        description: 'A modern e-commerce platform built with React and Node.js, featuring user authentication, product management, and payment integration.',
-        technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
+        title: 'TimeEX - Time Tracking Platform',
+        description: 'Comprehensive time tracking application with dashboard, reporting, and project management features. Built with modern web technologies for efficient work hour tracking and earnings calculation.',
+        image_path: '/images/Projects/timex-logo.png',
+        technologies: ['React', 'JavaScript', 'CSS3', 'Local Storage', 'Chart.js', 'Responsive Design'],
+        project_url: 'https://ult1m4t3ck.github.io/TimeEx/',
+        github_url: 'https://github.com/ULT1M4T3CK/TimeEx',
         featured: true
       },
       {
-        title: 'Task Management App',
-        description: 'A collaborative task management application with real-time updates, team collaboration, and progress tracking.',
-        technologies: ['Vue.js', 'Express', 'Socket.io', 'MongoDB'],
+        title: 'Nijenhuis Botenverhuur - Boat Rental Platform',
+        description: 'Professional boat rental website for Nijenhuis in the Weerribben nature area. Features online booking system, availability checking, and comprehensive service information for boat rentals and camping.',
+        image_path: '/images/Projects/Nijenghuis-logo.svg',
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Booking System', 'Multi-language'],
+        project_url: 'https://ult1m4t3ck.github.io/Nijenhuis/pages/index.html',
+        github_url: 'https://github.com/ULT1M4T3CK/Nijenhuis',
         featured: true
       },
       {
-        title: 'Portfolio Website',
-        description: 'A responsive portfolio website showcasing creative work and professional experience.',
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'GSAP'],
-        featured: false
+        title: 'MareSphere - Maritime Consulting',
+        description: 'Professional maritime consulting website showcasing comprehensive marine operations, safety, and sustainable practices. Features contact forms, service modules, and professional maritime expertise presentation.',
+        image_path: '/images/Projects/Maresphere-logo.png',
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Professional Design', 'Contact Forms', 'Service Modules'],
+        project_url: 'https://ult1m4t3ck.github.io/MareSphere/',
+        github_url: 'https://github.com/ULT1M4T3CK/MareSphere',
+        featured: true
       }
     ];
 
-    for (const project of sampleProjects) {
+    for (const project of realProjects) {
       const existingProject = await pool.query(
         'SELECT id FROM projects WHERE title = $1',
         [project.title]
@@ -95,8 +104,8 @@ const setupDatabase = async () => {
 
       if (existingProject.rows.length === 0) {
         await pool.query(
-          'INSERT INTO projects (title, description, technologies, featured) VALUES ($1, $2, $3, $4)',
-          [project.title, project.description, project.technologies, project.featured]
+          'INSERT INTO projects (title, description, image_path, technologies, project_url, github_url, featured) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+          [project.title, project.description, project.image_path, project.technologies, project.project_url, project.github_url, project.featured]
         );
       }
     }
