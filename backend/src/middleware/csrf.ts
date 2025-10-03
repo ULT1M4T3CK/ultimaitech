@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import crypto from 'crypto';
+import { csrfStore } from './csrfStore';
 
 interface CSRFRequest extends Request {
   csrfToken?: string;
@@ -16,20 +17,35 @@ export const csrfProtection = (req: CSRFRequest, res: Response, next: NextFuncti
     return next();
   }
 
-  // For admin routes, check CSRF token
+  // Skip CSRF for OPTIONS requests (preflight)
+  if (req.method === 'OPTIONS') {
+    return next();
+  }
+
+  // For protected routes, check CSRF token
   if (req.path.startsWith('/api/') && ['POST', 'PUT', 'DELETE'].includes(req.method)) {
-    const token = req.headers['x-csrf-token'] || req.body.csrfToken;
-    const sessionToken = req.headers['x-csrf-session-token'];
+    // Skip CSRF for public project endpoints
+    if (req.path === '/api/projects' && req.method === 'GET') {
+      return next();
+    }
+
+    const token = req.headers['x-csrf-token'] as string || req.body.csrfToken;
+    const sessionToken = req.headers['x-csrf-session-token'] as string;
 
     if (!token || !sessionToken) {
       return res.status(403).json({ message: 'CSRF token required' });
     }
 
-    // In a production app, you'd validate the token against a session store
-    // For now, we'll do basic validation that tokens are present and properly formatted
+    // Validate token format
     if (typeof token !== 'string' || token.length !== 64 || 
         typeof sessionToken !== 'string' || sessionToken.length !== 64) {
-      return res.status(403).json({ message: 'Invalid CSRF token' });
+      return res.status(403).json({ message: 'Invalid CSRF token format' });
+    }
+
+    // Validate token against store
+    const clientIp = req.ip || req.socket.remoteAddress || 'unknown';
+    if (!csrfStore.validate(sessionToken, token, clientIp)) {
+      return res.status(403).json({ message: 'Invalid or expired CSRF token' });
     }
   }
 
@@ -39,6 +55,10 @@ export const csrfProtection = (req: CSRFRequest, res: Response, next: NextFuncti
 export const csrfTokenEndpoint = (req: Request, res: Response) => {
   const token = generateCSRFToken();
   const sessionToken = generateCSRFToken();
+  const clientIp = req.ip || req.socket.remoteAddress || 'unknown';
+  
+  // Store token for validation
+  csrfStore.store(sessionToken, token, clientIp);
   
   res.json({ 
     csrfToken: token,

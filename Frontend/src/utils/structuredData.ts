@@ -9,9 +9,7 @@ export const organizationSchema = {
   "logo": "https://ultimaitech.com/images/ultimaitech-logo.png",
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+1-XXX-XXX-XXXX",
     "contactType": "customer service",
-    "email": "andre@ultimaitech.com",
     "availableLanguage": "English"
   },
   "address": {
@@ -26,8 +24,7 @@ export const organizationSchema = {
   ],
   "founder": {
     "@type": "Person",
-    "name": "Andre Hassler",
-    "email": "andre@ultimaitech.com"
+    "name": "Andre Hassler"
   },
   "foundingDate": "2024",
   "numberOfEmployees": "1-10",
@@ -152,7 +149,6 @@ export const contactSchema = {
   "mainEntity": {
     "@type": "ContactPoint",
     "contactType": "customer service",
-    "email": "andre@ultimaitech.com",
     "availableLanguage": "English",
     "areaServed": "Worldwide"
   }

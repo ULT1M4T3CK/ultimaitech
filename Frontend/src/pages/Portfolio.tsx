@@ -87,7 +87,10 @@ const Portfolio = () => {
     try {
       return {
         "@context": "https://schema.org",
-        "@graph": [breadcrumbSchema(breadcrumbs)]
+        "@graph": [
+          breadcrumbSchema(breadcrumbs),
+          portfolioSchema(projects)
+        ]
       }
     } catch (error) {
       console.error('Error generating structured data:', error)
