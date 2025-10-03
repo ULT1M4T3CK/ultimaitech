@@ -34,6 +34,15 @@ const Portfolio = () => {
 
   const fetchProjects = async () => {
     try {
+      // Skip API call in production (GitHub Pages) and use static data directly
+      if (window.location.hostname === 'ultimaitech.com' || window.location.hostname === 'www.ultimaitech.com') {
+        console.log('Using static project data for production')
+        setProjects(staticProjects)
+        setError(null)
+        setLoading(false)
+        return
+      }
+      
       const response = await axios.get('/api/projects')
       setProjects(response.data)
       setError(null)
@@ -48,23 +57,41 @@ const Portfolio = () => {
     }
   }
 
-  const filteredProjects = projects.filter(project => {
-    if (filter === 'featured') return project.featured
-    if (filter === 'Chatbots') return project.category === 'Chatbots'
-    if (filter === 'Websites') return project.category === 'Websites'
-    if (filter === 'Apps') return project.category === 'Apps'
-    return true // 'all' filter
-  })
+  const filteredProjects = (() => {
+    try {
+      return projects.filter(project => {
+        if (!project || typeof project !== 'object') return false
+        if (filter === 'featured') return project.featured
+        if (filter === 'Chatbots') return project.category === 'Chatbots'
+        if (filter === 'Websites') return project.category === 'Websites'
+        if (filter === 'Apps') return project.category === 'Apps'
+        return true // 'all' filter
+      })
+    } catch (error) {
+      console.error('Error filtering projects:', error)
+      return projects
+    }
+  })()
 
   const breadcrumbs = [
     { name: 'Home', url: 'https://ultimaitech.com' },
     { name: 'Portfolio', url: 'https://ultimaitech.com/portfolio' }
   ]
 
-  const combinedSchema = {
-    "@context": "https://schema.org",
-    "@graph": [portfolioSchema(projects), breadcrumbSchema(breadcrumbs)]
-  }
+  const combinedSchema = (() => {
+    try {
+      return {
+        "@context": "https://schema.org",
+        "@graph": [portfolioSchema(projects), breadcrumbSchema(breadcrumbs)]
+      }
+    } catch (error) {
+      console.error('Error generating structured data:', error)
+      return {
+        "@context": "https://schema.org",
+        "@graph": [breadcrumbSchema(breadcrumbs)]
+      }
+    }
+  })()
 
   if (loading) {
     return (

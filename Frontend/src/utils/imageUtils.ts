@@ -15,8 +15,8 @@ export const getImageUrl = (imagePath: string | null | undefined): string => {
     return `http://localhost:5001/${cleanPath}`
   }
   
-  // For production, use the same domain
-  return imagePath
+  // For production (GitHub Pages), ensure the path starts with /
+  return imagePath.startsWith('/') ? imagePath : `/${imagePath}`
 }
 
 export const isImageAccessible = async (url: string): Promise<boolean> => {
