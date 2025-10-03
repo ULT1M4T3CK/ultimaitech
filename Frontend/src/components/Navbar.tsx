@@ -27,7 +27,7 @@ const Navbar = () => {
             <img 
               src="/images/ultimaitech-logo.png" 
               alt="UltimAItech Logo" 
-              className="h-16 w-16 group-hover:scale-105 transition-transform duration-200"
+              className="h-20 w-20 group-hover:scale-105 transition-transform duration-200"
             />
           </Link>
 
