@@ -8,7 +8,7 @@ const Footer = () => {
           {/* Logo above copyright text */}
           <div className="mb-2">
             <img
-              src="/images/ultimaitech-logo.svg"
+              src="/images/ultimaitech-logo.png"
               alt="UltimAItech Logo"
               className="h-40 w-40"
             />

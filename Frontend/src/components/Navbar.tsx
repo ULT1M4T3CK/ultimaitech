@@ -25,7 +25,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center group">
             <img 
-              src="/images/ultimaitech-logo.svg" 
+              src="/images/ultimaitech-logo.png" 
               alt="UltimAItech Logo" 
               className="h-[70px] w-[70px] group-hover:scale-105 transition-transform duration-200"
             />
