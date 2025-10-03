@@ -54,7 +54,7 @@ export const staticProjects = [
     description: 'Comprehensive nutrition and calorie tracking application built with React Native and JavaScript. Features daily nutrition logging, weight tracking, macronutrient analysis, and progress visualization with charts and data export capabilities.',
     image_path: '/images/Projects/nutri-track-logo.png',
     technologies: ['React Native', 'JavaScript', 'CSS3', 'Nutrition API', 'Data Visualization', 'Mobile App', 'Health Tracking'],
-    project_url: 'https://github.com/ULT1M4T3CK/NutriTrack',
+    project_url: 'https://ult1m4t3ck.github.io/NutriTrack/',
     github_url: 'https://github.com/ULT1M4T3CK/NutriTrack',
     featured: true,
     category: 'Apps',
