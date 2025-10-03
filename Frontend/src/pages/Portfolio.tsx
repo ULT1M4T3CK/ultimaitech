@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { ExternalLink, Github, Star, ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAnalytics } from '../contexts/AnalyticsContext'
@@ -17,6 +17,7 @@ interface Project {
   project_url?: string
   github_url?: string
   featured: boolean
+  category?: string
   created_at: string
 }
 
@@ -27,10 +28,14 @@ const Portfolio = () => {
   const [filter, setFilter] = useState<'all' | 'featured' | 'Chatbots' | 'Websites' | 'Apps'>('all')
   const { recordVisit } = useAnalytics()
 
-  useEffect(() => {
+  const memoizedRecordVisit = useCallback(() => {
     recordVisit('Portfolio')
-    fetchProjects()
   }, [recordVisit])
+
+  useEffect(() => {
+    memoizedRecordVisit()
+    fetchProjects()
+  }, [memoizedRecordVisit])
 
   const fetchProjects = async () => {
     try {
@@ -61,7 +66,7 @@ const Portfolio = () => {
     try {
       return projects.filter(project => {
         if (!project || typeof project !== 'object') return false
-        if (filter === 'featured') return project.featured
+        if (filter === 'featured') return project.featured === true
         if (filter === 'Chatbots') return project.category === 'Chatbots'
         if (filter === 'Websites') return project.category === 'Websites'
         if (filter === 'Apps') return project.category === 'Apps'
@@ -69,7 +74,7 @@ const Portfolio = () => {
       })
     } catch (error) {
       console.error('Error filtering projects:', error)
-      return projects
+      return []
     }
   })()
 
@@ -82,13 +87,13 @@ const Portfolio = () => {
     try {
       return {
         "@context": "https://schema.org",
-        "@graph": [portfolioSchema(projects), breadcrumbSchema(breadcrumbs)]
+        "@graph": [breadcrumbSchema(breadcrumbs)]
       }
     } catch (error) {
       console.error('Error generating structured data:', error)
       return {
         "@context": "https://schema.org",
-        "@graph": [breadcrumbSchema(breadcrumbs)]
+        "@graph": []
       }
     }
   })()
@@ -239,18 +244,32 @@ const Portfolio = () => {
                   {/* Project Image */}
                   <div className="relative mb-6 overflow-hidden rounded-lg">
                     {project.image_path ? (
-                      <img
-                        src={getImageUrl(project.image_path)}
-                        alt={project.title}
-                        className={`w-full h-48 group-hover:scale-105 transition-transform duration-300 ${
-                          ['1', '2', '3', '4', '5'].includes(project.id || '') ? 'object-contain bg-white/10' : 'object-cover'
-                        }`}
-                        onError={(e) => {
-                          console.error('Image failed to load:', getImageUrl(project.image_path))
-                          // Hide the image on error
-                          e.currentTarget.style.display = 'none'
-                        }}
-                      />
+                      <>
+                        <img
+                          src={getImageUrl(project.image_path)}
+                          alt={project.title}
+                          className={`w-full h-48 group-hover:scale-105 transition-transform duration-300 ${
+                            ['1', '2', '3', '4', '5'].includes(project.id || '') ? 'object-contain bg-white/10' : 'object-cover'
+                          }`}
+                          onError={(e) => {
+                            console.error('Image failed to load:', getImageUrl(project.image_path))
+                            // Hide the image on error and show fallback
+                            e.currentTarget.style.display = 'none'
+                            const fallback = e.currentTarget.parentElement?.querySelector('.image-fallback')
+                            if (fallback) {
+                              fallback.classList.remove('hidden')
+                            }
+                          }}
+                        />
+                        <div className="image-fallback hidden w-full h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center absolute inset-0">
+                          <div className="text-center">
+                            <div className="w-16 h-16 bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-2">
+                              <Star className="h-8 w-8 text-primary" />
+                            </div>
+                            <p className="text-primary font-medium">{project.title}</p>
+                          </div>
+                        </div>
+                      </>
                     ) : (
                       <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
                         <div className="text-center">
