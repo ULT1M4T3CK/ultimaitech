@@ -60,7 +60,7 @@ const Home = () => {
                 AI Training & Chatbots
               </Link>
               <Link to="/portfolio" className="btn-outline">
-                View AI Projects
+                View all Projects
               </Link>
             </div>
           </div>
@@ -189,7 +189,7 @@ const Home = () => {
               AI Training & Chatbots
             </Link>
             <Link to="/portfolio" className="btn-outline text-lg px-8 py-4">
-              View AI Projects
+              View all Projects
             </Link>
             <Link to="/contact" className="btn-outline text-lg px-8 py-4">
               Contact Us

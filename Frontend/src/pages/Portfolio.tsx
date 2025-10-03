@@ -215,7 +215,9 @@ const Portfolio = () => {
                       <img
                         src={getImageUrl(project.image_path)}
                         alt={project.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                        className={`w-full h-48 group-hover:scale-105 transition-transform duration-300 ${
+                          ['1', '2', '3'].includes(project.id || '') ? 'object-contain bg-white/10' : 'object-cover'
+                        }`}
                         onError={(e) => {
                           console.error('Image failed to load:', getImageUrl(project.image_path))
                           // Hide the image on error
