@@ -53,10 +53,10 @@ const Home = () => {
               <img
                 src="/images/ultimaitech-logo.png"
                 alt="UltimAItech Logo"
-                className="h-24 w-24 mx-auto mb-4"
+                className="h-32 w-32 mx-auto mb-4"
               />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-up">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-slide-up">
               Custom AI Training & Chatbot Development by{' '}
               <span className="gradient-text">UltimAItech</span>
             </h1>
