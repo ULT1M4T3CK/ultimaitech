@@ -9,6 +9,7 @@ export const staticProjects = [
     project_url: 'https://ult1m4t3ck.github.io/TimeEx/',
     github_url: 'https://github.com/ULT1M4T3CK/TimeEx',
     featured: true,
+    category: 'Apps',
     created_at: '2024-01-20T00:00:00Z'
   },
   {
@@ -20,6 +21,7 @@ export const staticProjects = [
     project_url: 'https://ult1m4t3ck.github.io/Nijenhuis/pages/index.html',
     github_url: 'https://github.com/ULT1M4T3CK/Nijenhuis',
     featured: true,
+    category: 'Websites',
     created_at: '2024-01-18T00:00:00Z'
   },
   {
@@ -31,6 +33,7 @@ export const staticProjects = [
     project_url: 'https://ult1m4t3ck.github.io/MareSphere/',
     github_url: 'https://github.com/ULT1M4T3CK/MareSphere',
     featured: true,
+    category: 'Websites',
     created_at: '2024-01-15T00:00:00Z'
   }
 ]

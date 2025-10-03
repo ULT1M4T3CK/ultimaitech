@@ -8,6 +8,7 @@ export interface Project {
   github_url?: string
   featured: boolean
   created_at?: string
+  category?: 'Chatbots' | 'Websites' | 'Apps'
 }
 
 export interface AnalyticsData {

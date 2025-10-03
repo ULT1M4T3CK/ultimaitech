@@ -24,7 +24,7 @@ const Portfolio = () => {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [filter, setFilter] = useState<'all' | 'featured'>('all')
+  const [filter, setFilter] = useState<'all' | 'featured' | 'Chatbots' | 'Websites' | 'Apps'>('all')
   const { recordVisit } = useAnalytics()
 
   useEffect(() => {
@@ -48,9 +48,13 @@ const Portfolio = () => {
     }
   }
 
-  const filteredProjects = filter === 'featured' 
-    ? projects.filter(p => p.featured)
-    : projects
+  const filteredProjects = projects.filter(project => {
+    if (filter === 'featured') return project.featured
+    if (filter === 'Chatbots') return project.category === 'Chatbots'
+    if (filter === 'Websites') return project.category === 'Websites'
+    if (filter === 'Apps') return project.category === 'Apps'
+    return true // 'all' filter
+  })
 
   const breadcrumbs = [
     { name: 'Home', url: 'https://ultimaitech.com' },
@@ -137,10 +141,20 @@ const Portfolio = () => {
       {/* Filter Section */}
       <section className="py-8 bg-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center space-x-2 bg-dark-secondary rounded-lg p-1 max-w-md mx-auto">
+          <div className="flex flex-wrap justify-center gap-2">
+            <button
+              onClick={() => setFilter('all')}
+              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
+                filter === 'all'
+                  ? 'bg-primary text-white'
+                  : 'text-light/70 hover:text-primary'
+              }`}
+            >
+              All Projects ({projects.length})
+            </button>
             <button
               onClick={() => setFilter('featured')}
-              className={`px-6 py-2 rounded-md font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
                 filter === 'featured'
                   ? 'bg-primary text-white'
                   : 'text-light/70 hover:text-primary'
@@ -149,14 +163,34 @@ const Portfolio = () => {
               Featured ({projects.filter(p => p.featured).length})
             </button>
             <button
-              onClick={() => setFilter('all')}
-              className={`px-6 py-2 rounded-md font-medium transition-colors duration-200 ${
-                filter === 'all'
+              onClick={() => setFilter('Chatbots')}
+              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
+                filter === 'Chatbots'
                   ? 'bg-primary text-white'
                   : 'text-light/70 hover:text-primary'
               }`}
             >
-              All Projects ({projects.length})
+              Chatbots ({projects.filter(p => p.category === 'Chatbots').length})
+            </button>
+            <button
+              onClick={() => setFilter('Websites')}
+              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
+                filter === 'Websites'
+                  ? 'bg-primary text-white'
+                  : 'text-light/70 hover:text-primary'
+              }`}
+            >
+              Websites ({projects.filter(p => p.category === 'Websites').length})
+            </button>
+            <button
+              onClick={() => setFilter('Apps')}
+              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
+                filter === 'Apps'
+                  ? 'bg-primary text-white'
+                  : 'text-light/70 hover:text-primary'
+              }`}
+            >
+              Apps ({projects.filter(p => p.category === 'Apps').length})
             </button>
           </div>
         </div>
