@@ -48,14 +48,6 @@ const Home = () => {
         {/* Content */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <div className="mb-8">
-            {/* Logo above title */}
-            <div className="mb-8 animate-slide-up">
-              <img
-                src="/images/ultimaitech-logo.png"
-                alt="UltimAItech Logo"
-                className="h-32 w-32 mx-auto mb-4"
-              />
-            </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-slide-up">
               Custom AI Training & Chatbot Development by{' '}
               <span className="gradient-text">UltimAItech</span>
