@@ -4,7 +4,7 @@ export const staticProjects = [
     id: '1',
     title: 'TimeEX - Time Tracking Platform',
     description: 'Comprehensive time tracking application with dashboard, reporting, and project management features. Built with modern web technologies for efficient work hour tracking and earnings calculation.',
-    image_path: '/images/Projects/timex-logo.png',
+    image_path: '/images/Projects/timex-logo-bg.png',
     technologies: ['React', 'JavaScript', 'CSS3', 'Local Storage', 'Chart.js', 'Responsive Design'],
     project_url: 'https://ult1m4t3ck.github.io/TimeEx/',
     github_url: 'https://github.com/ULT1M4T3CK/TimeEx',
