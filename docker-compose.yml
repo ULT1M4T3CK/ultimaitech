@@ -40,7 +40,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-your_secure_db_password_here}
       JWT_SECRET: ${JWT_SECRET:-your_strong_jwt_secret_here}
       JWT_EXPIRES_IN: 24h
-      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,https://ultimaitech.com,https://www.ultimaitech.com}
       TRUST_PROXY: "true"
       RATE_LIMIT_WINDOW_MS: 900000
       RATE_LIMIT_MAX_REQUESTS: 100

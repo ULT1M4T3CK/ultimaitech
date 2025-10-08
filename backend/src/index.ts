@@ -47,6 +47,11 @@ const corsOrigins = process.env.NODE_ENV === 'production'
   ? process.env.CORS_ORIGIN?.split(',') || ['https://ultimaitech.com', 'https://www.ultimaitech.com']
   : ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost', 'http://127.0.0.1'];
 
+// Additional fallback for direct domain access
+if (process.env.NODE_ENV === 'production') {
+  corsOrigins.push('https://ultimaitech.com', 'https://www.ultimaitech.com');
+}
+
 app.use(cors({
   origin: corsOrigins,
   credentials: true,

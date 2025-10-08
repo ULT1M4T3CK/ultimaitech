@@ -297,8 +297,8 @@ For custom domain deployment:
 1. **DNS Configuration**
    ```bash
    # Point your domain to your server IP
-   # A record: yourdomain.com -> YOUR_SERVER_IP
-   # A record: www.yourdomain.com -> YOUR_SERVER_IP
+   # A record: ultimaitech.com -> YOUR_SERVER_IP
+   # A record: www.ultimaitech.com -> YOUR_SERVER_IP
    ```
 
 2. **SSL Certificate** (Let's Encrypt)
@@ -307,13 +307,13 @@ For custom domain deployment:
    sudo apt install certbot python3-certbot-nginx -y
 
    # Generate SSL certificate
-   sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+   sudo certbot --nginx -d ultimaitech.com -d www.ultimaitech.com
    ```
 
 3. **Update Application Configuration**
    ```bash
    # Edit backend/.env
-   CORS_ORIGIN=https://yourdomain.com,https://www.yourdomain.com
+   CORS_ORIGIN=https://ultimaitech.com,https://www.ultimaitech.com
    ```
 
 ### 4. Production Monitoring
@@ -344,7 +344,7 @@ JWT_SECRET=your_64_char_jwt_secret_here
 SESSION_SECRET=your_32_char_session_secret_here
 
 # Domain Configuration
-CORS_ORIGIN=https://yourdomain.com,https://www.yourdomain.com
+CORS_ORIGIN=https://ultimaitech.com,https://www.ultimaitech.com
 
 # Admin Credentials (change these!)
 ADMIN_USERNAME=your_admin_username
