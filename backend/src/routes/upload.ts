@@ -34,12 +34,17 @@ const storage = multer.diskStorage({
   }
 });
 
+// Get allowed file types from environment variables
+const allowedFileTypes = process.env.ALLOWED_FILE_TYPES?.split(',') || ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+const maxFileSize = parseInt(process.env.MAX_FILE_SIZE || '10485760'); // 10MB default
+
 const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-  // Allow only image files
-  if (file.mimetype.startsWith('image/')) {
+  // Check file type against allowed types
+  if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error('Only image files are allowed'));
+    const allowedTypesText = allowedFileTypes.map(type => type.split('/')[1]).join(', ');
+    cb(new Error(`Only these file types are allowed: ${allowedTypesText}`));
   }
 };
 
@@ -47,7 +52,7 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB limit
+    fileSize: maxFileSize
   }
 });
 

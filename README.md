@@ -228,13 +228,235 @@ npm run docker:logs
 cd backend && npm run setup:db
 ```
 
+## 🚀 Server Deployment Guide
+
+### Prerequisites for Server Deployment
+- **Ubuntu 20.04+** or similar Linux distribution
+- **Docker** and **Docker Compose** installed
+- **2GB RAM** minimum (4GB recommended)
+- **Node.js 18+** (for build processes)
+- **Domain name** (optional, for custom domain deployment)
+
+### 1. Server Setup
+
+```bash
+# Update system packages
+sudo apt update && sudo apt upgrade -y
+
+# Install Docker and Docker Compose
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Add user to docker group
+sudo usermod -aG docker $USER
+
+# Install Node.js (for build processes)
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Create deployment directory
+sudo mkdir -p /opt/ultimaitech
+sudo chown $USER:$USER /opt/ultimaitech
+```
+
+### 2. Application Deployment
+
+```bash
+# Navigate to deployment directory
+cd /opt/ultimaitech
+
+# Clone or copy your application files
+git clone https://github.com/yourusername/ultimaitech.git .
+# OR copy your project files here
+
+# Make deployment script executable
+chmod +x deploy.sh
+
+# Generate secure secrets
+npm run setup:production
+
+# Configure environment variables
+cd backend
+cp env.example .env
+# Edit .env with your actual values:
+# - Database password
+# - JWT secrets
+# - Domain name for CORS
+# - Admin credentials
+
+# Deploy the application
+./deploy.sh
+```
+
+### 3. Domain Configuration (Optional)
+
+For custom domain deployment:
+
+1. **DNS Configuration**
+   ```bash
+   # Point your domain to your server IP
+   # A record: yourdomain.com -> YOUR_SERVER_IP
+   # A record: www.yourdomain.com -> YOUR_SERVER_IP
+   ```
+
+2. **SSL Certificate** (Let's Encrypt)
+   ```bash
+   # Install certbot
+   sudo apt install certbot python3-certbot-nginx -y
+
+   # Generate SSL certificate
+   sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+   ```
+
+3. **Update Application Configuration**
+   ```bash
+   # Edit backend/.env
+   CORS_ORIGIN=https://yourdomain.com,https://www.yourdomain.com
+   ```
+
+### 4. Production Monitoring
+
+```bash
+# Check application status
+npm run deploy:status
+
+# View logs
+npm run docker:logs
+
+# Restart if needed
+npm run docker:rebuild
+
+# Check health endpoints
+curl http://localhost:3000
+curl http://localhost:5002/health
+```
+
+## 🔧 Environment Variables
+
+### Required for Production
+
+```bash
+# Database (generate secure passwords)
+DB_PASSWORD=your_secure_db_password_here
+JWT_SECRET=your_64_char_jwt_secret_here
+SESSION_SECRET=your_32_char_session_secret_here
+
+# Domain Configuration
+CORS_ORIGIN=https://yourdomain.com,https://www.yourdomain.com
+
+# Admin Credentials (change these!)
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_secure_admin_password
+```
+
+### Generate Secure Secrets
+
+```bash
+# Generate JWT secret (64 characters)
+node -e "console.log('JWT_SECRET=' + require('crypto').randomBytes(64).toString('hex'))"
+
+# Generate session secret (32 characters)
+node -e "console.log('SESSION_SECRET=' + require('crypto').randomBytes(32).toString('hex'))"
+```
+
+## 📊 Database Setup
+
+The application uses PostgreSQL for data persistence.
+
+### Docker Setup (Automatic)
+The Docker Compose file automatically creates the database with correct credentials.
+
+### Manual Setup
+```sql
+CREATE DATABASE ultimaitech_portfolio;
+CREATE USER ultimaitech_user WITH PASSWORD 'your_secure_password';
+GRANT ALL PRIVILEGES ON DATABASE ultimaitech_portfolio TO ultimaitech_user;
+```
+
+## 🔒 Security Features
+
+- **JWT Authentication**: Secure admin access with token-based authentication
+- **Rate Limiting**: Prevents abuse of API endpoints
+- **CORS Protection**: Configurable cross-origin requests
+- **Security Headers**: Helmet.js for security headers
+- **Input Validation**: Server-side validation of all inputs
+- **File Upload Security**: Restricted file types and sizes
+
+## 📱 Responsive Design
+
+The website is fully responsive and optimized for:
+- **Desktop** (1200px+): Full-featured experience with all animations
+- **Tablet** (768px - 1199px): Optimized layout with touch interactions
+- **Mobile** (320px - 767px): Touch-friendly interface with simplified navigation
+
+## 🚀 Production Deployment
+
+### Full-Stack Production
+```bash
+# Build frontend for production
+npm run build
+
+# Use Docker for production deployment
+docker-compose -f docker-compose.prod.yml up -d
+
+# Or configure with your hosting provider
+# Set NODE_ENV=production in environment variables
+```
+
+### Environment Considerations
+- Set `NODE_ENV=production` for optimized builds
+- Use strong JWT secrets in production
+- Configure proper CORS origins for your domain
+- Set up SSL/TLS certificates for secure connections
+- Use environment-specific database credentials
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Database Connection Failed**
+   - Check database credentials in `.env`
+   - Ensure PostgreSQL is running
+   - Verify database exists and user has permissions
+
+2. **Frontend Can't Connect to Backend**
+   - Check backend server is running on correct port
+   - Verify API URL configuration in Vite proxy settings
+   - Check CORS settings in backend
+
+3. **File Uploads Not Working**
+   - Ensure uploads directory exists and has write permissions
+   - Check file size limits in multer configuration
+   - Verify file type restrictions
+
+4. **Docker Issues**
+   - Check Docker and Docker Compose versions
+   - Ensure ports are not already in use
+   - Check Docker logs: `npm run docker:logs`
+
+### Logs and Debugging
+```bash
+# Backend logs
+cd backend && npm run dev
+
+# Docker logs
+npm run docker:logs
+
+# Database connection test
+cd backend && npm run setup:db
+```
+
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+4. Test thoroughly (both static and full-stack modes)
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
 ## 📄 License
 
@@ -242,12 +464,15 @@ This project is licensed under the MIT License.
 
 ## 🙏 Acknowledgments
 
-- React team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- Framer Motion for smooth animations
-- The open-source community for inspiration
+- **React Team** for the amazing framework
+- **Tailwind CSS** for the utility-first CSS framework
+- **Framer Motion** for smooth animations
+- **Vite** for fast build tooling
+- **PostgreSQL** for reliable data storage
+- **The open-source community** for inspiration and contributions
 
 ---
 
-**Built with ❤️ by UltimAItech Team**
-# Force rebuild Thu Oct  2 21:38:28 CEST 2025
+**Built with ❤️ by the UltimAItech Team**
+
+*Transforming businesses with custom AI solutions since 2024*

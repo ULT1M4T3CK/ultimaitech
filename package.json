@@ -1,23 +1,33 @@
 {
   "name": "ultimaitech-portfolio",
   "version": "1.0.0",
-  "description": "UltimAItech Portfolio Website with Admin Panel",
-  "main": "index.js",
+  "description": "UltimAItech Portfolio Website with Admin Panel - Production-Ready Full-Stack Application",
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd Frontend && npm run dev",
     "build": "cd Frontend && npm run build",
+    "build:github-pages": "cd Frontend && npm run build && cp -r dist/* docs/",
     "start": "cd backend && npm start",
+    "start:production": "NODE_ENV=production npm run docker:up",
     "install:all": "npm install && cd backend && npm install && cd ../Frontend && npm install",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:build": "docker-compose build",
-    "docker:logs": "docker-compose logs -f"
+    "docker:rebuild": "docker-compose down && docker-compose build --no-cache && docker-compose up -d",
+    "docker:logs": "docker-compose logs -f",
+    "preview": "cd Frontend && npm run preview",
+    "setup:production": "echo 'Setting up production environment...' && npm run install:all && echo 'Generating secure secrets...' && node -e \"console.log('JWT_SECRET=' + require('crypto').randomBytes(64).toString('hex')); console.log('SESSION_SECRET=' + require('crypto').randomBytes(32).toString('hex'))\"",
+    "deploy:check": "echo 'Checking deployment health...' && curl -f http://localhost/health || echo 'Health check failed'",
+    "deploy:status": "docker-compose ps && echo 'Container Status:' && docker-compose logs --tail=10"
   },
-  "keywords": ["portfolio", "ultimaitech", "admin", "react", "nodejs"],
+  "keywords": ["portfolio", "ultimaitech", "admin", "react", "nodejs", "typescript", "postgresql", "docker", "nginx"],
   "author": "UltimAItech",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "devDependencies": {
     "concurrently": "^8.2.2"
   }

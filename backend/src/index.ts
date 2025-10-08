@@ -42,13 +42,16 @@ app.use(helmet({
   },
   crossOriginEmbedderPolicy: false,
 }));
+// CORS configuration
+const corsOrigins = process.env.NODE_ENV === 'production'
+  ? process.env.CORS_ORIGIN?.split(',') || ['https://ultimaitech.com', 'https://www.ultimaitech.com']
+  : ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost', 'http://127.0.0.1'];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? process.env.FRONTEND_URL || ['https://ultimaitech.com', 'https://www.ultimaitech.com', 'http://localhost', 'http://127.0.0.1']
-    : ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost', 'http://127.0.0.1'],
+  origin: corsOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-CSRF-Token'],
   optionsSuccessStatus: 200
 }));
 
