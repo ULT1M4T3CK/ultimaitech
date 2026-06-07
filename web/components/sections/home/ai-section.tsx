@@ -3,6 +3,7 @@ import { AnimatedSectionHeading } from '@/components/ui/animated-section-heading
 import { GlassCard } from '@/components/ui/glass-card';
 import { MetalButton } from '@/components/ui/metal-button';
 import { RevealSection } from '@/components/ui/reveal-section';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import type { Dictionary } from '@/lib/locales';
 
 type AiSectionProps = {
@@ -16,6 +17,7 @@ const AI_CARDS = [
 ] as const;
 
 export function AiSection({ dict }: AiSectionProps) {
+  const studio = isImmersiveStudioEnabled();
   const nexus = dict.home.nexus;
   const cards = [
     {
@@ -36,9 +38,9 @@ export function AiSection({ dict }: AiSectionProps) {
     <RevealSection data-narrative-section="ai" className="narrative-section">
       <div className="mx-auto w-full max-w-6xl space-y-10 px-6">
         <AnimatedSectionHeading
-          label={nexus?.aiLabel ?? 'AI'}
-          title={nexus?.aiTitle ?? 'Slimme systemen op uw eigen content'}
-          subtitle={nexus?.aiIntro ?? dict.aiChatbots.hero.description}
+          label={studio ? (nexus?.aiLabel ?? 'AI') : dict.aiChatbots.hero.label}
+          title={studio ? (nexus?.aiTitle ?? 'Slimme systemen op uw eigen content') : dict.aiChatbots.hero.title}
+          subtitle={studio ? (nexus?.aiIntro ?? dict.aiChatbots.hero.description) : dict.aiChatbots.hero.description}
         />
 
         <div className="grid gap-4 md:grid-cols-3 md:gap-5">
@@ -59,7 +61,7 @@ export function AiSection({ dict }: AiSectionProps) {
 
         <div className="glass-spec-panel glass-spec-panel-accent rounded-2xl p-6 md:p-8">
           <p className="max-w-3xl text-base leading-relaxed text-text-muted">
-            {nexus?.aiCallout ?? dict.aiChatbots.whatIs.text}
+            {studio ? (nexus?.aiCallout ?? dict.aiChatbots.whatIs.text) : dict.aiChatbots.whatIs.text}
           </p>
           <MetalButton href={dict.slugs.aiChatbots} className="mt-5" variant="secondary">
             {dict.home.services[2]?.cta ?? 'Meer over AI'}

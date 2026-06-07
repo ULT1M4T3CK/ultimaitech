@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { AnimatedSectionHeading } from '@/components/ui/animated-section-heading';
 import { GlassCard } from '@/components/ui/glass-card';
 import { RevealSection } from '@/components/ui/reveal-section';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import type { Dictionary } from '@/lib/locales';
 
 type WorkSectionProps = {
@@ -11,6 +12,7 @@ type WorkSectionProps = {
 };
 
 export function WorkSection({ dict }: WorkSectionProps) {
+  const studio = isImmersiveStudioEnabled();
   const nexus = dict.home.nexus;
   const projects = dict.home.projects ?? [];
   const featured = projects.find((p) => p.featured) ?? projects[0];
@@ -22,9 +24,9 @@ export function WorkSection({ dict }: WorkSectionProps) {
     <RevealSection data-narrative-section="work" className="narrative-section section-glow">
       <div className="mx-auto w-full max-w-6xl space-y-10 px-6">
         <AnimatedSectionHeading
-          label={nexus?.workLabel ?? 'Projecten'}
-          title={nexus?.workTitle ?? 'Werk dat u zelf kunt beoordelen'}
-          subtitle={nexus?.workIntro ?? dict.projects.intro.text}
+          label={studio ? (nexus?.workLabel ?? 'Projecten') : dict.projects.hero.label}
+          title={studio ? (nexus?.workTitle ?? 'Werk dat u zelf kunt beoordelen') : dict.projects.hero.title}
+          subtitle={studio ? (nexus?.workIntro ?? dict.projects.intro.text) : dict.projects.hero.description}
         />
 
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">

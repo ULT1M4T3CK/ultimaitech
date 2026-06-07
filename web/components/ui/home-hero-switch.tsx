@@ -1,6 +1,7 @@
 'use client';
 
 import { useOptionalImmersive } from '@/components/immersive/immersive-provider';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import { HeroSection } from '@/components/sections/home/hero-section';
 import { HubHeroCompact } from '@/components/sections/home/hub-hero-compact';
 import { AnimatedPageHero } from '@/components/ui/animated-page-hero';
@@ -15,22 +16,21 @@ export function HomeHeroSwitch({ dict }: HomeHeroSwitchProps) {
   const immersive = useOptionalImmersive();
   const narrativeMode = immersive?.narrativeMode ?? false;
   const isImmersive = immersive?.isImmersive ?? false;
-  const nexus = dict.home.nexus;
   const hero = dict.home.hero;
+  const studio = isImmersiveStudioEnabled();
 
-  if (narrativeMode) {
+  if (studio && narrativeMode) {
     return <HeroSection dict={dict} />;
   }
 
-  if (isImmersive) {
+  if (studio && isImmersive) {
     return <HubHeroCompact dict={dict} />;
   }
 
   return (
     <AnimatedPageHero
-      label={nexus?.heroLabel}
-      title={nexus?.headline ?? hero.headline}
-      description={nexus?.subheadline ?? hero.subtext}
+      title={hero.headline}
+      description={hero.subtext}
     >
       <div className="flex flex-wrap gap-3">
         <MetalButton href={dict.slugs.contact}>{hero.cta1}</MetalButton>

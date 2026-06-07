@@ -7,6 +7,7 @@ import { Menu, X } from 'lucide-react';
 import { ImmersiveModeToggle } from '@/components/ui/immersive-mode-toggle';
 import { LocaleSwitcher } from '@/components/ui/locale-switcher';
 import { MetalButton } from '@/components/ui/metal-button';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import { isImmersivePath } from '@/lib/immersive-routes';
 import { cn } from '@/lib/cn';
 import type { Dictionary } from '@/lib/locales';
@@ -19,7 +20,7 @@ export function Nav({ dict }: NavProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const showImmersiveToggle = isImmersivePath(pathname);
+  const showImmersiveToggle = isImmersiveStudioEnabled() && isImmersivePath(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);

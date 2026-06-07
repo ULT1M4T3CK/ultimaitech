@@ -3,6 +3,7 @@ import { AnimatedStat } from '@/components/ui/animated-stat';
 import { GlassCard } from '@/components/ui/glass-card';
 import { RevealSection } from '@/components/ui/reveal-section';
 import { resolveIcon } from '@/lib/icon-map';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import type { Dictionary } from '@/lib/locales';
 
 type TrustSectionProps = {
@@ -10,15 +11,16 @@ type TrustSectionProps = {
 };
 
 export function TrustSection({ dict }: TrustSectionProps) {
+  const studio = isImmersiveStudioEnabled();
   const nexus = dict.home.nexus;
 
   return (
     <RevealSection data-narrative-section="trust" className="narrative-section section-glow">
       <div className="mx-auto w-full max-w-6xl space-y-12 px-6">
         <AnimatedSectionHeading
-          label={nexus?.trustLabel ?? dict.home.socialProof.label}
-          title={nexus?.trustHeadline ?? 'Geen lagen. Geen verrassingen. Verifieerbare oplevering.'}
-          subtitle={nexus?.trustIntro ?? dict.home.intro.text}
+          label={dict.home.socialProof.label}
+          title={studio ? (nexus?.trustHeadline ?? dict.home.intro.title) : dict.home.intro.title}
+          subtitle={dict.home.intro.text}
         />
 
         <div className="grid gap-8 md:grid-cols-3">

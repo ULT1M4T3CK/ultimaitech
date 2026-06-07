@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { usePathname } from 'next/navigation';
 import { useDeviceTier, type DeviceTier } from '@/lib/device-tier';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import { isImmersivePath, sceneIdFromPath } from '@/lib/immersive-routes';
 import {
   getImmersiveModePreference,
@@ -145,10 +146,11 @@ export function ImmersiveProvider({
 
   const onImmersiveRoute = isImmersivePath(pathname);
   const onHub = sceneIdFromPath(pathname) === 'hub';
+  const studioEnabled = isImmersiveStudioEnabled();
   const narrativeMode =
-    forceNarrative ?? (onImmersiveRoute && onHub && !narrativeComplete);
+    studioEnabled && (forceNarrative ?? (onImmersiveRoute && onHub && !narrativeComplete));
 
-  const isImmersive = tier !== false && prefers3D && onImmersiveRoute;
+  const isImmersive = studioEnabled && tier !== false && prefers3D && onImmersiveRoute;
   const bloom = 0.2 + bloomBoost + (hoveredPortal !== null ? 0.08 : 0) + (serviceFocus !== 'none' ? 0.05 : 0);
 
   const value = useMemo<ImmersiveContextValue>(

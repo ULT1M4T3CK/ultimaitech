@@ -1,5 +1,6 @@
 import { AnimatedSectionHeading } from '@/components/ui/animated-section-heading';
 import { RevealSection } from '@/components/ui/reveal-section';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import type { Dictionary } from '@/lib/locales';
 
 type ProcessSectionProps = {
@@ -7,6 +8,7 @@ type ProcessSectionProps = {
 };
 
 export function ProcessSection({ dict }: ProcessSectionProps) {
+  const studio = isImmersiveStudioEnabled();
   const nexus = dict.home.nexus;
   const steps = dict.home.howWeWork.steps;
 
@@ -14,8 +16,8 @@ export function ProcessSection({ dict }: ProcessSectionProps) {
     <RevealSection data-narrative-section="process" className="narrative-section">
       <div className="mx-auto w-full max-w-6xl space-y-12 px-6">
         <AnimatedSectionHeading
-          label={nexus?.processLabel ?? dict.home.howWeWork.label}
-          title={nexus?.processTitle ?? dict.home.howWeWork.title}
+          label={dict.home.howWeWork.label}
+          title={studio ? (nexus?.processTitle ?? dict.home.howWeWork.title) : dict.home.howWeWork.title}
           subtitle={dict.home.howWeWork.subtitle}
         />
 

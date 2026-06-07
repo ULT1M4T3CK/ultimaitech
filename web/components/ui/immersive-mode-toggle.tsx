@@ -1,9 +1,12 @@
 'use client';
 
 import { useOptionalImmersive } from '@/components/immersive/immersive-provider';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import { cn } from '@/lib/cn';
 
 export function ImmersiveModeToggle({ className }: { className?: string }) {
+  if (!isImmersiveStudioEnabled()) return null;
+
   const immersive = useOptionalImmersive();
   if (!immersive) return null;
 

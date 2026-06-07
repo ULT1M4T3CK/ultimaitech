@@ -4,6 +4,7 @@ import { AnimatedSectionHeading } from '@/components/ui/animated-section-heading
 import { GlassCard } from '@/components/ui/glass-card';
 import { RevealSection } from '@/components/ui/reveal-section';
 import { resolveIcon } from '@/lib/icon-map';
+import { isImmersiveStudioEnabled } from '@/lib/immersive-config';
 import type { Dictionary } from '@/lib/locales';
 
 type ServicesSectionProps = {
@@ -11,6 +12,7 @@ type ServicesSectionProps = {
 };
 
 export function ServicesSection({ dict }: ServicesSectionProps) {
+  const studio = isImmersiveStudioEnabled();
   const nexus = dict.home.nexus;
 
   return (
@@ -21,9 +23,9 @@ export function ServicesSection({ dict }: ServicesSectionProps) {
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start">
         <div className="lg:sticky lg:top-28">
           <AnimatedSectionHeading
-            label={nexus?.servicesLabel ?? 'Diensten'}
-            title={nexus?.servicesTitle ?? 'Drie pijlers, één studio'}
-            subtitle={nexus?.servicesIntro ?? dict.services.intro.text}
+            label={studio ? (nexus?.servicesLabel ?? 'Diensten') : dict.services.hero.label}
+            title={studio ? (nexus?.servicesTitle ?? 'Drie pijlers, één studio') : dict.services.intro.title}
+            subtitle={studio ? (nexus?.servicesIntro ?? dict.services.intro.text) : dict.services.intro.text}
           />
         </div>
 
