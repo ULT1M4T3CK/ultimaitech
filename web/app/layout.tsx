@@ -18,7 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={`${inter.variable} ${syne.variable} ${jetbrains.variable}`}
     >
-      <body className="min-h-screen bg-charcoal font-sans text-text antialiased">{children}</body>
+      <body suppressHydrationWarning className="min-h-screen bg-charcoal font-sans text-text antialiased">
+        {children}
+      </body>
     </html>
   );
 }

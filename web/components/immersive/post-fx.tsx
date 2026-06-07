@@ -12,7 +12,7 @@ export function PostFX() {
   const isUltra = tier === 'ultra';
 
   return (
-    <EffectComposer multisampling={isUltra ? 4 : 0}>
+    <EffectComposer enableNormalPass multisampling={isUltra ? 4 : 0}>
       <SSAO
         samples={isUltra ? 24 : 12}
         rings={3}

@@ -56,14 +56,24 @@ const ROUTE_KEYS = [
   ['offer', 'offer'],
 ] as const;
 
+function stripEdges(path: string): string {
+  return path.replace(/^\/|\/$/g, '');
+}
+
 export function parseLocalePath(pathname: string): { locale: Locale; segment: string } {
-  if (pathname.startsWith('/de/') || pathname === '/de') {
-    return { locale: 'de', segment: pathname.slice(4).replace(/^\/|\/$/g, '') };
+  const clean = stripEdges(pathname);
+
+  if (clean === 'de' || clean.startsWith('de/')) {
+    return { locale: 'de', segment: clean === 'de' ? '' : clean.slice(3) };
   }
-  if (pathname.startsWith('/en/') || pathname === '/en') {
-    return { locale: 'en', segment: pathname.slice(4).replace(/^\/|\/$/g, '') };
+  if (clean === 'en' || clean.startsWith('en/')) {
+    return { locale: 'en', segment: clean === 'en' ? '' : clean.slice(3) };
   }
-  return { locale: 'nl', segment: pathname.replace(/^\/|\/$/g, '') };
+  if (clean === 'nl' || clean.startsWith('nl/')) {
+    return { locale: 'nl', segment: clean === 'nl' ? '' : clean.slice(3) };
+  }
+
+  return { locale: 'nl', segment: clean };
 }
 
 export function toInternalSegment(locale: Locale, segment: string): string {
