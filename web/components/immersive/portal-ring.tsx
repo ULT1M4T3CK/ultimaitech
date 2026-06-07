@@ -76,24 +76,29 @@ export function PortalRing({ index, position, rotationY = 0, onClick }: PortalRi
   });
 
   return (
-    <mesh
-      ref={meshRef}
-      position={position}
-      rotation={[Math.PI / 2, rotationY, 0]}
-      material={material}
-      onClick={onClick}
-      onPointerOver={() => {
-        setHovered(true);
-        setHoveredPortal(index);
-        invalidate();
-      }}
-      onPointerOut={() => {
-        setHovered(false);
-        setHoveredPortal(null);
-        invalidate();
-      }}
-    >
-      <torusGeometry args={[1.1, 0.06, 32, 64]} />
-    </mesh>
+    <group position={position} rotation={[0, rotationY, 0]}>
+      <mesh rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
+        <torusGeometry args={[1.1, 0.05, 32, 64]} />
+        <meshStandardMaterial color="#1a2228" metalness={0.85} roughness={0.22} envMapIntensity={1.3} />
+      </mesh>
+      <mesh
+        ref={meshRef}
+        rotation={[Math.PI / 2, 0, 0]}
+        material={material}
+        onClick={onClick}
+        onPointerOver={() => {
+          setHovered(true);
+          setHoveredPortal(index);
+          invalidate();
+        }}
+        onPointerOut={() => {
+          setHovered(false);
+          setHoveredPortal(null);
+          invalidate();
+        }}
+      >
+        <torusGeometry args={[1.1, 0.07, 32, 64]} />
+      </mesh>
+    </group>
   );
 }

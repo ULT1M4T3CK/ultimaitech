@@ -48,7 +48,13 @@ export function hasPostFX(tier: DeviceTier): boolean {
 }
 
 export function hasReflectiveFloor(tier: DeviceTier): boolean {
-  return tier === 'ultra';
+  return tier === 'full' || tier === 'ultra';
+}
+
+export function reflectiveFloorQuality(tier: DeviceTier): 'none' | 'low' | 'high' {
+  if (tier === 'ultra') return 'high';
+  if (tier === 'full') return 'low';
+  return 'none';
 }
 
 export function hasFullDetail(tier: DeviceTier): boolean {

@@ -1,7 +1,9 @@
 'use client';
 
 import { GltfModel } from '@/components/immersive/gltf-model';
-import { ASSET_REGISTRY } from '@/lib/assets-3d';
+import { SceneFloor } from '@/components/immersive/scene-floor';
+import { ScreenPanel } from '@/components/immersive/screen-panel';
+import { ASSET_REGISTRY, PROJECT_SCREEN_TEXTURES } from '@/lib/assets-3d';
 
 export const PROJECT_SCREEN_POSITIONS: [number, number, number][] = [
   [-4, 1.8, -2.5],
@@ -9,24 +11,42 @@ export const PROJECT_SCREEN_POSITIONS: [number, number, number][] = [
   [4, 1.8, -2.5],
 ];
 
+const SCREEN_PANEL_OFFSET: [number, number, number][] = [
+  [-4, 1.8, -2.38],
+  [0, 2.2, -3.08],
+  [4, 1.8, -2.38],
+];
+
 export function ProjectsScene() {
   return (
     <group>
-      <GltfModel asset={ASSET_REGISTRY.corridorWall} position={[0, 0, -1.5]} />
+      <GltfModel asset={ASSET_REGISTRY.corridorWall} position={[0, 0, -1.5]} materialPreset="architecture" />
 
       {PROJECT_SCREEN_POSITIONS.map((pos, i) => (
         <GltfModel
           key={`screen-${i}`}
           asset={ASSET_REGISTRY.screenWide}
           position={pos}
-          rotation={[0, 0, 0]}
+          materialPreset="architecture"
         />
       ))}
 
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
-        <planeGeometry args={[18, 18]} />
-        <meshStandardMaterial color="#0a0c0f" roughness={0.9} metalness={0.1} />
-      </mesh>
+      {SCREEN_PANEL_OFFSET.map((pos, i) => (
+        <ScreenPanel key={`panel-${i}`} position={pos} src={PROJECT_SCREEN_TEXTURES[i]} />
+      ))}
+
+      {SCREEN_PANEL_OFFSET.map((pos, i) => (
+        <pointLight
+          key={`screen-light-${i}`}
+          position={[pos[0], pos[1] + 0.6, pos[2] + 0.8]}
+          intensity={0.45}
+          color="#e2ecff"
+          distance={5}
+          decay={2}
+        />
+      ))}
+
+      <SceneFloor size={18} />
     </group>
   );
 }

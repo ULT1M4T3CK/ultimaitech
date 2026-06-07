@@ -49,7 +49,7 @@ export function ImmersiveCanvas({ sceneId: sceneIdProp }: ImmersiveCanvasProps) 
         alpha: true,
         powerPreference: 'high-performance',
         toneMapping: THREE.ACESFilmicToneMapping,
-        toneMappingExposure: 1.05,
+        toneMappingExposure: 1.12,
       }}
       camera={{ fov: 45, near: 0.1, far: 100, position: [0, 3.5, 11] }}
       style={{
@@ -58,12 +58,13 @@ export function ImmersiveCanvas({ sceneId: sceneIdProp }: ImmersiveCanvasProps) 
         zIndex: 0,
         pointerEvents: narrativeMode ? 'none' : 'auto',
       }}
-      onCreated={({ invalidate }) => {
+      onCreated={({ gl, invalidate }) => {
+        gl.outputColorSpace = THREE.SRGBColorSpace;
         registerInvalidate(invalidate);
       }}
     >
-      <color attach="background" args={['#0d0f12']} />
-      <fog attach="fog" args={['#0d0f12', 12, 28]} />
+      <color attach="background" args={['#0b0d10']} />
+      <fog attach="fog" args={['#0b0d10', 18, 38]} />
       <DemandLoopDriver />
       <SceneRouter sceneId={sceneId} />
       <Preload all />

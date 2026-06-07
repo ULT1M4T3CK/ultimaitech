@@ -5,6 +5,7 @@ import { useGLTF } from '@react-three/drei';
 import { SkeletonUtils } from 'three-stdlib';
 import type { Group } from 'three';
 import type { GltfAsset } from '@/lib/assets-3d';
+import { enhanceGltfMaterials, type MaterialPreset } from '@/lib/material-utils';
 
 type GltfModelProps = {
   asset: GltfAsset;
@@ -13,6 +14,8 @@ type GltfModelProps = {
   scale?: number | [number, number, number];
   position?: [number, number, number];
   rotation?: [number, number, number];
+  materialPreset?: MaterialPreset;
+  envMapIntensity?: number;
 };
 
 function applyShadows(root: Group, cast: boolean, receive: boolean) {
@@ -31,6 +34,8 @@ export function GltfModel({
   scale: scaleProp,
   position: positionProp,
   rotation: rotationProp,
+  materialPreset = 'default',
+  envMapIntensity = 0.9,
 }: GltfModelProps) {
   const groupRef = useRef<Group>(null);
   const { scene } = useGLTF(asset.path);
@@ -38,8 +43,9 @@ export function GltfModel({
   const clone = useMemo(() => {
     const cloned = SkeletonUtils.clone(scene) as Group;
     applyShadows(cloned, castShadow, receiveShadow);
+    enhanceGltfMaterials(cloned, materialPreset, envMapIntensity);
     return cloned;
-  }, [scene, castShadow, receiveShadow]);
+  }, [scene, castShadow, receiveShadow, materialPreset, envMapIntensity]);
 
   const scale = scaleProp ?? asset.scale ?? 1;
   const position = positionProp ?? asset.position ?? [0, 0, 0];

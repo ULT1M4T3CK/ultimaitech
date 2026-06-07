@@ -1,6 +1,6 @@
 'use client';
 
-import { Sparkles } from '@react-three/drei';
+import { RoundedBox, Sparkles } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
@@ -12,8 +12,10 @@ import {
   SignalPaths,
   modulePosition,
 } from '@/components/immersive/signal-paths';
+import { SceneFloor } from '@/components/immersive/scene-floor';
+import { ScreenPanel } from '@/components/immersive/screen-panel';
 import { useImmersive } from '@/components/immersive/immersive-provider';
-import { ASSET_REGISTRY } from '@/lib/assets-3d';
+import { ASSET_REGISTRY, PROJECT_SCREEN_TEXTURES } from '@/lib/assets-3d';
 import { PROJECT_SCREEN_POSITIONS } from '@/components/immersive/scenes/projects-scene';
 import { SERVICE_PILLAR_POSITIONS } from '@/components/immersive/scenes/services-scene';
 import { hasFullDetail } from '@/lib/device-tier';
@@ -23,6 +25,12 @@ const WALL_PANEL_POSITIONS: [number, number, number][] = [
   [4.2, 1.6, -3.8],
   [-4.2, 1.6, 3.8],
   [4.2, 1.6, 3.8],
+];
+
+const SCREEN_PANEL_OFFSET: [number, number, number][] = [
+  [-4, 1.8, -2.38],
+  [0, 2.2, -3.08],
+  [4, 1.8, -2.38],
 ];
 
 function NexusModuleBox({
@@ -48,16 +56,26 @@ function NexusModuleBox({
   });
 
   return (
-    <mesh ref={meshRef} position={pos}>
-      <boxGeometry args={[0.9, 0.9, 0.9]} />
-      <meshStandardMaterial
-        color="#1a1e26"
+    <RoundedBox
+      ref={meshRef}
+      args={[0.88, 0.88, 0.88]}
+      radius={0.07}
+      smoothness={4}
+      position={pos}
+      castShadow
+      receiveShadow
+    >
+      <meshPhysicalMaterial
+        color="#1e242e"
         emissive={mod.color}
-        emissiveIntensity={0.2 + highlight * 0.6}
-        metalness={0.4}
-        roughness={0.35}
+        emissiveIntensity={0.12 + highlight * 0.55}
+        metalness={0.58}
+        roughness={0.2}
+        clearcoat={0.35}
+        clearcoatRoughness={0.12}
+        envMapIntensity={1.1}
       />
-    </mesh>
+    </RoundedBox>
   );
 }
 
@@ -95,10 +113,15 @@ export function NexusCoreScene() {
 
   return (
     <group>
-      <GltfModel asset={ASSET_REGISTRY.hubPlatform} position={[0, 0, 0]} />
+      <GltfModel asset={ASSET_REGISTRY.hubPlatform} position={[0, 0, 0]} materialPreset="architecture" />
 
       <group ref={ringRef} position={CORE_POSITION}>
-        <GltfModel asset={ASSET_REGISTRY.hubRing} position={[0, -1.15, 0]} scale={0.85 + state.corePulse * 0.1} />
+        <GltfModel
+          asset={ASSET_REGISTRY.hubRing}
+          position={[0, 0.05, 0]}
+          scale={0.85 + state.corePulse * 0.1}
+          materialPreset="metal"
+        />
       </group>
 
       {NEXUS_MODULES.map((mod, i) => (
@@ -118,13 +141,12 @@ export function NexusCoreScene() {
       />
 
       {state.showCorridor && (
-        <group visible={state.showCorridor}>
-          <GltfModel
-            asset={ASSET_REGISTRY.corridorWall}
-            position={[0, 0, -1.5]}
-            scale={0.5 + state.dockFactor * 0.5}
-          />
-        </group>
+        <GltfModel
+          asset={ASSET_REGISTRY.corridorWall}
+          position={[0, 0, -1.5]}
+          scale={0.5 + state.dockFactor * 0.5}
+          materialPreset="architecture"
+        />
       )}
 
       {state.showScreens &&
@@ -134,12 +156,23 @@ export function NexusCoreScene() {
             asset={ASSET_REGISTRY.screenWide}
             position={pos}
             scale={0.6 + state.dockFactor * 0.4}
+            materialPreset="architecture"
+          />
+        ))}
+
+      {state.showScreens &&
+        SCREEN_PANEL_OFFSET.map((pos, i) => (
+          <ScreenPanel
+            key={`nexus-panel-${i}`}
+            position={pos}
+            src={PROJECT_SCREEN_TEXTURES[i]}
+            emissiveIntensity={1.2 + state.pathIntensity * 0.8}
           />
         ))}
 
       {state.showPillars &&
         SERVICE_PILLAR_POSITIONS.map((pos, i) => (
-          <GltfModel key={`nexus-pedestal-${i}`} asset={ASSET_REGISTRY.pedestal} position={pos} />
+          <GltfModel key={`nexus-pedestal-${i}`} asset={ASSET_REGISTRY.pedestal} position={pos} materialPreset="architecture" />
         ))}
 
       {state.showWallPanels &&
@@ -150,6 +183,7 @@ export function NexusCoreScene() {
             position={pos}
             rotation={[0, i < 2 ? 0 : Math.PI, 0]}
             scale={0.7 + state.dockFactor * 0.3}
+            materialPreset="architecture"
           />
         ))}
 
@@ -164,13 +198,10 @@ export function NexusCoreScene() {
         ))}
 
       {fullDetail && (
-        <Sparkles count={30} scale={[12, 5, 12]} size={1.2} speed={0.2} opacity={0.3} color="#2DD4BF" />
+        <Sparkles count={22} scale={[12, 5, 12]} size={1} speed={0.15} opacity={0.18} color="#2DD4BF" />
       )}
 
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
-        <planeGeometry args={[24, 24]} />
-        <meshStandardMaterial color="#0a0c0f" roughness={0.9} metalness={0.1} />
-      </mesh>
+      <SceneFloor />
     </group>
   );
 }

@@ -8,6 +8,13 @@ export type GltfAsset = {
 
 export const HDR_PATH = '/assets/3d/hdr/studio_small_03_1k.hdr';
 export const HERO_TEXTURE = '/assets/images/hero.png';
+export const MONITOR_TEXTURE = '/assets/images/about-portrait.png';
+
+export const PROJECT_SCREEN_TEXTURES = [
+  '/assets/images/usecases/nijenhuis-usecase.jpeg',
+  '/assets/images/usecases/houthandel-jan-sok-usecase.jpeg',
+  '/assets/images/usecases/wal-beschoeiing-usecase.jpeg',
+] as const;
 
 export const ASSET_REGISTRY = {
   hubPlatform: { id: 'hubPlatform', path: '/assets/3d/models/hub_platform.glb' },
