@@ -72,6 +72,63 @@ const home = {
     trustLine: 'Vaste prijsafspraken · directe lijn · oplevering met documentatie',
   },
 
+  nexus: {
+    heroLabel: 'Digital systems studio · Wanneperveen',
+    headline: 'Digitale systemen die regio-ondernemers kunnen verifiëren — uit Wanneperveen.',
+    subheadline:
+      'Websites, maatwerksoftware en AI-systemen voor ondernemers in Drenthe, Overijssel en de grensregio. Eén studio, vaste afspraken, live portfolio.',
+    trustLine: 'Vaste prijs · directe lijn · documentatie bij oplevering',
+    servicesLabel: 'Diensten',
+    servicesTitle: 'Drie pijlers, één aanspreekpunt',
+    servicesIntro:
+      'Websites, software en AI — onder één dak, zonder tussenlagen. Elk traject met vaste scope en verifieerbare oplevering.',
+    workLabel: 'Projecten',
+    workTitle: 'Werk dat u zelf kunt beoordelen',
+    workIntro: 'Live cases uit de regio — van boekingsplatforms tot webshops met orderbeheer.',
+    aiLabel: 'AI',
+    aiTitle: 'Slimme systemen op uw eigen content',
+    aiIntro: 'Chatbots en automatisering die uw teams ontlasten — 24/7, in NL · DE · EN.',
+    aiCallout:
+      'AI als aanvulling: antwoorden op basis van uw content, met doorverwijzing wanneer persoonlijk contact nodig is.',
+    processLabel: 'Werkwijze',
+    processTitle: 'Van kennismaking tot oplevering',
+    trustLabel: 'Vertrouwen',
+    trustHeadline: 'Geen lagen. Geen verrassingen. Verifieerbare oplevering.',
+    trustIntro: 'Transparante werkwijze, vaste prijzen en documentatie die u zelf kunt controleren.',
+    contactHeadline: 'Klaar om uw digitale systeem te bespreken?',
+    hubExplore: 'Verken de hub — sleep om portalen te ontdekken',
+    portalLabels: {
+      services: 'Diensten',
+      projects: 'Projecten',
+      about: 'Over',
+      hub: 'Hub',
+    },
+  },
+
+  projects: [
+    {
+      slug: 'nijenhuis-botenverhuur',
+      title: 'Nijenhuis Botenverhuur',
+      label: 'Uitgelicht',
+      image: '/assets/images/usecases/nijenhuis-usecase.jpeg',
+      description:
+        'Van verouderde site naar boekingsgerichte website en blog voor bootverhuur bij Giethoorn.',
+      featured: true,
+    },
+    {
+      slug: 'houthandel-jan-sok',
+      title: 'Houthandel Jan Sok',
+      image: '/assets/images/usecases/houthandel-jan-sok-usecase.jpeg',
+      description: 'Van WordPress-builder naar maatwerk webshop met eigen orderbeheer.',
+    },
+    {
+      slug: 'wal-beschoeiing',
+      title: 'WAL Beschoeiing',
+      image: '/assets/images/usecases/wal-beschoeiing-usecase.jpeg',
+      description: 'Van Shopify-template naar maatwerk webshop met projectgericht orderbeheer.',
+    },
+  ],
+
   intro: {
     title: 'Wat is ultimAItech?',
     text: 'ultimAItech is een zelfstandig website- en softwareontwikkelaar uit Wanneperveen, Overijssel. Ik bouw professionele websites, webshops en maatwerksoftware voor ondernemers in Drenthe en Overijssel — van recreatiebedrijven en houthandels tot webshops en dienstverleners. Geen bureau met tussenlagen: u werkt rechtstreeks met mij, met vaste prijsafspraken, een helder proces en oplevering inclusief documentatie. AI-chatbots zijn een aanvullende dienst voor bedrijven die hun website of software willen versterken met slimme klantenservice.',
