@@ -1,0 +1,556 @@
+[
+  {
+    "filter_env": [],
+    "namespace": "default",
+    "kill_retry_time": 100,
+    "windowsHide": true,
+    "username": "ec2-user",
+    "treekill": true,
+    "automation": true,
+    "pmx": true,
+    "instance_var": "NODE_APP_INSTANCE",
+    "autorestart": true,
+    "autostart": true,
+    "vizion": true,
+    "merge_logs": true,
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": 3002,
+      "HTML_ROOT": "/var/www/ultimaitech/html"
+    },
+    "cwd": "/opt/website-backend",
+    "name": "website-blog-api",
+    "node_args": [],
+    "pm_exec_path": "/opt/website-backend/src/index.js",
+    "pm_cwd": "/opt/website-backend",
+    "exec_interpreter": "node",
+    "exec_mode": "fork_mode",
+    "pm_out_log_path": "/home/ec2-user/.pm2/logs/website-blog-api-out.log",
+    "pm_err_log_path": "/home/ec2-user/.pm2/logs/website-blog-api-error.log",
+    "pm_pid_path": "/home/ec2-user/.pm2/pids/website-blog-api-0.pid",
+    "km_link": false,
+    "vizion_running": false,
+    "NODE_APP_INSTANCE": 0,
+    "website-blog-api": "{}",
+    "PM2_HOME": "/home/ec2-user/.pm2",
+    "NODE_ENV": "production",
+    "PORT": 3002,
+    "HTML_ROOT": "/var/www/ultimaitech/html",
+    "PM2_JSON_PROCESSING": "true",
+    "PM2_USAGE": "CLI",
+    "_": "/usr/bin/pm2",
+    "BASH_FUNC_which%%": "() {  ( alias;\n eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot \"$@\"\n}",
+    "OLDPWD": "/home/ec2-user",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+    "SELINUX_LEVEL_REQUESTED": "",
+    "PATH": "/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin",
+    "which_declare": "declare -f",
+    "SSH_CLIENT": "84.27.250.195 41348 22",
+    "S_COLORS": "auto",
+    "XDG_RUNTIME_DIR": "/run/user/1000",
+    "XDG_SESSION_ID": "519",
+    "SHLVL": "1",
+    "SELINUX_USE_CURRENT_RANGE": "",
+    "USER": "ec2-user",
+    "LESSOPEN": "||/usr/bin/lesspipe.sh %s",
+    "SELINUX_ROLE_REQUESTED": "",
+    "XDG_SESSION_CLASS": "user",
+    "SSH_CONNECTION": "84.27.250.195 41348 172.31.13.70 22",
+    "LANG": "C.UTF-8",
+    "HOME": "/home/ec2-user",
+    "MOTD_SHOWN": "pam",
+    "XDG_SESSION_TYPE": "tty",
+    "LOGNAME": "ec2-user",
+    "PWD": "/opt/website-backend",
+    "SYSTEMD_COLORS": "false",
+    "SHELL": "/bin/bash",
+    "unique_id": "d1752d53-b1e5-4a8b-8ded-8c735bd89b96",
+    "status": "online",
+    "pm_uptime": 1780827407240,
+    "axm_actions": [
+      {
+        "action_name": "km:heapdump",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:cpu:profiling:start",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:cpu:profiling:stop",
+        "action_type": "internal",
+        "arity": 1
+      },
+      {
+        "action_name": "km:heap:sampling:start",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:heap:sampling:stop",
+        "action_type": "internal",
+        "arity": 1
+      }
+    ],
+    "axm_monitor": {},
+    "axm_options": {
+      "error": true,
+      "heapdump": true,
+      "feature.profiler.heapsnapshot": false,
+      "feature.profiler.heapsampling": true,
+      "feature.profiler.cpu_js": true,
+      "latency": true,
+      "catchExceptions": true,
+      "profiling": true,
+      "metrics": {
+        "http": true,
+        "runtime": true,
+        "eventLoop": true,
+        "network": false,
+        "v8": true
+      },
+      "standalone": false,
+      "module_conf": {},
+      "apm": {
+        "version": "6.1.0",
+        "type": "node"
+      },
+      "module_name": "website-blog-api",
+      "module_version": "6.0.14"
+    },
+    "axm_dynamic": {},
+    "created_at": 1780827407129,
+    "restart_time": 26,
+    "unstable_restarts": 0,
+    "version": "1.0.0",
+    "node_version": "18.20.8",
+    "exit_code": 0,
+    "env_production": {
+      "NODE_ENV": "production",
+      "PORT": 3002,
+      "HTML_ROOT": "/var/www/ultimaitech/html"
+    },
+    "script": "src/index.js",
+    "max_restarts": 15,
+    "min_uptime": 5000
+  },
+  {
+    "namespace": "default",
+    "kill_retry_time": 100,
+    "windowsHide": true,
+    "username": "ec2-user",
+    "treekill": true,
+    "automation": true,
+    "pmx": true,
+    "instance_var": "NODE_APP_INSTANCE",
+    "autorestart": true,
+    "autostart": true,
+    "vizion": true,
+    "merge_logs": true,
+    "env": {
+      "c95": "{}",
+      "PM2_HOME": "/home/ec2-user/.pm2",
+      "NODE_ENV": "production",
+      "PM2_JSON_PROCESSING": "true",
+      "PM2_USAGE": "CLI",
+      "_": "/usr/bin/pm2",
+      "BASH_FUNC_which%%": "() {  ( alias;\n eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot \"$@\"\n}",
+      "OLDPWD": "/home/ec2-user",
+      "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+      "SELINUX_LEVEL_REQUESTED": "",
+      "PATH": "/home/ec2-user/node22/bin:/home/ec2-user/node22/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin",
+      "which_declare": "declare -f",
+      "SSH_CLIENT": "84.27.250.195 58780 22",
+      "S_COLORS": "auto",
+      "XDG_RUNTIME_DIR": "/run/user/1000",
+      "XDG_SESSION_ID": "57",
+      "SHLVL": "1",
+      "SELINUX_USE_CURRENT_RANGE": "",
+      "USER": "ec2-user",
+      "LESSOPEN": "||/usr/bin/lesspipe.sh %s",
+      "SELINUX_ROLE_REQUESTED": "",
+      "XDG_SESSION_CLASS": "user",
+      "SSH_CONNECTION": "84.27.250.195 58780 172.31.13.70 22",
+      "LANG": "C.UTF-8",
+      "HOME": "/home/ec2-user",
+      "MOTD_SHOWN": "pam",
+      "XDG_SESSION_TYPE": "tty",
+      "LOGNAME": "ec2-user",
+      "PWD": "/home/ec2-user/c95",
+      "SYSTEMD_COLORS": "false",
+      "SHELL": "/bin/bash",
+      "unique_id": "bcb4628d-6ade-48e4-91d7-fd14f3a8451d"
+    },
+    "exec_interpreter": "/home/ec2-user/node22/bin/node",
+    "args": [
+      "start"
+    ],
+    "cwd": "/home/ec2-user/c95",
+    "name": "c95",
+    "node_args": [],
+    "pm_exec_path": "/home/ec2-user/c95/node_modules/next/dist/bin/next",
+    "source_map_support": true,
+    "pm_cwd": "/home/ec2-user/c95",
+    "exec_mode": "fork_mode",
+    "pm_out_log_path": "/home/ec2-user/.pm2/logs/c95-out.log",
+    "pm_err_log_path": "/home/ec2-user/.pm2/logs/c95-error.log",
+    "pm_pid_path": "/home/ec2-user/.pm2/pids/c95-5.pid",
+    "km_link": false,
+    "vizion_running": false,
+    "NODE_APP_INSTANCE": 0,
+    "c95": "{}",
+    "PM2_HOME": "/home/ec2-user/.pm2",
+    "NODE_ENV": "production",
+    "PM2_JSON_PROCESSING": "true",
+    "PM2_USAGE": "CLI",
+    "_": "/usr/bin/pm2",
+    "BASH_FUNC_which%%": "() {  ( alias;\n eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot \"$@\"\n}",
+    "OLDPWD": "/home/ec2-user",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+    "SELINUX_LEVEL_REQUESTED": "",
+    "PATH": "/home/ec2-user/node22/bin:/home/ec2-user/node22/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin",
+    "which_declare": "declare -f",
+    "SSH_CLIENT": "84.27.250.195 58780 22",
+    "S_COLORS": "auto",
+    "XDG_RUNTIME_DIR": "/run/user/1000",
+    "XDG_SESSION_ID": "57",
+    "SHLVL": "1",
+    "SELINUX_USE_CURRENT_RANGE": "",
+    "USER": "ec2-user",
+    "LESSOPEN": "||/usr/bin/lesspipe.sh %s",
+    "SELINUX_ROLE_REQUESTED": "",
+    "XDG_SESSION_CLASS": "user",
+    "SSH_CONNECTION": "84.27.250.195 58780 172.31.13.70 22",
+    "LANG": "C.UTF-8",
+    "HOME": "/home/ec2-user",
+    "MOTD_SHOWN": "pam",
+    "XDG_SESSION_TYPE": "tty",
+    "LOGNAME": "ec2-user",
+    "PWD": "/home/ec2-user/c95",
+    "SYSTEMD_COLORS": "false",
+    "SHELL": "/bin/bash",
+    "unique_id": "bcb4628d-6ade-48e4-91d7-fd14f3a8451d",
+    "status": "online",
+    "pm_uptime": 1779981893216,
+    "axm_actions": [
+      {
+        "action_name": "km:heapdump",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:cpu:profiling:start",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:cpu:profiling:stop",
+        "action_type": "internal",
+        "arity": 1
+      },
+      {
+        "action_name": "km:heap:sampling:start",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:heap:sampling:stop",
+        "action_type": "internal",
+        "arity": 1
+      }
+    ],
+    "axm_monitor": {
+      "Used Heap Size": {
+        "value": "53.31",
+        "type": "internal/v8/heap/used",
+        "unit": "MiB",
+        "historic": true
+      },
+      "Heap Usage": {
+        "value": 94.75,
+        "type": "internal/v8/heap/usage",
+        "unit": "%",
+        "historic": true
+      },
+      "Heap Size": {
+        "value": "56.26",
+        "type": "internal/v8/heap/total",
+        "unit": "MiB",
+        "historic": true
+      },
+      "Event Loop Latency p95": {
+        "value": "1.22",
+        "type": "internal/libuv/latency/p95",
+        "unit": "ms",
+        "historic": true
+      },
+      "Event Loop Latency": {
+        "value": "0.41",
+        "type": "internal/libuv/latency/p50",
+        "unit": "ms",
+        "historic": true
+      },
+      "Active handles": {
+        "value": 4,
+        "type": "internal/libuv/handles",
+        "historic": true
+      },
+      "Active requests": {
+        "value": 0,
+        "type": "internal/libuv/requests",
+        "historic": true
+      },
+      "HTTP": {
+        "value": 0,
+        "type": "internal/http/builtin/reqs",
+        "unit": "req/min",
+        "historic": true
+      },
+      "HTTP P95 Latency": {
+        "value": 94.44999999999999,
+        "type": "internal/http/builtin/latency/p95",
+        "unit": "ms",
+        "historic": true
+      },
+      "HTTP Mean Latency": {
+        "value": 12,
+        "type": "internal/http/builtin/latency/p50",
+        "unit": "ms",
+        "historic": true
+      }
+    },
+    "axm_options": {
+      "error": true,
+      "heapdump": true,
+      "feature.profiler.heapsnapshot": false,
+      "feature.profiler.heapsampling": true,
+      "feature.profiler.cpu_js": true,
+      "latency": true,
+      "catchExceptions": true,
+      "profiling": true,
+      "metrics": {
+        "http": true,
+        "runtime": true,
+        "eventLoop": true,
+        "network": false,
+        "v8": true
+      },
+      "standalone": false,
+      "module_conf": {},
+      "apm": {
+        "version": "6.1.0",
+        "type": "node"
+      },
+      "module_name": "c95",
+      "module_version": "6.0.14"
+    },
+    "axm_dynamic": {},
+    "created_at": 1779981893216,
+    "restart_time": 0,
+    "unstable_restarts": 0,
+    "version": "16.2.4",
+    "node_version": "22.22.3"
+  },
+  {
+    "namespace": "default",
+    "env_production": {
+      "NODE_ENV": "production",
+      "PORT": 3003,
+      "HOSTNAME": "0.0.0.0",
+      "INTERNAL_API_URL": "http://127.0.0.1:3002/api/blog"
+    },
+    "kill_retry_time": 100,
+    "windowsHide": true,
+    "username": "ec2-user",
+    "treekill": true,
+    "automation": true,
+    "pmx": true,
+    "instance_var": "NODE_APP_INSTANCE",
+    "max_restarts": 15,
+    "min_uptime": 5000,
+    "autorestart": true,
+    "autostart": true,
+    "vizion": true,
+    "merge_logs": true,
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": 3003,
+      "HOSTNAME": "0.0.0.0",
+      "INTERNAL_API_URL": "http://127.0.0.1:3002/api/blog"
+    },
+    "cwd": "/opt/ultimaitech-next",
+    "name": "ultimaitech-web",
+    "node_args": [],
+    "pm_exec_path": "/opt/ultimaitech-next/server.js",
+    "pm_cwd": "/opt/ultimaitech-next",
+    "exec_interpreter": "node",
+    "exec_mode": "fork_mode",
+    "pm_out_log_path": "/home/ec2-user/.pm2/logs/ultimaitech-web-out.log",
+    "pm_err_log_path": "/home/ec2-user/.pm2/logs/ultimaitech-web-error.log",
+    "pm_pid_path": "/home/ec2-user/.pm2/pids/ultimaitech-web-6.pid",
+    "km_link": false,
+    "vizion_running": false,
+    "NODE_APP_INSTANCE": 0,
+    "ultimaitech-web": "{}",
+    "PM2_HOME": "/home/ec2-user/.pm2",
+    "PM2_JSON_PROCESSING": "true",
+    "PM2_USAGE": "CLI",
+    "OLDPWD": "/home/ec2-user",
+    "_": "/usr/bin/pm2",
+    "BASH_FUNC_which%%": "() {  ( alias;\n eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot \"$@\"\n}",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+    "SELINUX_LEVEL_REQUESTED": "",
+    "PATH": "/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin",
+    "which_declare": "declare -f",
+    "SSH_CLIENT": "84.27.250.195 52158 22",
+    "S_COLORS": "auto",
+    "XDG_RUNTIME_DIR": "/run/user/1000",
+    "XDG_SESSION_ID": "77",
+    "SHLVL": "1",
+    "SELINUX_USE_CURRENT_RANGE": "",
+    "USER": "ec2-user",
+    "LESSOPEN": "||/usr/bin/lesspipe.sh %s",
+    "SELINUX_ROLE_REQUESTED": "",
+    "XDG_SESSION_CLASS": "user",
+    "SSH_CONNECTION": "84.27.250.195 52158 172.31.13.70 22",
+    "LANG": "C.UTF-8",
+    "HOME": "/home/ec2-user",
+    "MOTD_SHOWN": "pam",
+    "NEXT_REMOTE": "/opt/ultimaitech-next",
+    "XDG_SESSION_TYPE": "tty",
+    "LOGNAME": "ec2-user",
+    "PWD": "/opt/ultimaitech-next",
+    "SYSTEMD_COLORS": "false",
+    "SHELL": "/bin/bash",
+    "NODE_ENV": "production",
+    "PORT": 3003,
+    "HOSTNAME": "0.0.0.0",
+    "NEXT_PUBLIC_API_URL": "http://127.0.0.1:3002/admin/api",
+    "unique_id": "f65a0d8f-04ed-4dd8-8bcc-c2ae6cab6da9",
+    "status": "online",
+    "pm_uptime": 1780824004734,
+    "axm_actions": [
+      {
+        "action_name": "km:heapdump",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:cpu:profiling:start",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:cpu:profiling:stop",
+        "action_type": "internal",
+        "arity": 1
+      },
+      {
+        "action_name": "km:heap:sampling:start",
+        "action_type": "internal",
+        "arity": 2
+      },
+      {
+        "action_name": "km:heap:sampling:stop",
+        "action_type": "internal",
+        "arity": 1
+      }
+    ],
+    "axm_monitor": {
+      "Used Heap Size": {
+        "value": "39.79",
+        "type": "internal/v8/heap/used",
+        "unit": "MiB",
+        "historic": true
+      },
+      "Heap Usage": {
+        "value": 88.52,
+        "type": "internal/v8/heap/usage",
+        "unit": "%",
+        "historic": true
+      },
+      "Heap Size": {
+        "value": "44.95",
+        "type": "internal/v8/heap/total",
+        "unit": "MiB",
+        "historic": true
+      },
+      "Event Loop Latency p95": {
+        "value": "1.07",
+        "type": "internal/libuv/latency/p95",
+        "unit": "ms",
+        "historic": true
+      },
+      "Event Loop Latency": {
+        "value": "0.42",
+        "type": "internal/libuv/latency/p50",
+        "unit": "ms",
+        "historic": true
+      },
+      "Active handles": {
+        "value": 5,
+        "type": "internal/libuv/handles",
+        "historic": true
+      },
+      "Active requests": {
+        "value": 0,
+        "type": "internal/libuv/requests",
+        "historic": true
+      },
+      "HTTP": {
+        "value": 0.11,
+        "type": "internal/http/builtin/reqs",
+        "unit": "req/min",
+        "historic": true
+      },
+      "HTTP P95 Latency": {
+        "value": 75,
+        "type": "internal/http/builtin/latency/p95",
+        "unit": "ms",
+        "historic": true
+      },
+      "HTTP Mean Latency": {
+        "value": 12,
+        "type": "internal/http/builtin/latency/p50",
+        "unit": "ms",
+        "historic": true
+      }
+    },
+    "axm_options": {
+      "error": true,
+      "heapdump": true,
+      "feature.profiler.heapsnapshot": false,
+      "feature.profiler.heapsampling": true,
+      "feature.profiler.cpu_js": true,
+      "latency": true,
+      "catchExceptions": true,
+      "profiling": true,
+      "metrics": {
+        "http": true,
+        "runtime": true,
+        "eventLoop": true,
+        "network": false,
+        "v8": true
+      },
+      "standalone": false,
+      "module_conf": {},
+      "apm": {
+        "version": "6.1.0",
+        "type": "node"
+      },
+      "module_name": "ultimaitech-web",
+      "module_version": "6.0.14"
+    },
+    "axm_dynamic": {},
+    "created_at": 1780824004625,
+    "restart_time": 8,
+    "unstable_restarts": 0,
+    "version": "1.0.0",
+    "node_version": "18.20.8",
+    "script": "server.js",
+    "exit_code": 0,
+    "INTERNAL_API_URL": "http://127.0.0.1:3002/api/blog"
+  }
+]

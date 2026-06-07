@@ -1,0 +1,358 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  ADMIN
+}
+
+enum QuestionType {
+  SINGLE
+  MULTI
+  TRUE_FALSE
+  IMAGE_CHOICE
+  OPEN_ANSWER
+  OBSERVATION_CHECKLIST
+  PHYSICAL_INSPECTION
+  SAFETY_OVERRIDE
+}
+
+enum GradingMode {
+  AUTO
+  INSTRUCTOR
+}
+
+enum LiveExamStatus {
+  DRAFT
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum AttemptMode {
+  EXAM
+  STUDY
+  COURSE_RUN
+}
+
+enum SurveyQuestionType {
+  RATING
+  TEXT
+  SINGLE_CHOICE
+  MULTI_CHOICE
+}
+
+enum SurveyTrigger {
+  EXAM_PASSED
+  EXAM_FAILED
+  MANUAL
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String
+  passwordHash  String
+  role          Role     @default(STUDENT)
+  invitedById   String?
+  invitedBy     User?    @relation("UserInvites", fields: [invitedById], references: [id], onDelete: SetNull)
+  invitedUsers  User[]   @relation("UserInvites")
+  createdAt     DateTime @default(now())
+
+  attempts              ExamAttempt[]
+  inviteCodesCreated    InviteCode[]      @relation("InviteCreator")
+  inviteUsed            InviteCode?       @relation("InviteUsedBy")
+  liveExamsAsTeacher    LiveExamSession[] @relation("LiveExamTeacher")
+  liveExamsAsStudent    LiveExamSession[] @relation("LiveExamStudent")
+  surveyInvitations     SurveyInvitation[]
+}
+
+model InviteCode {
+  code        String   @id
+  role        Role
+  createdById String
+  createdBy   User     @relation("InviteCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  usedById    String?  @unique
+  usedBy      User?    @relation("InviteUsedBy", fields: [usedById], references: [id], onDelete: SetNull)
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+}
+
+model Course {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique
+  description String?
+  order       Int           @default(0)
+  isActive    Boolean       @default(true)
+  questionSets QuestionSet[]
+  examAttempts ExamAttempt[]
+  liveExamSessions LiveExamSession[]
+  surveyAssignments SurveyAssignment[]
+}
+
+model QuestionSet {
+  id                   String    @id @default(cuid())
+  courseId             String
+  course               Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  name                 String
+  order                Int       @default(0)
+  passingSectionCount  Int
+  sections             Section[]
+  liveExamSessions     LiveExamSession[]
+  examAttempts         ExamAttempt[]
+
+  @@unique([courseId, order])
+  @@index([courseId])
+}
+
+model Section {
+  id                   String      @id @default(cuid())
+  questionSetId      String
+  questionSet        QuestionSet @relation(fields: [questionSetId], references: [id], onDelete: Cascade)
+  name                 String
+  order                Int
+  passingQuestionCount Int
+  phaseLabel           String?
+  code                 String?
+  questions            Question[]
+  attempts             ExamAttempt[]
+  scenarios            Scenario[]
+
+  @@unique([questionSetId, order])
+}
+
+model Scenario {
+  id        String     @id @default(cuid())
+  sectionId String
+  section   Section    @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  title     String
+  body      String
+  questions Question[]
+
+  @@index([sectionId])
+}
+
+model Question {
+  id                String         @id @default(cuid())
+  sectionId         String
+  section           Section        @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  type              QuestionType
+  gradingMode       GradingMode
+  prompt            String
+  imageUrl          String?
+  feedback          String?
+  instructorNote    String?
+  canonicalAnswer   String?
+  scenarioId        String?
+  scenario          Scenario?      @relation(fields: [scenarioId], references: [id], onDelete: SetNull)
+  safetyCritical    Boolean        @default(false)
+  referenceMaterial String?
+  order             Int
+  options           AnswerOption[]
+  images            QuestionImage[]
+  criteria          Criterion[]
+  liveExamGrades    LiveExamGrade[]
+
+  @@unique([sectionId, order])
+}
+
+model QuestionImage {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  url        String
+  caption    String?
+  order      Int      @default(0)
+
+  @@index([questionId])
+}
+
+model Criterion {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text       String
+  order      Int
+  isRequired Boolean  @default(true)
+
+  @@index([questionId])
+}
+
+model AnswerOption {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text       String
+  imageUrl   String?
+  isCorrect  Boolean
+  order      Int
+}
+
+model ExamAttempt {
+  id               String    @id @default(cuid())
+  userId           String
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId         String?
+  course           Course?   @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  questionSetId    String?
+  questionSet      QuestionSet? @relation(fields: [questionSetId], references: [id], onDelete: SetNull)
+  sectionId        String?
+  section          Section?  @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+  sectionName      String
+  questionSetName  String
+  mode             AttemptMode @default(EXAM)
+  startedAt        DateTime  @default(now())
+  submittedAt      DateTime?
+  correctCount     Int       @default(0)
+  totalCount       Int       @default(0)
+  passed           Boolean   @default(false)
+  safetyFailed     Boolean   @default(false)
+  answers          ExamAnswer[]
+
+  @@index([questionSetId])
+}
+
+model ExamAnswer {
+  id                    String       @id @default(cuid())
+  attemptId             String
+  attempt               ExamAttempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionOrder         Int
+  prompt                String
+  type                  QuestionType
+  gradingMode           GradingMode  @default(AUTO)
+  imageUrl              String?
+  feedbackSnapshot      String?
+  optionsSnapshot       Json
+  selectedOptionIds     String[]
+  isCorrect             Boolean
+  safetyFailed          Boolean      @default(false)
+  sectionIdSnapshot     String?
+  sectionNameSnapshot   String?
+  sectionOrderSnapshot  Int?
+}
+
+model LiveExamSession {
+  id             String          @id @default(cuid())
+  teacherId      String
+  teacher        User            @relation("LiveExamTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  studentId      String
+  student        User            @relation("LiveExamStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  courseId       String
+  course         Course          @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  questionSetId  String
+  questionSet    QuestionSet     @relation(fields: [questionSetId], references: [id], onDelete: Cascade)
+  status         LiveExamStatus  @default(DRAFT)
+  startedAt      DateTime        @default(now())
+  completedAt    DateTime?
+  safetyFailed   Boolean         @default(false)
+  grades         LiveExamGrade[]
+
+  @@index([studentId])
+  @@index([teacherId])
+  @@index([courseId])
+}
+
+model LiveExamGrade {
+  id                   String           @id @default(cuid())
+  sessionId            String
+  session              LiveExamSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  questionId           String?
+  question             Question?        @relation(fields: [questionId], references: [id], onDelete: SetNull)
+  sectionOrder         Int
+  questionOrder        Int
+  promptSnapshot       String
+  typeSnapshot         QuestionType
+  gradingModeSnapshot  GradingMode
+  optionsSnapshot      Json?
+  criteriaSnapshot     Json?
+  passed               Boolean?
+  criteriaPassedIds    String[]         @default([])
+  instructorNotes      String?
+  safetyFailed         Boolean          @default(false)
+
+  @@index([sessionId])
+}
+
+model Survey {
+  id          String             @id @default(cuid())
+  title       String
+  description String?
+  isActive    Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  questions   SurveyQuestion[]
+  assignments SurveyAssignment[]
+  invitations SurveyInvitation[]
+}
+
+model SurveyQuestion {
+  id       String             @id @default(cuid())
+  surveyId String
+  survey   Survey             @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  type     SurveyQuestionType
+  prompt   String
+  options  Json?
+  required Boolean            @default(true)
+  order    Int
+  answers  SurveyAnswer[]
+
+  @@index([surveyId])
+}
+
+model SurveyAssignment {
+  id        String        @id @default(cuid())
+  surveyId  String
+  survey    Survey        @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  courseId  String?
+  course    Course?       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  trigger   SurveyTrigger
+  createdAt DateTime      @default(now())
+
+  @@unique([surveyId, courseId, trigger])
+  @@index([courseId, trigger])
+}
+
+model SurveyInvitation {
+  id          String           @id @default(cuid())
+  surveyId    String
+  survey      Survey           @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attemptId   String?
+  trigger     SurveyTrigger
+  token       String           @unique @default(cuid())
+  sentAt      DateTime         @default(now())
+  emailSent   Boolean          @default(false)
+  completedAt DateTime?
+  response    SurveyResponse?
+
+  @@index([userId, completedAt])
+  @@index([surveyId])
+  @@index([attemptId])
+}
+
+model SurveyResponse {
+  id           String           @id @default(cuid())
+  invitationId String           @unique
+  invitation   SurveyInvitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  submittedAt  DateTime         @default(now())
+  answers      SurveyAnswer[]
+}
+
+model SurveyAnswer {
+  id         String          @id @default(cuid())
+  responseId String
+  response   SurveyResponse  @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  questionId String?
+  question   SurveyQuestion? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+  value      String
+
+  @@index([responseId])
+}

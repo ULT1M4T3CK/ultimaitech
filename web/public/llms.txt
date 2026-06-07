@@ -1,0 +1,35 @@
+# ultimAItech
+
+> Solo website- en softwareontwikkelaar uit Wanneperveen (Overijssel). Betrouwbare websites, webshops en maatwerksoftware voor ondernemers in Drenthe, Overijssel en de grensregio Niedersachsen. AI-chatbots als aanvullende dienst.
+
+Use this file as a curated index. For full crawlable content, prefer the linked markdown below. Contact: info@ultimaitech.com
+
+## Docs
+
+- [Full site content for AI crawlers](https://ultimaitech.com/ai-content.md): Site map, page summaries, and blog index in NL/DE/EN
+- [Blog posts — markdown index](https://ultimaitech.com/blog/md/index.md): All published articles
+- [Sitemap](https://ultimaitech.com/sitemap.xml): URL list with hreflang alternates
+
+## Key pages (Dutch — default)
+
+- [Home](https://ultimaitech.com/)
+- [Diensten](https://ultimaitech.com/diensten/)
+- [Websites & webshops](https://ultimaitech.com/diensten/websites/)
+- [Software op maat](https://ultimaitech.com/diensten/software/)
+- [AI & chatbots](https://ultimaitech.com/diensten/ai-chatbots/)
+- [Projecten](https://ultimaitech.com/projecten/)
+- [Over](https://ultimaitech.com/over/)
+- [Blog](https://ultimaitech.com/blog/)
+- [Contact](https://ultimaitech.com/contact/)
+
+## German
+
+- [Startseite](https://ultimaitech.com/de/)
+- [Leistungen](https://ultimaitech.com/de/leistungen/)
+- [Blog](https://ultimaitech.com/de/blog/)
+
+## English
+
+- [Home](https://ultimaitech.com/en/)
+- [Services](https://ultimaitech.com/en/services/)
+- [Blog](https://ultimaitech.com/en/blog/)

@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    ports:
+      # Use 5433 on the host when another Postgres already owns localhost:5432
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: c95
+      POSTGRES_PASSWORD: c95
+      POSTGRES_DB: c95
+    volumes:
+      - c95_pgdata:/var/lib/postgresql/data
+
+volumes:
+  c95_pgdata:

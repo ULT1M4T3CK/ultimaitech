@@ -1,0 +1,4 @@
+CREATE TYPE "AttemptMode" AS ENUM ('EXAM', 'STUDY', 'COURSE_RUN');
+
+ALTER TABLE "ExamAttempt"
+ADD COLUMN "mode" "AttemptMode" NOT NULL DEFAULT 'EXAM';

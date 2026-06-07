@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#0d0f12"/>
+  <text x="4" y="24" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">
+    <tspan fill="#ece9e2">u</tspan><tspan fill="#3f7cc4">A</tspan>
+  </text>
+</svg>

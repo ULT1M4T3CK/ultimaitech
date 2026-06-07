@@ -85,7 +85,10 @@ jspm_packages/
 
 # Gatsby files
 .cache/
-public
+
+# PM2 runtime
+deploy/ec2/pm2/logs/
+deploy/ec2/pm2/pids/
 
 # Storybook build outputs
 .out

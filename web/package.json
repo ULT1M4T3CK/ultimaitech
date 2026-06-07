@@ -1,0 +1,52 @@
+{
+  "name": "ultimaitech",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "import-blog": "node scripts/import-blog-from-markdown.mjs",
+    "export-blog-md": "node scripts/export-blog-markdown.mjs",
+    "deploy": "./deploy.sh",
+    "seed-site-assets": "node scripts/seed-site-assets-from-local.mjs",
+    "fetch-3d-assets": "node scripts/fetch-3d-assets.mjs",
+    "build:static-legacy": "node scripts/import-blog-from-markdown.mjs && node scripts/generate-sitemap.js && node scripts/export-blog-markdown.mjs && node scripts/generate-ai-content.mjs && node static-site/build.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/postprocessing": "^3.0.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.572.0",
+    "marked": "^17.0.4",
+    "motion": "^12.12.1",
+    "next": "^15.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.0",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^9.39.1",
+    "@gltf-transform/cli": "^4.4.0",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.184.1",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^15.3.2",
+    "postcss": "^8.5.3",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.18",
+    "turndown": "^7.2.2",
+    "typescript": "^5.8.3"
+  }
+}

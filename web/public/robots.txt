@@ -1,0 +1,94 @@
+# =============================================================================
+# AI Search Engine Crawlers — explicit Allow for each known AI bot
+# =============================================================================
+
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+Allow: /
+Allow: /llms.txt
+Allow: /ai-content.md
+Allow: /blog/md/
+Allow: /*.md$
+Disallow: /admin/
+Disallow: /offer/
+Disallow: /cdn-cgi/
+Crawl-delay: 5
+
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: anthropic-ai
+Allow: /
+Allow: /llms.txt
+Allow: /ai-content.md
+Allow: /blog/md/
+Allow: /*.md$
+Disallow: /admin/
+Disallow: /offer/
+Disallow: /cdn-cgi/
+Crawl-delay: 5
+
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Allow: /llms.txt
+Allow: /ai-content.md
+Allow: /blog/md/
+Allow: /*.md$
+Disallow: /admin/
+Disallow: /offer/
+Disallow: /cdn-cgi/
+Crawl-delay: 5
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /ai-content.md
+Allow: /blog/md/
+Allow: /*.md$
+Disallow: /admin/
+Disallow: /offer/
+Disallow: /cdn-cgi/
+Crawl-delay: 5
+
+User-agent: Applebot-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /ai-content.md
+Allow: /blog/md/
+Allow: /*.md$
+Disallow: /admin/
+Disallow: /offer/
+Disallow: /cdn-cgi/
+Crawl-delay: 5
+
+User-agent: Amazonbot
+User-agent: Bytespider
+User-agent: Meta-ExternalAgent
+User-agent: CCBot
+Allow: /
+Allow: /llms.txt
+Allow: /ai-content.md
+Allow: /blog/md/
+Allow: /*.md$
+Disallow: /admin/
+Disallow: /offer/
+Disallow: /cdn-cgi/
+Crawl-delay: 5
+
+# =============================================================================
+# Default rules for all other crawlers
+# =============================================================================
+User-agent: *
+Allow: /
+
+Allow: /llms.txt
+Allow: /ai-content.md
+Allow: /blog/md/
+Allow: /*.md$
+
+Disallow: /admin/
+Disallow: /offer/
+Disallow: /cdn-cgi/
+
+Sitemap: https://ultimaitech.com/sitemap.xml
