@@ -49,7 +49,7 @@ export function ImmersiveCanvas({ sceneId: sceneIdProp }: ImmersiveCanvasProps) 
         alpha: true,
         powerPreference: 'high-performance',
         toneMapping: THREE.ACESFilmicToneMapping,
-        toneMappingExposure: 1.12,
+        toneMappingExposure: 1.0,
       }}
       camera={{ fov: 45, near: 0.1, far: 100, position: [0, 3.5, 11] }}
       style={{

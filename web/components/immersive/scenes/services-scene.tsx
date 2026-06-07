@@ -1,10 +1,13 @@
 'use client';
 
+import { Line, Sparkles } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
-import { Mesh, MeshPhysicalMaterial } from 'three';
+import { useMemo, useRef } from 'react';
+import * as THREE from 'three';
 import { GltfModel } from '@/components/immersive/gltf-model';
 import { SceneFloor } from '@/components/immersive/scene-floor';
+import { ServiceColumn } from '@/components/immersive/service-column';
+import { CORE_POSITION } from '@/components/immersive/signal-paths';
 import { useImmersive } from '@/components/immersive/immersive-provider';
 import { ASSET_REGISTRY } from '@/lib/assets-3d';
 import { hasFullDetail } from '@/lib/device-tier';
@@ -15,59 +18,130 @@ export const SERVICE_PILLAR_POSITIONS: [number, number, number][] = [
   [3.8, 0.8, 0],
 ];
 
-function GlassPillar({ position }: { position: [number, number, number] }) {
-  const meshRef = useRef<Mesh>(null);
-  const { invalidate, tier } = useImmersive();
+const WALL_PANEL_POSITIONS: [number, number, number][] = [
+  [-4.2, 1.6, -3.8],
+  [4.2, 1.6, -3.8],
+  [-4.2, 1.6, 3.8],
+  [4.2, 1.6, 3.8],
+];
+
+const COLUMN_IDS = ['websites', 'software', 'ai'] as const;
+
+function ServicesSignalPaths() {
+  const { serviceFocus, invalidate } = useImmersive();
+  const groupRef = useRef<THREE.Group>(null);
+
+  const paths = useMemo(() => {
+    if (serviceFocus !== 'software') return [];
+    const core = new THREE.Vector3(...CORE_POSITION);
+    return SERVICE_PILLAR_POSITIONS.map((pos) => {
+      const end = new THREE.Vector3(pos[0], pos[1] + 2.2, pos[2]);
+      const mid = new THREE.Vector3().addVectors(core, end).multiplyScalar(0.5);
+      mid.y += 0.8;
+      return new THREE.QuadraticBezierCurve3(core, mid, end).getPoints(20);
+    });
+  }, [serviceFocus]);
+
+  useFrame((state) => {
+    if (serviceFocus === 'software' && groupRef.current) {
+      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.02;
+      invalidate();
+    }
+  });
+
+  if (serviceFocus !== 'software') return null;
+
+  return (
+    <group ref={groupRef}>
+      {paths.map((points, i) => (
+        <Line
+          key={`svc-path-${i}`}
+          points={points}
+          color="#2DD4BF"
+          lineWidth={1.2}
+          transparent
+          opacity={0.35}
+        />
+      ))}
+    </group>
+  );
+}
+
+function DaisCore({ position }: { position: [number, number, number] }) {
+  const groupRef = useRef<THREE.Group>(null);
+  const { serviceFocus, invalidate, tier } = useImmersive();
   const fullDetail = hasFullDetail(tier);
 
   useFrame((state) => {
-    if (!meshRef.current) return;
-    const mat = meshRef.current.material as MeshPhysicalMaterial;
-    mat.emissiveIntensity = 0.12 + Math.sin(state.clock.elapsedTime * 1.5 + position[0]) * 0.04;
-    invalidate();
+    if (!groupRef.current) return;
+    const lift = serviceFocus === 'software' ? 0.04 : 0;
+    groupRef.current.position.y = position[1] + lift + Math.sin(state.clock.elapsedTime * 0.4) * 0.003;
+    if (serviceFocus === 'software') invalidate();
   });
 
   return (
-    <mesh ref={meshRef} position={position} castShadow receiveShadow>
-      <cylinderGeometry args={[0.35, 0.45, 2.2, 32]} />
-      <meshPhysicalMaterial
-        color="#1c222c"
-        metalness={0.15}
-        roughness={0.04}
-        transmission={fullDetail ? 0.92 : 0.75}
-        thickness={0.65}
-        ior={1.45}
-        attenuationColor="#0d1218"
-        attenuationDistance={0.8}
-        emissive="#2DD4BF"
-        emissiveIntensity={0.12}
-        transparent
-        envMapIntensity={1.2}
-      />
-    </mesh>
+    <group ref={groupRef} position={position}>
+      <GltfModel asset={ASSET_REGISTRY.servicesDais} position={[0, 0, 0]} materialPreset="architecture" />
+      {serviceFocus === 'software' && fullDetail && (
+        <>
+          <mesh position={[-0.6, 2.8, 0]} castShadow>
+            <boxGeometry args={[0.5, 0.06, 0.5]} />
+            <meshStandardMaterial color="#353c44" metalness={0.8} roughness={0.3} />
+          </mesh>
+          <mesh position={[0.6, 2.85, 0]} castShadow>
+            <boxGeometry args={[0.5, 0.06, 0.5]} />
+            <meshStandardMaterial color="#353c44" metalness={0.8} roughness={0.3} />
+          </mesh>
+        </>
+      )}
+    </group>
+  );
+}
+
+function AiColumnParticles() {
+  const { serviceFocus, tier } = useImmersive();
+  if (serviceFocus !== 'ai' || !hasFullDetail(tier)) return null;
+
+  return (
+    <Sparkles
+      position={[3.8, 3.2, 0]}
+      count={12}
+      scale={[0.6, 1.2, 0.6]}
+      size={0.8}
+      speed={0.15}
+      opacity={0.25}
+      color="#2DD4BF"
+    />
   );
 }
 
 export function ServicesScene() {
   return (
     <group>
-      <GltfModel asset={ASSET_REGISTRY.servicesDais} position={[0, 0, 0]} materialPreset="architecture" />
-
-      {SERVICE_PILLAR_POSITIONS.map((pos, i) => (
-        <group key={`pillar-group-${i}`}>
-          <GltfModel asset={ASSET_REGISTRY.pedestal} position={pos} materialPreset="architecture" />
-          <GlassPillar position={[pos[0], pos[1] + 1.5, pos[2]]} />
-          <pointLight
-            position={[pos[0], pos[1] + 2.8, pos[2] + 0.4]}
-            intensity={0.3}
-            color="#2DD4BF"
-            distance={4}
-            decay={2}
-          />
-        </group>
+      {WALL_PANEL_POSITIONS.map((pos, i) => (
+        <GltfModel
+          key={`svc-wall-${i}`}
+          asset={ASSET_REGISTRY.wallPanel}
+          position={pos}
+          rotation={[0, i < 2 ? 0 : Math.PI, 0]}
+          materialPreset="architecture"
+        />
       ))}
 
-      <SceneFloor size={20} />
+      <mesh position={[0, 5.2, 0]} rotation={[Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[18, 18]} />
+        <meshStandardMaterial color="#0a0c0f" roughness={0.92} metalness={0.08} side={THREE.DoubleSide} />
+      </mesh>
+
+      <DaisCore position={[0, 0, 0]} />
+
+      {SERVICE_PILLAR_POSITIONS.map((pos, i) => (
+        <ServiceColumn key={COLUMN_IDS[i]} id={COLUMN_IDS[i]} position={pos} />
+      ))}
+
+      <ServicesSignalPaths />
+      <AiColumnParticles />
+      <SceneFloor size={22} variant="resin" />
     </group>
   );
 }

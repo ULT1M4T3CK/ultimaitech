@@ -20,6 +20,10 @@ import {
 
 export const TEAL_ACCENT = '#2DD4BF';
 
+export type ServiceFocus = 'none' | 'websites' | 'software' | 'ai';
+
+export const SERVICE_FOCUS_ORDER: ServiceFocus[] = ['websites', 'software', 'ai'];
+
 export type PortalConfig = {
   position: [number, number, number];
   label: string;
@@ -58,6 +62,8 @@ type ImmersiveContextValue = {
   setNarrativeComplete: () => void;
   hoveredPortal: number | null;
   setHoveredPortal: (index: number | null) => void;
+  serviceFocus: ServiceFocus;
+  setServiceFocus: (focus: ServiceFocus) => void;
   invalidate: () => void;
   registerInvalidate: (fn: () => void) => () => void;
 };
@@ -82,6 +88,7 @@ export function ImmersiveProvider({
   const [nexusProgress, setNexusProgress] = useState(0);
   const [nexusPhase, setNexusPhase] = useState(0);
   const [hoveredPortal, setHoveredPortal] = useState<number | null>(null);
+  const [serviceFocus, setServiceFocus] = useState<ServiceFocus>('none');
   const [narrativeComplete, setNarrativeCompleteState] = useState(false);
   const [invalidateFns, setInvalidateFns] = useState<Set<() => void>>(new Set());
 
@@ -89,6 +96,12 @@ export function ImmersiveProvider({
     setPrefers3DState(getImmersiveModePreference());
     setNarrativeCompleteState(hasCompletedNarrative());
   }, []);
+
+  useEffect(() => {
+    if (sceneIdFromPath(pathname) !== 'services') {
+      setServiceFocus('none');
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const onModeChange = (e: Event) => {
@@ -136,7 +149,7 @@ export function ImmersiveProvider({
     forceNarrative ?? (onImmersiveRoute && onHub && !narrativeComplete);
 
   const isImmersive = tier !== false && prefers3D && onImmersiveRoute;
-  const bloom = 0.35 + bloomBoost + (hoveredPortal !== null ? 0.15 : 0);
+  const bloom = 0.2 + bloomBoost + (hoveredPortal !== null ? 0.08 : 0) + (serviceFocus !== 'none' ? 0.05 : 0);
 
   const value = useMemo<ImmersiveContextValue>(
     () => ({
@@ -156,6 +169,8 @@ export function ImmersiveProvider({
       setNarrativeComplete,
       hoveredPortal,
       setHoveredPortal,
+      serviceFocus,
+      setServiceFocus,
       invalidate,
       registerInvalidate,
     }),
@@ -172,6 +187,7 @@ export function ImmersiveProvider({
       nexusPhase,
       setNarrativeComplete,
       hoveredPortal,
+      serviceFocus,
       invalidate,
       registerInvalidate,
     ],

@@ -27,7 +27,7 @@ export function PostFX() {
       />
       <Bloom
         intensity={bloom}
-        luminanceThreshold={0.35}
+        luminanceThreshold={0.45}
         luminanceSmoothing={0.9}
         mipmapBlur
       />

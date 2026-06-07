@@ -1,9 +1,8 @@
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import {
   ImmersiveScenePage,
   ServicePillarList,
 } from '@/components/pages/immersive-scene-page';
+import { ServicesOverlay } from '@/components/sections/services/services-overlay';
 import { AnimatedCtaBand } from '@/components/ui/animated-cta-band';
 import { RevealSection } from '@/components/ui/reveal-section';
 import { getDictionary, type Locale } from '@/lib/locales';
@@ -18,21 +17,10 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
   const { services, slugs } = dict;
 
   const overlay = (
-    <>
-      <p className="text-sm leading-relaxed text-text-muted">{services.intro.text}</p>
-      <div className="space-y-2">
-        {services.pillars.map((pillar) => (
-          <Link
-            key={pillar.title}
-            href={pillar.link}
-            className="flex items-center justify-between rounded-xl border border-border bg-surface/50 px-4 py-3 text-sm font-medium text-text transition-colors hover:border-accent/30"
-          >
-            {pillar.title}
-            <ArrowRight className="h-4 w-4 text-accent" />
-          </Link>
-        ))}
-      </div>
-    </>
+    <ServicesOverlay
+      intro={services.intro.text}
+      pillars={services.pillars.map((p) => ({ title: p.title, link: p.link }))}
+    />
   );
 
   return (

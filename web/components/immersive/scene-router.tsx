@@ -36,7 +36,7 @@ export function SceneRouter({ sceneId }: SceneRouterProps) {
 
   return (
     <>
-      <SceneLighting tier={tier} />
+      <SceneLighting tier={tier} sceneId={activeScene} />
       <Suspense fallback={null}>
         {narrativeMode ? <NexusCoreScene /> : <SceneContent sceneId={sceneId} />}
       </Suspense>
