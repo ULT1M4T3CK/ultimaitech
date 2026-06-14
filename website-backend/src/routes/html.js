@@ -6,7 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const { query } = require('../db');
-const { getMetaForPath, SITE_URL, OG_IMAGE, blogPostAlternates } = require('../data/seo');
+const { getMetaForPath, SITE_URL, OG_IMAGE, blogPostAlternates, buildBaseJsonLd } = require('../data/seo');
 const { injectBody } = require('../data/seoBody');
 
 const SITE_NAME = 'ultimAItech';
@@ -94,9 +94,16 @@ function offerUnavailableMeta(pathname) {
   };
 }
 
+function getBlogOgImage(slug) {
+  const safeSlug = String(slug || '').replace(/[^a-z0-9-]/gi, '');
+  if (!safeSlug) return OG_IMAGE;
+  return `${SITE_URL}/og/blog/${safeSlug}.png`;
+}
+
 async function getBlogPostMeta(slug, locale = 'nl') {
   const { rows } = await query(
-    `SELECT canonical_url, meta_title, meta_description, meta_image_url, title, excerpt, cover_image_url, noindex, locale
+    `SELECT canonical_url, meta_title, meta_description, meta_image_url, title, excerpt,
+            cover_image_url, noindex, locale, published_at, updated_at, author_name
      FROM blog_posts
      WHERE slug = $1
        AND locale = $2
@@ -111,8 +118,12 @@ async function getBlogPostMeta(slug, locale = 'nl') {
   const canonical = row.canonical_url || `${SITE_URL}${locale === 'de' ? '/de/blog/' : locale === 'en' ? '/en/blog/' : '/blog/'}${slug}/`;
   const title = row.meta_title || row.title;
   const description = row.meta_description || row.excerpt;
-  const image = row.meta_image_url || row.cover_image_url || OG_IMAGE;
+  const image = row.meta_image_url || row.cover_image_url || getBlogOgImage(slug);
   const robots = row.noindex ? 'noindex, nofollow' : 'index, follow';
+  const datePublished = row.published_at ? new Date(row.published_at).toISOString() : undefined;
+  const dateModified = row.updated_at
+    ? new Date(row.updated_at).toISOString()
+    : datePublished;
   return {
     title: `${title} | ${SITE_NAME} Blog`,
     description,
@@ -128,6 +139,24 @@ async function getBlogPostMeta(slug, locale = 'nl') {
     twitterTitle: title,
     twitterDescription: description,
     twitterImage: image,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      image,
+      datePublished,
+      dateModified,
+      author: {
+        '@type': 'Person',
+        name: row.author_name && row.author_name !== 'Website Admin' ? row.author_name : 'Andre Hassler',
+        url: `${SITE_URL}/over/`,
+      },
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      mainEntityOfPage: canonical,
+      inLanguage: locale === 'de' ? 'de-DE' : locale === 'en' ? 'en-US' : 'nl-NL',
+      url: canonical,
+    },
   };
 }
 
@@ -215,6 +244,15 @@ function injectMeta(html, meta) {
       /<link rel="canonical" href="[^"]*"\s*\/?>/,
       `<link rel="canonical" href="${c}" />\n    ${hreflangTags}`
     );
+  }
+
+  const jsonLdBlocks = [buildBaseJsonLd(), meta.jsonLd].filter(Boolean);
+  if (jsonLdBlocks.length) {
+    out = out.replace(/\n?\s*<script type="application\/ld\+json" data-seo-runtime>[\s\S]*?<\/script>/g, '');
+    const scripts = jsonLdBlocks
+      .map((jsonLd) => `<script type="application/ld+json" data-seo-runtime>${JSON.stringify(jsonLd)}</script>`)
+      .join('\n    ');
+    out = out.replace('</head>', `    ${scripts}\n  </head>`);
   }
 
   return out;

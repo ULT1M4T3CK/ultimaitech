@@ -3,6 +3,10 @@
  */
 const SITE_URL = process.env.SITE_URL || 'https://ultimaitech.com';
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
+const SOCIAL_LINKS = [
+  'https://nl.linkedin.com/in/andre-hassler-8161b31b5',
+  'https://github.com/UltimAItech',
+];
 
 const ROUTE_SLUGS = {
   home: { nl: '/', de: '/de/', en: '/en/' },
@@ -43,6 +47,66 @@ function metaEntry(title, description, canonical, alternates, ogType = 'website'
     twitterTitle: title,
     twitterDescription: description,
     twitterImage: OG_IMAGE,
+  };
+}
+
+function buildBaseJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: 'ultimAItech',
+        url: SITE_URL,
+        logo: `${SITE_URL}/assets/images/logo.png`,
+        email: 'info@ultimaitech.com',
+        founder: { '@id': `${SITE_URL}/#andre-hassler` },
+        sameAs: SOCIAL_LINKS,
+      },
+      {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/#andre-hassler`,
+        name: 'Andre Hassler',
+        jobTitle: 'Founder & Web Developer',
+        worksFor: { '@id': `${SITE_URL}/#organization` },
+        url: `${SITE_URL}/over/`,
+        sameAs: SOCIAL_LINKS,
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': `${SITE_URL}/#professional-service`,
+        name: 'ultimAItech',
+        url: SITE_URL,
+        description: 'Betrouwbare websites, webshops, maatwerksoftware en AI-chatbots voor ondernemers in Drenthe, Overijssel en de grensregio Niedersachsen.',
+        email: 'info@ultimaitech.com',
+        founder: { '@id': `${SITE_URL}/#andre-hassler` },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Wanneperveen',
+          addressRegion: 'Overijssel',
+          addressCountry: 'NL',
+        },
+        areaServed: [
+          { '@type': 'State', name: 'Drenthe' },
+          { '@type': 'State', name: 'Overijssel' },
+          { '@type': 'State', name: 'Niedersachsen' },
+        ],
+        sameAs: SOCIAL_LINKS,
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        name: 'ultimAItech',
+        url: SITE_URL,
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${SITE_URL}/blog/?q={search_term_string}`,
+          'query-input': 'required name=search_term_string',
+        },
+      },
+    ],
   };
 }
 
@@ -147,6 +211,7 @@ module.exports = {
   seoByPath: seoByRouteKey,
   getMetaForPath,
   blogPostAlternates,
+  buildBaseJsonLd,
   SITE_URL,
   OG_IMAGE,
 };

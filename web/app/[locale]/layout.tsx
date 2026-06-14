@@ -3,6 +3,7 @@ import { Nav } from '@/components/ui/nav';
 import { ScrollRestore } from '@/components/ui/scroll-restore';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { getDictionary, locales, type Locale } from '@/lib/locales';
+import { buildBaseJsonLd } from '@/lib/structured-data';
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -17,10 +18,16 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const { locale } = await params;
   if (!locales.includes(locale as Locale)) notFound();
 
-  const dict = getDictionary(locale);
+  const currentLocale = locale as Locale;
+  const dict = getDictionary(currentLocale);
+  const baseJsonLd = buildBaseJsonLd(currentLocale);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(baseJsonLd) }}
+      />
       <a href="#main" className="skip-link">
         Skip to content
       </a>
