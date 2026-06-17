@@ -12,7 +12,6 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const { locale } = await params;
   const dict = getDictionary(locale as Locale);
   const { projects, slugs } = dict;
-  const [featured, ...secondary] = projects.cases;
   const overlay = (
     <>
       <p className="text-sm leading-relaxed text-text-muted">
@@ -64,69 +63,36 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           </ul>
         </div>
       </RevealSection>
-      {featured && (
-        <RevealSection className="grid gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-          <GlassCard className="overflow-hidden" hover glow>
-            <Link href={`${slugs.projects}${featured.slug}/`}>
-              <div className="relative aspect-[16/9] bg-surface">
-                <Image
-                  src={featured.image}
-                  alt={featured.imageAlt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                />
-              </div>
-              <div className="space-y-4 p-6">
-                <p className="editorial-eyebrow">{featured.label}</p>
-                <h2 className="font-display text-3xl font-semibold text-text">
-                  {featured.title}
-                </h2>
-                <p className="prose-readable text-sm">{featured.description}</p>
-                <ul className="grid gap-2 pt-2 md:grid-cols-2">
-                  {featured.highlights.slice(0, 4).map((highlight) => (
-                    <li
-                      key={highlight}
-                      className="text-sm leading-relaxed text-text-muted"
-                    >
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">
-                  {projects.caseStudyUi.ctaFullCase}
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </div>
-            </Link>
-          </GlassCard>
-          <div className="grid gap-4">
-            {secondary.map((project) => (
-              <GlassCard key={project.slug} className="p-5" hover>
-                <Link
-                  href={`${slugs.projects}${project.slug}/`}
-                  className="block space-y-3"
-                >
+      <RevealSection>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.cases.map((project) => (
+            <GlassCard key={project.slug} className="overflow-hidden" hover>
+              <Link href={`${slugs.projects}${project.slug}/`}>
+                <div className="relative aspect-[16/10] bg-surface">
+                  <Image
+                    src={project.image}
+                    alt={project.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="33vw"
+                  />
+                </div>
+                <div className="space-y-2 p-5">
                   <p className="editorial-eyebrow">{project.label}</p>
                   <h2 className="font-display text-xl font-semibold text-text">
                     {project.title}
                   </h2>
-                  <p className="text-sm font-medium leading-relaxed text-text">
-                    {project.subtitle}
-                  </p>
-                  <p className="text-sm leading-relaxed text-text-muted">
-                    {project.description}
-                  </p>
+                  <p className="text-sm text-text-muted">{project.subtitle}</p>
                   <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">
                     {projects.caseStudyUi.ctaFullCase}
                     <ArrowRight className="h-4 w-4" />
                   </span>
-                </Link>
-              </GlassCard>
-            ))}
-          </div>
-        </RevealSection>
-      )}
+                </div>
+              </Link>
+            </GlassCard>
+          ))}
+        </div>
+      </RevealSection>
       <RevealSection className="page-band -mx-6 px-6 py-14 md:-mx-10 md:px-10">
         <div className="relative z-10 grid gap-4 md:grid-cols-3">
           {projects.cases.map((project) => (
