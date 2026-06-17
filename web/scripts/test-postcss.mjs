@@ -1,0 +1,11 @@
+console.log('start');
+const { default: postcss } = await import('postcss');
+console.log('postcss loaded');
+const { default: tailwindcss } = await import('@tailwindcss/postcss');
+console.log('tailwind loaded');
+const fs = await import('node:fs');
+const css = fs.readFileSync('app/globals.css', 'utf8');
+const start = Date.now();
+console.log('processing css...');
+const result = await postcss([tailwindcss()]).process(css, { from: 'app/globals.css' });
+console.log('done in', Date.now() - start, 'ms, bytes:', result.css.length);

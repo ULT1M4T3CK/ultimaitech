@@ -27,8 +27,7 @@ import {
   Store,
   Workflow,
   type LucideIcon,
-} from 'lucide-react';
-
+} from "lucide-react";
 const ICON_MAP: Record<string, LucideIcon> = {
   AppWindow,
   BadgeEuro,
@@ -58,7 +57,6 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Store,
   Workflow,
 };
-
 export function resolveIcon(name: string): LucideIcon {
   return ICON_MAP[name] ?? Blocks;
 }

@@ -1,38 +1,34 @@
-'use client';
-
-import { RoundedBox, Sparkles } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
-import * as THREE from 'three';
-import { GltfModel } from '@/components/immersive/gltf-model';
-import { PortalRing } from '@/components/immersive/portal-ring';
+"use client";
+import { RoundedBox, Sparkles } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useMemo, useRef } from "react";
+import * as THREE from "three";
+import { GltfModel } from "@/components/immersive/gltf-model";
+import { PortalRing } from "@/components/immersive/portal-ring";
 import {
   CORE_POSITION,
   NEXUS_MODULES,
   SignalPaths,
   modulePosition,
-} from '@/components/immersive/signal-paths';
-import { SceneFloor } from '@/components/immersive/scene-floor';
-import { ScreenPanel } from '@/components/immersive/screen-panel';
-import { useImmersive } from '@/components/immersive/immersive-provider';
-import { ASSET_REGISTRY, PROJECT_SCREEN_TEXTURES } from '@/lib/assets-3d';
-import { PROJECT_SCREEN_POSITIONS } from '@/components/immersive/scenes/projects-scene';
-import { SERVICE_PILLAR_POSITIONS } from '@/components/immersive/scenes/services-scene';
-import { hasFullDetail } from '@/lib/device-tier';
-
+} from "@/components/immersive/signal-paths";
+import { SceneFloor } from "@/components/immersive/scene-floor";
+import { ScreenPanel } from "@/components/immersive/screen-panel";
+import { useImmersive } from "@/components/immersive/immersive-provider";
+import { ASSET_REGISTRY, PROJECT_SCREEN_TEXTURES } from "@/lib/assets-3d";
+import { PROJECT_SCREEN_POSITIONS } from "@/components/immersive/scenes/projects-scene";
+import { SERVICE_PILLAR_POSITIONS } from "@/components/immersive/scenes/services-scene";
+import { hasFullDetail } from "@/lib/device-tier";
 const WALL_PANEL_POSITIONS: [number, number, number][] = [
   [-4.2, 1.6, -3.8],
   [4.2, 1.6, -3.8],
   [-4.2, 1.6, 3.8],
   [4.2, 1.6, 3.8],
 ];
-
 const SCREEN_PANEL_OFFSET: [number, number, number][] = [
   [-4, 1.8, -2.38],
   [0, 2.2, -3.08],
   [4, 1.8, -2.38],
 ];
-
 function NexusModuleBox({
   mod,
   dockFactor,
@@ -47,14 +43,14 @@ function NexusModuleBox({
   const meshRef = useRef<THREE.Mesh>(null);
   const { invalidate } = useImmersive();
   const pos = modulePosition(mod, dockFactor);
-
   useFrame((state) => {
     if (!meshRef.current) return;
-    meshRef.current.rotation.y = rotationOffset + state.clock.elapsedTime * 0.25;
-    meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5 + mod.orbitAngle) * 0.08;
+    meshRef.current.rotation.y =
+      rotationOffset + state.clock.elapsedTime * 0.25;
+    meshRef.current.rotation.x =
+      Math.sin(state.clock.elapsedTime * 0.5 + mod.orbitAngle) * 0.08;
     invalidate();
   });
-
   return (
     <RoundedBox
       ref={meshRef}
@@ -78,12 +74,19 @@ function NexusModuleBox({
     </RoundedBox>
   );
 }
-
 function phaseState(phase: number, progress: number) {
   const blend = progress % (1 / 7);
   return {
-    dockFactor: THREE.MathUtils.clamp(phase >= 1 ? 0.3 + phase * 0.12 + blend : phase * 0.15, 0, 1),
-    pathIntensity: THREE.MathUtils.clamp(phase >= 1 ? (phase - 0.5) / 5.5 : 0, 0, 1),
+    dockFactor: THREE.MathUtils.clamp(
+      phase >= 1 ? 0.3 + phase * 0.12 + blend : phase * 0.15,
+      0,
+      1,
+    ),
+    pathIntensity: THREE.MathUtils.clamp(
+      phase >= 1 ? (phase - 0.5) / 5.5 : 0,
+      0,
+      1,
+    ),
     showCorridor: phase >= 2,
     showScreens: phase >= 2,
     showPillars: phase >= 3,
@@ -93,28 +96,27 @@ function phaseState(phase: number, progress: number) {
     corePulse: phase >= 3 ? 0.3 + Math.min(phase - 2, 3) * 0.15 : 0.1,
   };
 }
-
 export function NexusCoreScene() {
   const { tier, nexusPhase, nexusProgress, portalConfig } = useImmersive();
   const ringRef = useRef<THREE.Group>(null);
   const fullDetail = hasFullDetail(tier);
-
   const state = useMemo(
     () => phaseState(nexusPhase, nexusProgress),
     [nexusPhase, nexusProgress],
   );
-
   useFrame((frameState) => {
     if (ringRef.current) {
       ringRef.current.rotation.y =
         frameState.clock.elapsedTime * 0.08 + state.processRotation;
     }
   });
-
   return (
     <group>
-      <GltfModel asset={ASSET_REGISTRY.hubPlatform} position={[0, 0, 0]} materialPreset="architecture" />
-
+      <GltfModel
+        asset={ASSET_REGISTRY.hubPlatform}
+        position={[0, 0, 0]}
+        materialPreset="architecture"
+      />
       <group ref={ringRef} position={CORE_POSITION}>
         <GltfModel
           asset={ASSET_REGISTRY.hubRing}
@@ -123,7 +125,6 @@ export function NexusCoreScene() {
           materialPreset="metal"
         />
       </group>
-
       {NEXUS_MODULES.map((mod, i) => (
         <NexusModuleBox
           key={mod.id}
@@ -133,13 +134,11 @@ export function NexusCoreScene() {
           rotationOffset={state.processRotation * (i + 1)}
         />
       ))}
-
       <SignalPaths
         dockFactor={state.dockFactor}
         pathIntensity={state.pathIntensity}
         pulsePhase={state.processRotation}
       />
-
       {state.showCorridor && (
         <GltfModel
           asset={ASSET_REGISTRY.corridorWall}
@@ -148,7 +147,6 @@ export function NexusCoreScene() {
           materialPreset="architecture"
         />
       )}
-
       {state.showScreens &&
         PROJECT_SCREEN_POSITIONS.map((pos, i) => (
           <GltfModel
@@ -159,7 +157,6 @@ export function NexusCoreScene() {
             materialPreset="architecture"
           />
         ))}
-
       {state.showScreens &&
         SCREEN_PANEL_OFFSET.map((pos, i) => (
           <ScreenPanel
@@ -169,12 +166,15 @@ export function NexusCoreScene() {
             emissiveIntensity={1.2 + state.pathIntensity * 0.8}
           />
         ))}
-
       {state.showPillars &&
         SERVICE_PILLAR_POSITIONS.map((pos, i) => (
-          <GltfModel key={`nexus-pedestal-${i}`} asset={ASSET_REGISTRY.pedestal} position={pos} materialPreset="architecture" />
+          <GltfModel
+            key={`nexus-pedestal-${i}`}
+            asset={ASSET_REGISTRY.pedestal}
+            position={pos}
+            materialPreset="architecture"
+          />
         ))}
-
       {state.showWallPanels &&
         WALL_PANEL_POSITIONS.map((pos, i) => (
           <GltfModel
@@ -186,7 +186,6 @@ export function NexusCoreScene() {
             materialPreset="architecture"
           />
         ))}
-
       {state.showPortals &&
         portalConfig.map((portal, index) => (
           <PortalRing
@@ -196,11 +195,16 @@ export function NexusCoreScene() {
             rotationY={portal.rotationY}
           />
         ))}
-
       {fullDetail && (
-        <Sparkles count={22} scale={[12, 5, 12]} size={1} speed={0.15} opacity={0.18} color="#2DD4BF" />
+        <Sparkles
+          count={22}
+          scale={[12, 5, 12]}
+          size={1}
+          speed={0.15}
+          opacity={0.18}
+          color="#2DD4BF"
+        />
       )}
-
       <SceneFloor />
     </group>
   );

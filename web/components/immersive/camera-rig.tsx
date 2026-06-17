@@ -1,34 +1,25 @@
-'use client';
-
-import { OrbitControls } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import { useImmersive } from '@/components/immersive/immersive-provider';
-import type { SceneId } from '@/lib/immersive-routes';
-
+"use client";
+import { OrbitControls } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
+import { useImmersive } from "@/components/immersive/immersive-provider";
+import type { SceneId } from "@/lib/immersive-routes";
 export type CameraPreset = {
   position: [number, number, number];
   target: [number, number, number];
 };
-
-export const CAMERA_PRESETS: Record<SceneId | 'narrative', CameraPreset> = {
+export const CAMERA_PRESETS: Record<SceneId | "narrative", CameraPreset> = {
   hub: { position: [0, 3.5, 11], target: [0, 1.2, 0] },
   services: { position: [0, 2.4, 8.5], target: [0, 1.0, 0] },
   projects: { position: [0, 2.2, 8], target: [0, 1.5, -2] },
   about: { position: [2.2, 2.2, 6.5], target: [0, 1, 0] },
   narrative: { position: [0, 4, 12], target: [0, 1.2, 0] },
 };
-
 const TRANSITION_MS = 1400;
 const IDLE_ORBIT_SPEED = 0.00015;
 const IDLE_BOB_AMPLITUDE = 0.08;
-
-type CameraRigProps = {
-  sceneId: SceneId | 'narrative';
-  enabled?: boolean;
-};
-
+type CameraRigProps = { sceneId: SceneId | "narrative"; enabled?: boolean };
 export function CameraRig({ sceneId, enabled = true }: CameraRigProps) {
   const { invalidate } = useImmersive();
   const { camera: threeCamera } = useThree();
@@ -42,7 +33,6 @@ export function CameraRig({ sceneId, enabled = true }: CameraRigProps) {
   const basePos = useRef(new THREE.Vector3());
   const userInteracting = useRef(false);
   const idlePhase = useRef(0);
-
   useEffect(() => {
     const preset = CAMERA_PRESETS[sceneId];
     fromPos.current.copy(threeCamera.position);
@@ -56,46 +46,43 @@ export function CameraRig({ sceneId, enabled = true }: CameraRigProps) {
     prevScene.current = sceneId;
     invalidate();
   }, [sceneId, threeCamera, invalidate]);
-
   useFrame((state, delta) => {
     if (progress.current < 1) {
-      progress.current = Math.min(1, progress.current + delta / (TRANSITION_MS / 1000));
+      progress.current = Math.min(
+        1,
+        progress.current + delta / (TRANSITION_MS / 1000),
+      );
       const t = easeInOutCubic(progress.current);
       threeCamera.position.lerpVectors(fromPos.current, toPos.current, t);
-
       if (controlsRef.current) {
-        controlsRef.current.target.lerpVectors(fromTarget.current, toTarget.current, t);
+        controlsRef.current.target.lerpVectors(
+          fromTarget.current,
+          toTarget.current,
+          t,
+        );
         controlsRef.current.update();
       }
-
       invalidate();
       return;
     }
-
-    if (!enabled || userInteracting.current || sceneId !== 'services') return;
-
+    if (!enabled || userInteracting.current || sceneId !== "services") return;
     idlePhase.current += delta;
     const orbit = idlePhase.current * IDLE_ORBIT_SPEED;
     const bob = Math.sin(idlePhase.current * 0.35) * IDLE_BOB_AMPLITUDE;
-
     const preset = CAMERA_PRESETS[sceneId];
     const radius = Math.hypot(preset.position[0], preset.position[2]);
     const angle = Math.atan2(preset.position[0], preset.position[2]) + orbit;
-
     threeCamera.position.set(
       Math.sin(angle) * radius,
       preset.position[1] + bob,
       Math.cos(angle) * radius,
     );
-
     if (controlsRef.current) {
       controlsRef.current.target.set(...preset.target);
       controlsRef.current.update();
     }
-
     invalidate();
   });
-
   return (
     <OrbitControls
       ref={controlsRef}
@@ -118,7 +105,6 @@ export function CameraRig({ sceneId, enabled = true }: CameraRigProps) {
     />
   );
 }
-
 function easeInOutCubic(t: number): number {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }

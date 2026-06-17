@@ -25,13 +25,19 @@ const nav = [
   { name: 'Kontakt', path: slugs.contact },
 ];
 
+const closing = {
+  eyebrow: 'Kontakt',
+  headline: 'Ein klarer Plan für Website oder Software?',
+  subtext:
+    'Planen Sie ein unverbindliches Kennenlerngespräch. Gemeinsam finden wir den besten Ansatz für Ihre Website, Webshop oder Software.',
+  primary: 'Gespräch planen',
+  secondary: 'Leistungen ansehen',
+  responseNote: 'Kein Verkaufsgespräch — sondern Klarheit zu Vorgehen, Umfang und nächsten Schritten. Antwort innerhalb eines Werktags.',
+  navCta: 'Kontakt',
+};
+
 const footer = {
   tagline: 'Zuverlässige Websites und maßgeschneiderte Software aus Wanneperveen — für Unternehmer in Drenthe, Overijssel und Niedersachsen.',
-  ctaBand: {
-    headline: 'Ein klarer Plan für Website oder Software?',
-    sub: 'Kein Verkaufsgespräch — sondern Klarheit zu Vorgehen, Umfang und nächsten Schritten. Antwort innerhalb eines Werktags.',
-    cta: 'Gespräch planen',
-  },
   copyright: `© ${new Date().getFullYear()} ultimAItech. Alle Rechte vorbehalten.`,
   bottomLine: 'Registriert bei der Handelskammer Overijssel.',
   columns: {
@@ -464,7 +470,7 @@ const websites = {
       {
         q: 'Warum kein WordPress?',
         a: 'WordPress ist gut für einfache Blogs, aber für Unternehmenswebsites gibt es bessere Optionen. Eine individuelle Seite lädt schneller, ist sicherer, braucht keine Plugin-Updates und gibt Ihnen volle Kontrolle.',
-        link: { slug: 'maatwerk-website-vs-wordpress', label: 'Individuelle Website oder WordPress — was passt zu Ihrem Unternehmen?' },
+        link: { slug: 'maatwerk-website-of-wordpress', label: 'Individuelle Website oder WordPress — was passt zu Ihrem Unternehmen?' },
       },
       {
         q: 'Arbeiten Sie auch mit Unternehmen außerhalb von Drenthe und Overijssel?',
@@ -1137,7 +1143,7 @@ const contact = {
     messageLabel: 'Ihre Nachricht',
     messagePlaceholder: 'Erzählen Sie kurz, woran Sie denken...',
     submit: 'Nachricht senden',
-    successTitle: 'Nachricht gesendet!',
+    successTitle: 'Nachricht gesendet',
     successText: 'Vielen Dank für Ihre Nachricht. Ich melde mich so schnell wie möglich bei Ihnen, in der Regel innerhalb eines Werktages.',
   },
 
@@ -1336,8 +1342,6 @@ const terms = {
   ],
 };
 
-const dictionary = { locale, slugs, nav, footer, home, services, websites, software, aiChatbots, projects, about, blog, contact, privacy, terms };
-
-export type Dictionary = typeof dictionary;
+const dictionary = { locale, slugs, nav, closing, footer, home, services, websites, software, aiChatbots, projects, about, blog, contact, privacy, terms };
 
 export default dictionary;

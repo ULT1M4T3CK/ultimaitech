@@ -25,13 +25,19 @@ const nav = [
   { name: 'Contact', path: slugs.contact },
 ];
 
+const closing = {
+  eyebrow: 'Contact',
+  headline: 'Want a clear plan for your site or software?',
+  subtext:
+    'Schedule a free introductory call. Together we will find the best approach for your website, webshop or software project.',
+  primary: 'Schedule a call',
+  secondary: 'View services',
+  responseNote: 'No sales pitch — clarity on approach, scope and next steps. Reply within one business day.',
+  navCta: 'Contact',
+};
+
 const footer = {
   tagline: 'Reliable websites and custom software from Wanneperveen — for businesses in Drenthe, Overijssel and the Lower Saxony border region.',
-  ctaBand: {
-    headline: 'Want a clear plan for your site or software?',
-    sub: 'No sales pitch — clarity on approach, scope, and next steps. Reply within one business day.',
-    cta: 'Schedule a call',
-  },
   copyright: `© ${new Date().getFullYear()} ultimAItech. All rights reserved.`,
   bottomLine: 'Registered with the Chamber of Commerce in Overijssel.',
   columns: {
@@ -464,7 +470,7 @@ const websites = {
       {
         q: 'Why not WordPress?',
         a: 'WordPress is fine for simple blogs, but for business websites there are better options. A custom site loads faster, is more secure, needs no plugin updates and gives you full control.',
-        link: { slug: 'maatwerk-website-vs-wordpress', label: 'Custom website or WordPress — what fits your business?' },
+        link: { slug: 'maatwerk-website-of-wordpress', label: 'Custom website or WordPress — what fits your business?' },
       },
       {
         q: 'Do you also work with businesses outside Drenthe and Overijssel?',
@@ -1137,7 +1143,7 @@ const contact = {
     messageLabel: 'Your message',
     messagePlaceholder: 'Briefly describe what you have in mind...',
     submit: 'Send message',
-    successTitle: 'Message sent!',
+    successTitle: 'Message sent',
     successText: 'Thank you for your message. I will get back to you as soon as possible, usually within one working day.',
   },
 
@@ -1233,6 +1239,10 @@ const blog = {
         q: 'Can I quote or share the articles?',
         a: 'Yes, with attribution (ultimAItech and link to the article). The content is meant to share knowledge with businesses in the region.',
       },
+      {
+        q: 'Where can I find markdown versions for AI systems?',
+        a: 'Published articles are also available as markdown under /blog/md/ — useful for AI crawlers and search engines that prefer structured content.',
+      },
     ],
   },
 
@@ -1327,13 +1337,11 @@ const terms = {
     },
     {
       title: 'Applicable law',
-      text: 'Dutch law applies to all agreements. Disputes will be submitted to the competent court in the district of Overijssel. Parties will first attempt to resolve a dispute by mutual agreement.',
+      text: 'Dutch law applies to all agreements. Disputes will be submitted to the competent court in the district of Overijssel. Parties will first attempt to resolve a dispute by mutual agreement. If any provision is invalid, the remaining provisions remain in effect.',
     },
   ],
 };
 
-const dictionary = { locale, slugs, nav, footer, home, services, websites, software, aiChatbots, projects, about, blog, contact, privacy, terms };
-
-export type Dictionary = typeof dictionary;
+const dictionary = { locale, slugs, nav, closing, footer, home, services, websites, software, aiChatbots, projects, about, blog, contact, privacy, terms };
 
 export default dictionary;

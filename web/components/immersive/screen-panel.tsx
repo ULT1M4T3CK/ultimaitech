@@ -1,8 +1,6 @@
-'use client';
-
-import { useTexture } from '@react-three/drei';
-import * as THREE from 'three';
-
+"use client";
+import { useTexture } from "@react-three/drei";
+import * as THREE from "three";
 type ScreenPanelProps = {
   position: [number, number, number];
   rotation?: [number, number, number];
@@ -11,7 +9,6 @@ type ScreenPanelProps = {
   height?: number;
   emissiveIntensity?: number;
 };
-
 export function ScreenPanel({
   position,
   rotation = [0, 0, 0],
@@ -24,7 +21,6 @@ export function ScreenPanel({
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.anisotropy = 8;
   texture.minFilter = THREE.LinearMipmapLinearFilter;
-
   return (
     <mesh position={position} rotation={rotation}>
       <planeGeometry args={[width, height]} />

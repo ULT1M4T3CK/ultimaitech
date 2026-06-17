@@ -1,26 +1,19 @@
-'use client';
-
-import { motion } from 'motion/react';
-import { ChevronDown } from 'lucide-react';
-import { MetalButton } from '@/components/ui/metal-button';
-import { revealTransition, staggerContainer, staggerItem } from '@/lib/motion';
-import { useReducedMotion } from '@/components/ui/use-reduced-motion';
-import type { Dictionary } from '@/lib/locales';
-
-type HeroSectionProps = {
-  dict: Dictionary;
-};
-
+"use client";
+import { motion } from "motion/react";
+import { ChevronDown } from "lucide-react";
+import { MetalButton } from "@/components/ui/metal-button";
+import { revealTransition, staggerContainer, staggerItem } from "@/lib/motion";
+import { useReducedMotion } from "@/components/ui/use-reduced-motion";
+import type { Dictionary } from "@/lib/locales";
+type HeroSectionProps = { dict: Dictionary };
 export function HeroSection({ dict }: HeroSectionProps) {
   const reducedMotion = useReducedMotion();
   const nexus = dict.home.nexus;
   const hero = dict.home.hero;
-
-  const label = nexus?.heroLabel ?? 'Digital systems studio';
+  const label = nexus?.heroLabel ?? "Digital systems studio";
   const headline = nexus?.headline ?? hero.headline;
   const subheadline = nexus?.subheadline ?? hero.subtext;
   const trustLine = nexus?.trustLine ?? hero.trustLine;
-
   return (
     <section
       data-narrative-section="hero"
@@ -33,14 +26,17 @@ export function HeroSection({ dict }: HeroSectionProps) {
           animate="visible"
           className="max-w-4xl space-y-6"
         >
-          <motion.p variants={staggerItem(reducedMotion)} className="label-pill w-fit">
+          <motion.p
+            variants={staggerItem(reducedMotion)}
+            className="label-pill w-fit"
+          >
             {label}
           </motion.p>
           <motion.h1
             variants={staggerItem(reducedMotion)}
             className="type-hero text-4xl text-text md:text-5xl lg:text-6xl xl:text-7xl"
           >
-            <span className="premium-gradient-text">{headline}</span>
+            {headline}
           </motion.h1>
           <motion.p
             variants={staggerItem(reducedMotion)}
@@ -65,7 +61,6 @@ export function HeroSection({ dict }: HeroSectionProps) {
           </motion.p>
         </motion.div>
       </div>
-
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-text-faint"
         initial={reducedMotion ? false : { opacity: 0, y: -8 }}

@@ -1,16 +1,16 @@
-'use client';
-
-import { Bloom, EffectComposer, SSAO, Vignette } from '@react-three/postprocessing';
-import { useImmersive } from '@/components/immersive/immersive-provider';
-import { hasPostFX } from '@/lib/device-tier';
-
+"use client";
+import {
+  Bloom,
+  EffectComposer,
+  SSAO,
+  Vignette,
+} from "@react-three/postprocessing";
+import { useImmersive } from "@/components/immersive/immersive-provider";
+import { hasPostFX } from "@/lib/device-tier";
 export function PostFX() {
   const { tier, bloom } = useImmersive();
-
   if (!hasPostFX(tier)) return null;
-
-  const isUltra = tier === 'ultra';
-
+  const isUltra = tier === "ultra";
   return (
     <EffectComposer enableNormalPass multisampling={isUltra ? 4 : 0}>
       <SSAO

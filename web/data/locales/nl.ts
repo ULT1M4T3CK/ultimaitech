@@ -25,13 +25,19 @@ const nav = [
   { name: 'Contact', path: slugs.contact },
 ];
 
+const closing = {
+  eyebrow: 'Contact',
+  headline: 'Een concreet plan voor uw site of software?',
+  subtext:
+    'Plan een vrijblijvend kennismakingsgesprek. Samen kijken we wat de beste aanpak is voor uw website, webshop of softwareproject.',
+  primary: 'Plan een gesprek',
+  secondary: 'Bekijk diensten',
+  responseNote: 'Geen verkooppraatje — wel duidelijkheid over aanpak, scope en vervolgstappen. Reactie binnen één werkdag.',
+  navCta: 'Contact',
+};
+
 const footer = {
   tagline: 'Betrouwbare websites en software op maat uit Wanneperveen — voor ondernemers in Drenthe en Overijssel.',
-  ctaBand: {
-    headline: 'Een concreet plan voor uw site of software?',
-    sub: 'Geen verkooppraatje — wel duidelijkheid over aanpak, scope en vervolgstappen. Reactie binnen één werkdag.',
-    cta: 'Plan een gesprek',
-  },
   copyright: `© ${new Date().getFullYear()} ultimAItech. Alle rechten voorbehouden.`,
   bottomLine: 'KVK-geregistreerd in Overijssel.',
   columns: {
@@ -464,7 +470,7 @@ const websites = {
       {
         q: 'Waarom geen WordPress?',
         a: 'WordPress is prima voor eenvoudige blogs, maar voor zakelijke websites zijn er betere opties. Een maatwerk site laadt sneller, is veiliger, heeft geen plug-in-updates nodig en geeft u volledige controle.',
-        link: { slug: 'maatwerk-website-vs-wordpress', label: 'Maatwerk website of WordPress — wat past bij jouw bedrijf?' },
+        link: { slug: 'maatwerk-website-of-wordpress', label: 'Maatwerk website of WordPress — wat past bij jouw bedrijf?' },
       },
       {
         q: 'Bouw je ook voor bedrijven buiten Drenthe en Overijssel?',
@@ -1137,7 +1143,7 @@ const contact = {
     messageLabel: 'Uw bericht',
     messagePlaceholder: 'Vertel kort waar u aan denkt...',
     submit: 'Verstuur bericht',
-    successTitle: 'Bericht verstuurd!',
+    successTitle: 'Bericht verstuurd',
     successText: 'Bedankt voor uw bericht. Ik neem zo snel mogelijk contact met u op, meestal binnen één werkdag.',
   },
 
@@ -1331,13 +1337,30 @@ const terms = {
     },
     {
       title: 'Toepasselijk recht',
-      text: 'Op alle overeenkomsten is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in het arrondissement Overijssel. Partijen zullen eerst trachten een geschil in onderling overleg op te lossen.',
+      text: 'Op alle overeenkomsten is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in het arrondissement Overijssel. Partijen zullen eerst trachten een geschil in onderling overleg op te lossen. Indien een bepaling ongeldig is, blijven de overige bepalingen van kracht.',
     },
   ],
 };
 
-const dictionary = { locale, slugs, nav, footer, home, services, websites, software, aiChatbots, projects, about, blog, contact, privacy, terms };
+const dictionary = { locale, slugs, nav, closing, footer, home, services, websites, software, aiChatbots, projects, about, blog, contact, privacy, terms };
 
-export type Dictionary = typeof dictionary;
+export type Dictionary = {
+  locale: string;
+  slugs: typeof slugs;
+  nav: typeof nav;
+  closing: typeof closing;
+  footer: typeof footer;
+  home: typeof home;
+  services: typeof services;
+  websites: typeof websites;
+  software: typeof software;
+  aiChatbots: typeof aiChatbots;
+  projects: typeof projects;
+  about: typeof about;
+  blog: typeof blog;
+  contact: typeof contact;
+  privacy: typeof privacy;
+  terms: typeof terms;
+};
 
 export default dictionary;
