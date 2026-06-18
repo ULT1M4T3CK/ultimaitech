@@ -15,7 +15,7 @@ export type MetalButtonProps =
   | (MetalButtonLinkProps & { href: string })
   | (MetalButtonButtonProps & { href?: undefined });
 const variantClasses: Record<MetalButtonVariant, string> = {
-  primary: "bg-accent text-charcoal border-accent hover:bg-accent-hover",
+  primary: "bg-accent text-white border-accent hover:bg-accent-hover",
   secondary:
     "bg-transparent text-text border-border-strong hover:border-accent/40 hover:text-text",
   ghost:

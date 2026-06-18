@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ImmersiveScenePage } from "@/components/pages/immersive-scene-page";
@@ -6,12 +5,27 @@ import { StudioClosingSection } from "@/components/ui/studio-closing-section";
 import { AnimatedSectionHeading } from "@/components/ui/animated-section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { RevealSection } from "@/components/ui/reveal-section";
+import { UseCaseDeck } from "@/components/ui/use-case-deck";
 import { getDictionary, type Locale } from "@/lib/locales";
+
 type ProjectsPageProps = { params: Promise<{ locale: string }> };
+
 export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const { locale } = await params;
   const dict = getDictionary(locale as Locale);
   const { projects, slugs } = dict;
+
+  const deckCases = projects.cases.map((project) => ({
+    slug: project.slug,
+    label: project.label,
+    title: project.title,
+    subtitle: project.subtitle,
+    image: project.image,
+    imageAlt: project.imageAlt,
+    href: `${slugs.projects}${project.slug}/`,
+    ctaLabel: projects.caseStudyUi.ctaFullCase,
+  }));
+
   const overlay = (
     <>
       <p className="text-sm leading-relaxed text-text-muted">
@@ -33,6 +47,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
       </div>
     </>
   );
+
   return (
     <ImmersiveScenePage
       dict={dict}
@@ -63,42 +78,18 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           </ul>
         </div>
       </RevealSection>
+
       <RevealSection>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.cases.map((project) => (
-            <GlassCard key={project.slug} className="overflow-hidden" hover>
-              <Link href={`${slugs.projects}${project.slug}/`}>
-                <div className="relative aspect-[16/10] bg-surface">
-                  <Image
-                    src={project.image}
-                    alt={project.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="33vw"
-                  />
-                </div>
-                <div className="space-y-2 p-5">
-                  <p className="editorial-eyebrow">{project.label}</p>
-                  <h2 className="font-display text-xl font-semibold text-text">
-                    {project.title}
-                  </h2>
-                  <p className="text-sm text-text-muted">{project.subtitle}</p>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">
-                    {projects.caseStudyUi.ctaFullCase}
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
-              </Link>
-            </GlassCard>
-          ))}
-        </div>
+        <UseCaseDeck cases={deckCases} />
       </RevealSection>
+
       <RevealSection className="page-band -mx-6 px-6 py-14 md:-mx-10 md:px-10">
         <div className="relative z-10 grid gap-4 md:grid-cols-3">
           {projects.cases.map((project) => (
             <GlassCard
               key={`${project.slug}-summary`}
-              className="p-5"
+              data-case-panel={project.slug}
+              className="scroll-mt-28 p-5 transition-colors"
               hover={false}
             >
               <h3 className="font-display text-lg font-semibold text-text">
@@ -110,10 +101,18 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
               <p className="mt-3 text-sm leading-relaxed text-text-muted">
                 {project.solution.intro}
               </p>
+              <Link
+                href={`${slugs.projects}${project.slug}/`}
+                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:text-accent-hover"
+              >
+                {projects.caseStudyUi.ctaFullCase}
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
             </GlassCard>
           ))}
         </div>
       </RevealSection>
+
       <StudioClosingSection
         headline={projects.cta.headline}
         subtext={projects.cta.text}
