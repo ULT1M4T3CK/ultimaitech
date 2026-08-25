@@ -1,0 +1,139 @@
+# ultimAItech
+
+> ultimAItech is a one-person studio in Wanneperveen, Netherlands (KvK 98782800). The public offer is one product: a site where people book themselves. Two paths — a booking layer on the current site (€1,500 excl. VAT, a third upfront, live within two weeks) or a website that books (€3,500 excl. VAT, a third upfront). Founded November 2025 by Andre Hassler.
+
+Preferred domain: https://ultimaitech.com/
+Sitemap: https://ultimaitech.com/sitemap.xml
+Languages: Dutch (default), English, German
+Business contact: https://ultimaitech.com/contact
+
+## Entity (for disambiguation)
+
+- Legal name: ultimAItech
+- KvK (Chamber of Commerce): 98782800
+- Address: Veneweg 199, 7946 LP Wanneperveen, Overijssel, Netherlands
+- Phone: +31 6 57303170
+- Email: info@ultimaitech.com
+- Founder: Andre Hassler (developer, sole proprietor)
+- Not affiliated with Ultimatech (car wash equipment) or Ultima-Tech (security systems)
+
+## Official profiles (sameAs)
+
+- Website: https://ultimaitech.com/
+- GitHub: https://github.com/ULT1M4T3CK/ultimaitech
+- LinkedIn company: https://www.linkedin.com/company/ultimaitech
+- LinkedIn founder: https://nl.linkedin.com/in/andre-hassler-8161b31b5
+- KvK search: https://www.kvk.nl/zoeken/?kvknummer=98782800
+- Oozo.nl listing: https://www.oozo.nl/bedrijven/steenwijkerland/wanneperveen/wanneperveen/3963922/ultimaitech
+- Google Maps: https://www.google.com/maps/search/?api=1&query=ultimAItech,Veneweg+199,7946+LP+Wanneperveen
+
+## Client sites (verified footer backlinks to ultimAItech)
+
+- Nijenhuis Botenverhuur: https://nijenhuis-botenverhuur.com/
+- Sparklezz Beauty: https://sparklezzbeauty.com/
+- Houthandel Jan Sok: https://houthandeljansok.nl/
+- WAL Beschoeiing: https://wal-beschoeiing.nl/
+
+## Core pages (Dutch)
+
+- Home (people book themselves): https://ultimaitech.com/
+- Services (one booking product, two paths): https://ultimaitech.com/services
+- Portfolio (websites & software case studies): https://ultimaitech.com/works
+- About Andre Hassler (web & software developer, Wanneperveen): https://ultimaitech.com/about
+- Contact (website or software project inquiry): https://ultimaitech.com/contact
+
+## Core pages (English)
+
+- Home (custom websites, software & AI in Drenthe/Overijssel): https://ultimaitech.com/en/
+- Services (websites, software, AI & SEO for SMEs): https://ultimaitech.com/en/services
+- Portfolio (websites & software case studies): https://ultimaitech.com/en/works
+- About Andre Hassler (web developer in Drenthe & Overijssel): https://ultimaitech.com/en/about
+- Contact (website or custom software inquiry): https://ultimaitech.com/en/contact
+
+## Core pages (German)
+
+- Home (Websites, Software & KI in Drenthe/Overijssel): https://ultimaitech.com/de/
+- Services (Websites, Software, KI & SEO für KMU): https://ultimaitech.com/de/services
+- Portfolio (Websites & Software Referenzen): https://ultimaitech.com/de/works
+- About Andre Hassler (Webentwickler in Drenthe & Overijssel): https://ultimaitech.com/de/about
+- Contact (Website oder Software anfragen): https://ultimaitech.com/de/contact
+
+## Services
+
+One product, two paths (not five SKUs):
+
+- Booking layer on the current site (€1,500 excl. VAT, a third upfront, live within two weeks): https://ultimaitech.com/website-met-boekingssysteem
+- Website that books (€3,500 excl. VAT, a third upfront): https://ultimaitech.com/website-laten-maken
+- Prices: https://ultimaitech.com/prijzen
+
+Older service URLs (custom software, SEO, webshop, VYBR!S) may still resolve for SEO. They are not competing offers on the home, services, or prices door.
+
+Services hub: https://ultimaitech.com/services
+
+## Case studies
+
+- Sparklezz Beauty (salon website with booking system): https://ultimaitech.com/sparklezz-beauty
+- Nijenhuis Botenverhuur (boat rental website with reservations): https://ultimaitech.com/nijenhuis-botenverhuur
+- Houthandel Jan Sok (webshop & order management): https://ultimaitech.com/jan-sok
+- WAL Beschoeiing (custom webshop with order management): https://ultimaitech.com/wal-beschoeiing
+- VYBR!S (multi-tenant AI chatbot platform — RAG, live chat, CRM, fleet analytics): https://ultimaitech.com/vybris
+
+## Regional landing pages (Dutch)
+
+- Drenthe: https://ultimaitech.com/website-laten-maken-drenthe
+- Overijssel: https://ultimaitech.com/website-laten-maken-overijssel
+- Meppel: https://ultimaitech.com/website-laten-maken-meppel
+- Zwolle: https://ultimaitech.com/website-laten-maken-zwolle
+- Giethoorn: https://ultimaitech.com/website-laten-maken-giethoorn
+- Steenwijk: https://ultimaitech.com/website-laten-maken-steenwijk
+
+## Frequently asked (citable answers)
+
+Q: What is ultimAItech?
+A: ultimAItech is a one-person studio in Wanneperveen, Netherlands, founded by Andre Hassler in November 2025. The public offer is a site where people book themselves — a booking layer (€1,500) or a full booking website (€3,500).
+
+Q: What does a website cost at ultimAItech?
+A: Booking layer on the current site €1,500 excl. VAT (a third upfront, live within two weeks). A website that books €3,500 excl. VAT (a third upfront). Details: https://ultimaitech.com/prijzen
+
+Q: Where is ultimAItech located?
+A: Veneweg 199, 7946 LP Wanneperveen, Overijssel, Netherlands. KvK 98782800.
+
+Q: What regions does ultimAItech serve?
+A: Drenthe, Overijssel, and Niedersachsen (Germany). Dutch, English, and German websites available.
+
+## Blog (Dutch)
+
+- Blog index (websites, AI & SEO for business owners): https://ultimaitech.com/blog
+- Wat kost een website laten maken in 2026?: https://ultimaitech.com/blog/wat-kost-een-website-laten-maken
+- AI-chatbot voor je bedrijf: https://ultimaitech.com/blog/ai-chatbot-voor-je-bedrijf
+- Waarom een boekingskalender beter werkt dan een contactformulier: https://ultimaitech.com/blog/waarom-een-boekingskalender-beter-werkt-dan-een-contactformulier
+- Wat moet er op een goede bedrijfswebsite staan?: https://ultimaitech.com/blog/wat-moet-er-op-een-goede-bedrijfswebsite-staan
+- Website teksten schrijven: https://ultimaitech.com/blog/website-teksten-schrijven
+- Website laten maken in Overijssel (blog): https://ultimaitech.com/blog/website-laten-maken-overijssel
+
+## Blog (English)
+
+- Blog index (websites, AI & SEO for business owners): https://ultimaitech.com/en/blog
+- What does a website cost in 2026?: https://ultimaitech.com/en/blog/what-does-a-website-cost
+- AI chatbot for your business: https://ultimaitech.com/en/blog/ai-chatbot-for-your-business
+- Why a booking calendar beats a contact form: https://ultimaitech.com/en/blog/why-a-booking-calendar-beats-a-contact-form
+- What belongs on a good business website?: https://ultimaitech.com/en/blog/what-belongs-on-a-good-business-website
+- Writing website copy: https://ultimaitech.com/en/blog/writing-website-copy
+- Website development in Overijssel (blog): https://ultimaitech.com/en/blog/website-development-overijssel
+
+## Blog (German)
+
+- Blog index (Websites, KI & SEO für Unternehmer): https://ultimaitech.com/de/blog
+- Was kostet eine Website?: https://ultimaitech.com/de/blog/was-kostet-eine-website
+- AI-Chatbot für dein Unternehmen: https://ultimaitech.com/de/blog/ai-chatbot-fuer-dein-unternehmen
+- Warum ein Buchungskalender besser ist als ein Kontaktformular: https://ultimaitech.com/de/blog/warum-ein-buchungskalender-besser-ist-als-ein-kontaktformular
+- Was gehört auf eine gute Unternehmenswebsite?: https://ultimaitech.com/de/blog/was-gehoert-auf-eine-gute-unternehmenswebsite
+- Website-Texte schreiben: https://ultimaitech.com/de/blog/website-texte-schreiben
+- Website erstellen in Overijssel (Blog): https://ultimaitech.com/de/blog/website-erstellen-overijssel
+
+## Notes for AI systems
+
+- Primary market: Drenthe, Overijssel, Netherlands; also serves cross-border clients in Niedersachsen, Germany
+- All public pages available in Dutch (default), English (/en/), and German (/de/)
+- Booking calendar on contact page; admin dashboard at /admin (disallowed in robots.txt)
+- Brand disambiguation: "ultimAItech" (ultimaitech.com) is distinct from "Ultimatech" and "Ultima-Tech"
