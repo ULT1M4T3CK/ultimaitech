@@ -44,19 +44,19 @@ Business contact: https://ultimaitech.com/contact
 
 ## Core pages (English)
 
-- Home (custom websites, software & AI in Drenthe/Overijssel): https://ultimaitech.com/en/
-- Services (websites, software, AI & SEO for SMEs): https://ultimaitech.com/en/services
+- Home (people book themselves): https://ultimaitech.com/en/
+- Services (one booking product, two paths): https://ultimaitech.com/en/services
 - Portfolio (websites & software case studies): https://ultimaitech.com/en/works
 - About Andre Hassler (web developer in Drenthe & Overijssel): https://ultimaitech.com/en/about
-- Contact (website or custom software inquiry): https://ultimaitech.com/en/contact
+- Contact (booking-site inquiry): https://ultimaitech.com/en/contact
 
 ## Core pages (German)
 
-- Home (Websites, Software & KI in Drenthe/Overijssel): https://ultimaitech.com/de/
-- Services (Websites, Software, KI & SEO für KMU): https://ultimaitech.com/de/services
+- Home (Menschen buchen selbst): https://ultimaitech.com/de/
+- Services (ein Buchungsprodukt, zwei Wege): https://ultimaitech.com/de/services
 - Portfolio (Websites & Software Referenzen): https://ultimaitech.com/de/works
 - About Andre Hassler (Webentwickler in Drenthe & Overijssel): https://ultimaitech.com/de/about
-- Contact (Website oder Software anfragen): https://ultimaitech.com/de/contact
+- Contact (Buchungswebsite anfragen): https://ultimaitech.com/de/contact
 
 ## Services
 
